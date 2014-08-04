@@ -1,0 +1,14 @@
+{
+	"name": "omni",
+	"version": "0.0.1-dev",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chielkunkels/omni.git"
+	},
+	"author": "Chiel Kunkels <chiel@kunkels.me>",
+	"main": "app.js",
+	"dependencies": {
+		"express": "4.7",
+		"mout": "0.9"
+	}
+}
