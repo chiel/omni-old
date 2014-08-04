@@ -21,7 +21,7 @@ if (isString(config.listen)){
 
 		clientSocket.connect({path: config.listen}, function(){
 			console.log('Socket %s is in use, exiting...', config.listen);
-			process.exit();
+			process.exit(1);
 		});
 	});
 } else {
@@ -29,6 +29,7 @@ if (isString(config.listen)){
 		if (e.code != 'EADDRINUSE') return;
 
 		console.log('Port %d is in use, exiting...', config.listen);
+		process.exit(1);
 	});
 }
 
