@@ -8,7 +8,17 @@
 	"author": "Chiel Kunkels <chiel@kunkels.me>",
 	"main": "app.js",
 	"dependencies": {
+		"body-parser": "1.6",
+		"connect-slashes": "1.2",
+		"consolidate": "0.9",
 		"express": "4.7",
-		"mout": "0.9"
+		"mout": "0.9",
+		"serve-static": "1.4",
+		"swig": "1.1"
+	},
+	"devDependencies": {
+		"grunt": "0.4",
+		"grunt-nodemon": "0.1",
+		"matchdep": "0.3"
 	}
 }
