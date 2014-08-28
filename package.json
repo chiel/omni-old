@@ -8,10 +8,12 @@
 	"author": "Chiel Kunkels <chiel@kunkels.me>",
 	"main": "app.js",
 	"dependencies": {
+		"bcrypt": "0.8",
 		"body-parser": "1.6",
 		"connect-slashes": "1.2",
 		"consolidate": "0.9",
 		"express": "4.7",
+		"mongodb": "1.4",
 		"mout": "0.9",
 		"serve-static": "1.4",
 		"swig": "1.1"
