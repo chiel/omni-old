@@ -1,6 +1,8 @@
 'use strict';
 
 var swig = require('swig'),
+	session = require('express-session'),
+	RedisStore = require('connect-redis')(session),
 	app = require('./app'),
 	config = require('./config');
 
@@ -12,7 +14,8 @@ app
 	.use(require('serve-static')(process.cwd() + '/public'))
 	.use(require('connect-slashes')())
 	.use(require('body-parser').urlencoded({extended: true}))
-	.use(require('express-session')({
+	.use(session({
+		store: new RedisStore(),
 		name: config.session.name || 'omni.sid',
 		secret: config.session.secret,
 		resave: true,
