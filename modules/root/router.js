@@ -7,8 +7,12 @@ router.get('/', function(req, res){
 	if (req.session.user){
 		res.render('dashboard');
 	} else {
-		res.render(__dirname + '/views/login');
+		res.redirect('/login/');
 	}
+});
+
+router.get('/login/', function(req, res){
+	res.render(__dirname + '/views/login');
 });
 
 router.post('/login/', function(req, res){
