@@ -1,9 +1,14 @@
 'use strict';
 
-var router = require('express').Router();
+var router = require('express').Router(),
+	auth = require('../auth/lib');
 
 router.get('/', function(req, res){
-	res.render(__dirname + '/views/login');
+	if (req.session.user){
+		res.render('dashboard');
+	} else {
+		res.render(__dirname + '/views/login');
+	}
 });
 
 router.post('/login/', function(req, res){
@@ -14,7 +19,13 @@ router.post('/login/', function(req, res){
 		return;
 	}
 
-	res.status(501).json({});
+	auth.withPassword(req.body.email, req.body.password, function(err, user){
+		if (err){
+			return res.render(__dirname + '/views/login', {error: err.message});
+		}
+		req.session.user = user;
+		res.redirect('/');
+	});
 });
 
 module.exports = router;

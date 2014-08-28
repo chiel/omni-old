@@ -1,7 +1,8 @@
 'use strict';
 
 var swig = require('swig'),
-	app = require('./app');
+	app = require('./app'),
+	config = require('./config');
 
 app
 	.engine('html', require('consolidate').swig)
@@ -10,7 +11,13 @@ app
 	.enable('strict routing')
 	.use(require('serve-static')(process.cwd() + '/public'))
 	.use(require('connect-slashes')())
-	.use(require('body-parser').urlencoded({extended: true}));
+	.use(require('body-parser').urlencoded({extended: true}))
+	.use(require('express-session')({
+		name: config.session.name || 'omni.sid',
+		secret: config.session.secret,
+		resave: true,
+		saveUninitialized: true
+	}));
 
 if (app.settings.env == 'development'){
 	swig.setDefaults({cache: false});
