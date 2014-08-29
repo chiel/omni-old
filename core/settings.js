@@ -4,7 +4,8 @@ var swig = require('swig'),
 	session = require('express-session'),
 	RedisStore = require('connect-redis')(session),
 	app = require('./app'),
-	config = require('./config');
+	config = require('./config'),
+	SessionUser = require('../modules/user/sessionuser');
 
 app
 	.engine('html', require('consolidate').swig)
@@ -21,6 +22,12 @@ app
 		resave: true,
 		saveUninitialized: true
 	}))
+	.use(function(req, res, next){
+		if (req.session.userData){
+			req.session.user = new SessionUser(req.session.userData);
+		}
+		next();
+	})
 	.use(function(req, res, next){
 		if (!req.session.user && req.path != '/login/'){
 			return res.redirect('/login/?forward=' + encodeURIComponent(req.path));

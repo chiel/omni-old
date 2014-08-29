@@ -21,17 +21,18 @@ router.post('/login/', function(req, res){
 		return;
 	}
 
-	auth.withPassword(req.body.email, req.body.password, function(err, user){
+	auth.withPassword(req.body.email, req.body.password, function(err, data){
 		if (err){
 			return res.render(__dirname + '/views/login', {error: err.message});
 		}
-		req.session.user = user;
+		req.session.userData = data;
 		res.redirect(req.body.forward || '/');
 	});
 });
 
 router.get('/logout/', function(req, res){
 	delete req.session.user;
+	delete req.session.userData;
 	res.redirect('/');
 });
 
