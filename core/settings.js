@@ -20,7 +20,13 @@ app
 		secret: config.session.secret,
 		resave: true,
 		saveUninitialized: true
-	}));
+	}))
+	.use(function(req, res, next){
+		if (!req.session.user && req.path != '/login/'){
+			return res.redirect('/login/?forward=' + encodeURIComponent(req.path));
+		}
+		next();
+	});
 
 if (app.settings.env == 'development'){
 	swig.setDefaults({cache: false});

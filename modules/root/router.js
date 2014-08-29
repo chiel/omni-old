@@ -4,15 +4,13 @@ var router = require('express').Router(),
 	auth = require('../auth/lib');
 
 router.get('/', function(req, res){
-	if (req.session.user){
-		res.render('dashboard');
-	} else {
-		res.redirect('/login/');
-	}
+	res.render('dashboard');
 });
 
 router.get('/login/', function(req, res){
-	res.render(__dirname + '/views/login');
+	res.render(__dirname + '/views/login', {
+		forward: req.query.forward
+	});
 });
 
 router.post('/login/', function(req, res){
@@ -28,7 +26,7 @@ router.post('/login/', function(req, res){
 			return res.render(__dirname + '/views/login', {error: err.message});
 		}
 		req.session.user = user;
-		res.redirect('/');
+		res.redirect(req.body.forward || '/');
 	});
 });
 
