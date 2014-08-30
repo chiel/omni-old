@@ -14,7 +14,7 @@ var load = function(modulesPath){
 	var modules = fs.readdirSync(modulesPath);
 	if (!modules || !modules.length) return;
 
-	var i, len = modules.length, moduleName, modulePath, router, mountPath;
+	var i, len = modules.length, moduleName, modulePath, router, mountPath, manifest;
 	for (i = 0; i < len; i++){
 		moduleName = modules[i];
 		modulePath = modulesPath + '/' + moduleName;
@@ -28,6 +28,19 @@ var load = function(modulesPath){
 		if (!isFunction(router)) continue;
 
 		mountPath = '/' + (moduleName == 'root' ? '' : moduleName);
+
+		manifest = undefined;
+		if (fs.existsSync(modulePath + '/manifest.json')){
+			try {
+				manifest = JSON.parse(fs.readFileSync(modulePath + '/manifest.json', 'utf8'));
+				if (manifest.mount){
+					mountPath = '/' + manifest.mount;
+				}
+			} catch(e){
+				console.log('Failed to parse manifest for module %s', moduleName);
+			}
+		}
+
 		app.use(mountPath, router);
 	}
 };
