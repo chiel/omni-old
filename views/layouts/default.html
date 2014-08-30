@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Omni</title>
+		<link rel="stylesheet" href="/css/base.css">
+	</head>
+
+	<body>
+		<header class="main-header">
+			<div class="wrap">
+				<nav class="main-nav">
+					<ul>
+						<li><a href="/">Dashboard</a></li>
+						<li><a href="/roles/">Roles</a></li>
+					</ul>
+				</nav>
+				<a href="/logout/">Log out</a>
+			</div>
+		</header>
+		{% block content %}{% endblock %}
+		<script src="/js/base.js"></script>
+	</body>
+</html>

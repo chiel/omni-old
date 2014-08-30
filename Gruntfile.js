@@ -7,12 +7,15 @@ module.exports = function(grunt){
 		mkdir: {
 			all: {
 				options: {
-					create: ['public/css']
+					create: ['public/css', 'public/js']
 				}
 			}
 		},
 
 		concurrent: {
+			preDev: {
+				tasks: ['sass', 'browserify']
+			},
 			dev: {
 				tasks: ['nodemon', 'watch'],
 				options: {
@@ -22,6 +25,14 @@ module.exports = function(grunt){
 		},
 
 		sass: {},
+
+		browserify: {
+			base: {
+				files: {
+					'public/js/base.js': 'src/js/base.js'
+				}
+			}
+		},
 
 		nodemon: {
 			dev: {}
@@ -33,8 +44,8 @@ module.exports = function(grunt){
 	var readCssDir = function(dir, target){
 		if (!fs.existsSync(dir)) return;
 
-		var count = 0, hasSubdirs = false, filePath,
-			name, input, output;
+		var count = 0, hasSubdirs, filePath,
+			name, input, output, globs;
 
 		fs.readdirSync(dir)
 		.forEach(function(fileName){
@@ -58,7 +69,7 @@ module.exports = function(grunt){
 		});
 
 		if (count > 0){
-			var globs = [dir + '/*.scss'];
+			globs = [dir + '/*.scss'];
 			if (hasSubdirs){
 				globs.push(dir + '/**/*.scss');
 			}
@@ -85,7 +96,7 @@ module.exports = function(grunt){
 
 	grunt.registerTask('default', [
 		'mkdir',
-		'sass',
+		'concurrent:preDev',
 		'concurrent:dev'
 	]);
 };

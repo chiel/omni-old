@@ -1,0 +1,41 @@
+{
+	"name": "Roles",
+	"mount": "roles",
+
+	"rights": [
+		{
+			"key": "view",
+			"description": "View existing roles"
+		},
+		{
+			"key": "create",
+			"description": "Create new roles"
+		},
+		{
+			"key": "update",
+			"description": "Update existing roles"
+		}
+	],
+
+	"formSpec": {
+		"method": "post",
+		"action": "/roles/new/",
+		"save": {},
+		"pages": [
+			{
+				"groups": ["group1"]
+			}
+		],
+		"groups": {
+			"group1": {
+				"fields": ["name"]
+			}
+		},
+		"fields": {
+			"name": {
+				"type": "text",
+				"label": "Name"
+			}
+		}
+	}
+}

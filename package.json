@@ -9,12 +9,14 @@
 	"main": "app.js",
 	"dependencies": {
 		"bcrypt": "0.8",
+		"behaviour": "0.1",
 		"body-parser": "1.6",
 		"connect-redis": "2.0",
 		"connect-slashes": "1.2",
 		"consolidate": "0.9",
 		"express": "4.7",
 		"express-session": "1.7",
+		"informal": "0.2",
 		"mongodb": "1.4",
 		"mout": "0.9",
 		"normalize.css": "3.0",
@@ -23,6 +25,7 @@
 	},
 	"devDependencies": {
 		"grunt": "0.4",
+		"grunt-browserify": "3.0",
 		"grunt-concurrent": "0.5",
 		"grunt-contrib-watch": "0.6",
 		"grunt-mkdir": "0.1",

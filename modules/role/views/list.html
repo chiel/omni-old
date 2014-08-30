@@ -1,0 +1,18 @@
+{% extends "../../../views/layouts/default.html" %}
+
+{% block content %}
+<h2>Roles</h2>
+<table class="item-list">
+	<thead>
+		<tr>
+			<th><input type="checkbox"></th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="empty-set">
+			<td colspan="2">No roles found, would you like to <a href="/roles/new/">create one</a>?</td>
+		</tr>
+	</tbody>
+</table>
+{% endblock %}
