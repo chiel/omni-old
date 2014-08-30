@@ -1,0 +1,25 @@
+{% extends "./default.html" %}
+
+{% block content %}
+<div class="wrap">
+	<h2>{{ module }}</h2>
+	<table class="item-list">
+		<thead>
+			<tr>
+				<th><input type="checkbox"></th>
+				{% for field in listSpec.fields %}
+					<th>{{ field.label }}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="empty-set">
+				<td colspan="{{ listSpec.fields.length + 1 }}">
+					No {{ module|lower }} found, would you like to <a href="/{{ mount }}/new/">create one</a>?
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+

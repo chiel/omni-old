@@ -37,5 +37,14 @@
 				"label": "Name"
 			}
 		}
+	},
+
+	"listSpec": {
+		"fields": [
+			{
+				"name": "name",
+				"label": "Name"
+			}
+		]
 	}
 }
