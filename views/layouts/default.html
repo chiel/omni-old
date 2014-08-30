@@ -13,11 +13,20 @@
 			<div class="wrap">
 				<nav class="main-nav">
 					<ul>
+						<li>
+							<span>Administration</span>
+							<ul>
+								<li><a href="/roles/">Roles</a></li>
+							</ul>
+						</li>
 						<li><a href="/">Dashboard</a></li>
-						<li><a href="/roles/">Roles</a></li>
 					</ul>
 				</nav>
-				<a href="/logout/">Log out</a>
+				<nav class="user-nav">
+					<ul>
+						<li><a href="/logout/">Log out</a></li>
+					</ul>
+				</nav>
 			</div>
 		</header>
 		{% block content %}{% endblock %}

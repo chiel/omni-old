@@ -19,6 +19,7 @@
 		"informal": "0.2",
 		"mongodb": "1.4",
 		"mout": "0.9",
+		"node-bourbon": "1.2",
 		"normalize.css": "3.0",
 		"serve-static": "1.4",
 		"swig": "1.1"

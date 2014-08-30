@@ -1,8 +1,10 @@
 {% extends "./default.html" %}
 
 {% block content %}
-<h2>Add new {{ unit }}</h2>
-<div data-informal>
-	<script type="application/json" data-informal-spec>{{formSpec|json|safe}}</script>
+<div class="wrap">
+	<h2>Add new {{ unit }}</h2>
+	<div data-informal>
+		<script type="application/json" data-informal-spec>{{formSpec|json|safe}}</script>
+	</div>
 </div>
 {% endblock %}
