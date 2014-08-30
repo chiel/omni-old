@@ -7,7 +7,8 @@ module.exports = function(modulePath, manifest){
 
 	router.get('/', function(req, res){
 		res.render(modulePath + '/views/list', {
-			module: manifest.name,
+			unit: manifest.unit,
+			units: manifest.units,
 			listSpec: manifest.listSpec,
 			mount: manifest.mount
 		});
@@ -15,6 +16,8 @@ module.exports = function(modulePath, manifest){
 
 	router.get('/new/', function(req, res){
 		res.render(modulePath + '/views/form', {
+			unit: manifest.unit,
+			units: manifest.units,
 			formSpec: manifest.formSpec
 		});
 	});

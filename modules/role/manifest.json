@@ -2,6 +2,9 @@
 	"name": "Roles",
 	"mount": "roles",
 
+	"unit": "role",
+	"units": "roles",
+
 	"rights": [
 		{
 			"key": "view",
