@@ -1,3 +1,8 @@
 .git/
+Gruntfile.js
+modules/**/css/
+modules/**/js/
+public/
 setup.js
+src/
 views/

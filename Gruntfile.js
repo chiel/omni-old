@@ -1,13 +1,91 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function(grunt){
-	grunt.initConfig({
+	var config = {
+		mkdir: {
+			all: {
+				options: {
+					create: ['public/css']
+				}
+			}
+		},
+
+		concurrent: {
+			dev: {
+				tasks: ['nodemon', 'watch'],
+				options: {
+					logConcurrentOutput: true
+				}
+			}
+		},
+
+		sass: {},
+
 		nodemon: {
 			dev: {}
+		},
+
+		watch: {}
+	};
+
+	var readCssDir = function(dir, target){
+		if (!fs.existsSync(dir)) return;
+
+		var count = 0, hasSubdirs = false, filePath,
+			name, input, output;
+
+		fs.readdirSync(dir)
+		.forEach(function(fileName){
+			if (/^_/.test(fileName)) return;
+
+			if (!config.sass[target]){
+				config.sass[target] = {files: {}};
+			}
+
+			filePath = dir + '/' + fileName;
+			if (fs.statSync(filePath).isDirectory()){
+				hasSubdirs = true;
+				return;
+			}
+
+			name = fileName.match(/(.*)\.scss/)[1];
+			input = dir + '/' + name + '.scss';
+			output = 'public/css/' + name + '.css';
+			config.sass[target].files[output] = input;
+			count ++;
+		});
+
+		if (count > 0){
+			var globs = [dir + '/*.scss'];
+			if (hasSubdirs){
+				globs.push(dir + '/**/*.scss');
+			}
+			config.watch[target] = {
+				files: globs,
+				tasks: ['sass:' + target]
+			};
+		}
+	};
+
+	readCssDir(__dirname + '/src/css', 'base');
+
+	fs.readdirSync(__dirname + '/modules')
+	.forEach(function(moduleName){
+		var modulePath = __dirname + '/modules/' + moduleName;
+		if (fs.existsSync(modulePath + '/css')){
+			readCssDir(modulePath + '/css', moduleName);
 		}
 	});
 
+	grunt.initConfig(config);
+
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	grunt.registerTask('default', ['nodemon']);
+	grunt.registerTask('default', [
+		'mkdir',
+		'sass',
+		'concurrent:dev'
+	]);
 };

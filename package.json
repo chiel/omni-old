@@ -17,12 +17,17 @@
 		"express-session": "1.7",
 		"mongodb": "1.4",
 		"mout": "0.9",
+		"normalize.css": "3.0",
 		"serve-static": "1.4",
 		"swig": "1.1"
 	},
 	"devDependencies": {
 		"grunt": "0.4",
+		"grunt-concurrent": "0.5",
+		"grunt-contrib-watch": "0.6",
+		"grunt-mkdir": "0.1",
 		"grunt-nodemon": "0.1",
+		"grunt-sass": "0.14",
 		"matchdep": "0.3"
 	}
 }
