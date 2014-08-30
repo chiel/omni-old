@@ -1,0 +1,8 @@
+'use strict';
+
+var mongoose = require('mongoose');
+
+module.exports = new mongoose.Schema({
+	name: String,
+	modules: {}
+});

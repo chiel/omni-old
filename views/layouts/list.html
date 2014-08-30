@@ -13,11 +13,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="empty-set">
-				<td colspan="{{ listSpec.fields.length + 1 }}">
-					No {{ units|lower }} found, would you like to <a href="/{{ mount }}/new/">create one</a>?
-				</td>
-			</tr>
+			{% for item in items %}
+				<tr>
+					<td><input type="checkbox"></td>
+					{% for field in listSpec.fields %}
+						<td>{{ item[field.name] }}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+			{% if !items.length %}
+				<tr class="empty-set">
+					<td colspan="{{ listSpec.fields.length + 1 }}">
+						{% if error %}
+							{{ error }}
+						{% else %}
+							No {{ units|lower }} found, would you like to <a href="/{{ mount }}/new/">create one</a>?
+						{% endif %}
+					</td>
+				</tr>
+			{% endif %}
 		</tbody>
 	</table>
 </div>

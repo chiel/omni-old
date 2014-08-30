@@ -2,6 +2,8 @@
 	"name": "Roles",
 	"mount": "roles",
 
+	"model": "Role",
+
 	"unit": "role",
 	"units": "roles",
 
