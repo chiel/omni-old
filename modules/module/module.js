@@ -28,9 +28,9 @@ Module.prototype.loadManifest = function(){
 		this.manifest = {};
 	}
 
-	if (!this.manifest.mount){
-		this.manifest.mount = this.path.match(/([^\/]+)$/)[0];
-		if (this.manifest.mount == 'root') this.manifest.mount = '';
+	if (!this.manifest.slug){
+		this.manifest.slug = this.path.match(/([^\/]+)$/)[0];
+		if (this.manifest.slug == 'root') this.manifest.slug = '';
 	}
 
 	if (fs.existsSync(this.path + '/manifest.js')){
@@ -49,7 +49,7 @@ Module.prototype.loadSchema = function(){
 
 Module.prototype.loadModel = function(){
 	if (this.schema){
-		this.Model = mongoose.model(this.manifest.mount, this.schema, this.manifest.mount);
+		this.Model = mongoose.model(this.manifest.slug, this.schema, this.manifest.slug);
 	}
 };
 

@@ -4,7 +4,7 @@
 <div class="wrap">
 	<h2>{{ manifest.units|capitalize }}</h2>
 	<ul class="actions">
-		<li><a href="/{{ manifest.mount }}/new/">New</a></li>
+		<li><a href="/{{ manifest.slug }}/new/">New</a></li>
 	</ul>
 	<table class="item-list">
 		<thead>
@@ -21,7 +21,7 @@
 					<td><input type="checkbox"></td>
 					{% for field in manifest.listSpec.fields %}
 						{% if loop.index == 1 %}
-							<td><a href="/{{ manifest.mount }}/edit/{{ item._id.toString() }}/">{{ item[field.name] }}</a></td>
+							<td><a href="/{{ manifest.slug }}/edit/{{ item._id.toString() }}/">{{ item[field.name] }}</a></td>
 						{% else %}
 							<td>{{ item[field.name] }}</td>
 						{% endif %}
@@ -34,7 +34,7 @@
 						{% if error %}
 							{{ error }}
 						{% else %}
-							No {{ units|lower }} found, would you like to <a href="/{{ manifest.mount }}/new/">create one</a>?
+							No {{ units|lower }} found, would you like to <a href="/{{ manifest.slug }}/new/">create one</a>?
 						{% endif %}
 					</td>
 				</tr>

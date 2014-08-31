@@ -28,7 +28,7 @@ module.exports = function(modulesPath){
 		modules.push(mod);
 
 		if (mod.router){
-			app.use('/' + mod.manifest.mount, mod.router);
+			app.use('/' + mod.manifest.slug, mod.router);
 		}
 	}
 };
