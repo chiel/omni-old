@@ -33,6 +33,10 @@ app
 			return res.redirect('/login/?forward=' + encodeURIComponent(req.path));
 		}
 		next();
+	})
+	.use(function(req, res, next){
+		res.locals.user = req.session.user;
+		next();
 	});
 
 if (app.settings.env == 'development'){
