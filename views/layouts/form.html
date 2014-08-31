@@ -2,9 +2,13 @@
 
 {% block content %}
 <div class="wrap">
-	<h2>Add new {{ unit }}</h2>
+	{% if formData %}
+		<h2>Edit {{ manifest.unit }}</h2>
+	{% else %}
+		<h2>Add new {{ manifest.unit }}</h2>
+	{% endif %}
 	<div data-informal>
-		<script type="application/json" data-informal-spec>{{ formSpec|json|safe }}</script>
+		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
 	</div>
 </div>

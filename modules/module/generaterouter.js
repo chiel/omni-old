@@ -2,7 +2,6 @@
 
 var express = require('express'),
 	mongoose = require('mongoose'),
-	mixIn = require('mout/object/mixIn'),
 	config = require('../../core/config'),
 	db = mongoose.connection;
 
@@ -13,10 +12,7 @@ module.exports = function(mod){
 
 	router.get('/', function(req, res){
 		var locals = {
-			unit: mod.manifest.unit,
-			units: mod.manifest.units,
-			listSpec: mod.manifest.listSpec,
-			mount: mod.manifest.mount
+			manifest: mod.manifest
 		};
 
 		if (!mod.Model){
@@ -35,10 +31,9 @@ module.exports = function(mod){
 	});
 
 	router.get('/new/', function(req, res){
+		mod.manifest.formSpec.action = '/' + mod.manifest.mount + '/new/';
 		res.render(mod.path + '/views/form', {
-			unit: mod.manifest.unit,
-			units: mod.manifest.units,
-			formSpec: mod.manifest.formSpec
+			manifest: mod.manifest
 		});
 	});
 
@@ -53,7 +48,11 @@ module.exports = function(mod){
 				db.close();
 				if (err){
 					console.error(err);
-					return res.render(mod.path + '/views/form');
+					return res.render(mod.path + '/views/form', {
+						manifest: mod.manifest,
+						error: err.message,
+						formData: req.body
+					});
 				}
 
 				res.redirect('/' + mod.manifest.mount + '/');
@@ -71,16 +70,13 @@ module.exports = function(mod){
 			}
 
 			if (!docs.length){
-				console.err('No document found with id %s', req.params.id);
+				console.error('No document found with id %s', req.params.id);
 				return res.redirect('/' + mod.manifest.mount + '/new/');
 			}
 
+			mod.manifest.formSpec.action = '/' + mod.manifest.mount + '/edit/' + req.params.id + '/';
 			res.render(mod.path + '/views/form', {
-				unit: mod.manifest.unit,
-				units: mod.manifest.units,
-				formSpec: mixIn(mod.manifest.formSpec, {
-					action: '/' + mod.manifest.mount + '/edit/' + req.params.id + '/'
-				}),
+				manifest: mod.manifest,
 				formData: docs[0]
 			});
 		});
@@ -97,7 +93,11 @@ module.exports = function(mod){
 			db.close();
 			if (err){
 				console.error(err);
-				return res.render(mod.path + '/views/form');
+				mod.manifest.formSpec.action = '/' + mod.manifest.mount + '/edit/' + req.params.id + '/';
+				return res.render(mod.path + '/views/form', {
+					manifest: mod.manifest,
+					formData: req.body
+				});
 			}
 
 			res.redirect('/' + mod.manifest.mount + '/');
