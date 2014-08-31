@@ -7,6 +7,9 @@
 	{% else %}
 		<h2>Add new {{ manifest.unit }}</h2>
 	{% endif %}
+	{% if error %}
+		{{ error }}
+	{% endif %}
 	<div data-informal>
 		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>

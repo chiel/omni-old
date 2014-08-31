@@ -20,7 +20,7 @@ module.exports = function(mod){
 	if (!mod.manifest || !mod.manifest.formSpec) return;
 
 	var fields = mod.manifest.formSpec.fields,
-		schema = {}, o, p;
+		schema = {}, o, p, def;
 
 	forOwn(fields, function(field, name){
 		name = field.name || name;
@@ -38,7 +38,17 @@ module.exports = function(mod){
 			o = o[p];
 		}
 
-		o[p] = types[field.type];
+		def = { type: types[field.type] };
+
+		if (field.required){
+			def.required = true;
+		}
+
+		if (field.unique){
+			def.index = { unique: true };
+		}
+
+		o[p] = def;
 	});
 
 	return new mongoose.Schema(schema);
