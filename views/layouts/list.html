@@ -17,7 +17,11 @@
 				<tr>
 					<td><input type="checkbox"></td>
 					{% for field in listSpec.fields %}
-						<td>{{ item[field.name] }}</td>
+						{% if loop.index == 1 %}
+						<td><a href="/{{ mount }}/edit/{{ item._id.toString() }}/">{{ item[field.name] }}</a></td>
+						{% else %}
+							<td>{{ item[field.name] }}</td>
+						{% endif %}
 					{% endfor %}
 				</tr>
 			{% endfor %}

@@ -38,7 +38,12 @@ module.exports = function(grunt){
 			dev: {}
 		},
 
-		watch: {}
+		watch: {
+			js: {
+				files: ['src/js/*.js', 'src/js/**.js'],
+				tasks: ['browserify:base']
+			}
+		}
 	};
 
 	var readCssDir = function(dir, target){
