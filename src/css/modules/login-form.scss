@@ -1,0 +1,33 @@
+.login-form {
+	margin: 200px 0 0;
+	padding: 30px 0;
+	fieldset {
+		width: 200px;
+		margin: 0 auto;
+		padding: 0;
+		border: 0;
+	}
+	input {
+		display: block;
+		width: 100%;
+		margin: 12px 0 0 0;
+		border: 0;
+		border-bottom: 1px solid #ccc;
+		background: #fff;
+		text-align: center;
+		@include transition(border .2s ease-out);
+		&:first-child {
+			margin-top: 0;
+		}
+		&[type=submit] {
+			width: auto;
+			margin: 30px auto 0;
+			padding: 3px 30px;
+			border: 1px solid #ccc;
+		}
+		&:focus {
+			border-color: #2795bd;
+			outline: 0;
+		}
+	}
+}

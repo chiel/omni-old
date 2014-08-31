@@ -1,14 +1,14 @@
 {% extends "../../../views/layouts/plain.html" %}
 
 {% block content %}
-<form method="post" action="/login/">
+<form method="post" action="/login/" class="login-form">
 	{% if error %}
 		<p class="error">{{error}}</p>
 	{% endif %}
 	<fieldset>
 		<input type="email" name="email" placeholder="E-mail" autofocus>
 		<input type="password" name="password" placeholder="Password">
-		<input type="submit" value="Login">
+		<input type="submit" value="Sign in">
 	</fieldset>
 	{% if forward %}
 		<input type="hidden" name="forward" value="{{forward}}">
