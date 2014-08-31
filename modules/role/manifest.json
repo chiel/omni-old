@@ -39,7 +39,11 @@
 		"fields": {
 			"name": {
 				"type": "text",
-				"label": "Name"
+				"label": "Name",
+				"required": true,
+				"attributes": {
+					"autofocus": true
+				}
 			}
 		}
 	},
