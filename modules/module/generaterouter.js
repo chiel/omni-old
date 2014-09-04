@@ -105,5 +105,21 @@ module.exports = function(mod){
 		mongoose.connect(config.mongo);
 	});
 
+	router.get('/delete/:id/', function(req, res){
+		if (!mod.Model){
+			console.error('No model found for module %s', mod.manifest.name);
+			return res.redirect('/' + mod.manifest.slug + '/');
+		}
+
+		mod.Model.remove({_id: req.params.id}, function(err){
+			db.close();
+			if (err){
+				console.error(err);
+			}
+			res.redirect('/' + mod.manifest.slug + '/');
+		});
+		mongoose.connect(config.mongo);
+	});
+
 	return router;
 };

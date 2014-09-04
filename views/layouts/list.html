@@ -13,6 +13,7 @@
 				{% for field in manifest.listSpec.fields %}
 					<th>{{ field.label }}</th>
 				{% endfor %}
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,15 +27,16 @@
 							<td>{{ item[field.name] }}</td>
 						{% endif %}
 					{% endfor %}
+					<td><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
 				</tr>
 			{% endfor %}
 			{% if !items.length %}
 				<tr class="empty-set">
-					<td colspan="{{ manifest.listSpec.fields.length + 1 }}">
+					<td colspan="{{ manifest.listSpec.fields.length + 2 }}">
 						{% if error %}
 							{{ error }}
 						{% else %}
-							No {{ units|lower }} found, would you like to <a href="/{{ manifest.slug }}/new/">create one</a>?
+							No {{ manifest.units|lower }} found, would you like to <a href="/{{ manifest.slug }}/new/">create one</a>?
 						{% endif %}
 					</td>
 				</tr>
