@@ -20,7 +20,7 @@ if (isString(config.listen)){
 		});
 
 		clientSocket.connect({path: config.listen}, function(){
-			console.log('Socket %s is in use, exiting...', config.listen);
+			console.error('Socket %s is in use, exiting...', config.listen);
 			process.exit(1);
 		});
 	});
@@ -28,7 +28,7 @@ if (isString(config.listen)){
 	server.on('error', function(e){
 		if (e.code != 'EADDRINUSE') return;
 
-		console.log('Port %d is in use, exiting...', config.listen);
+		console.error('Port %d is in use, exiting...', config.listen);
 		process.exit(1);
 	});
 }

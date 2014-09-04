@@ -9,9 +9,9 @@ try {
 	config = JSON.parse(config);
 } catch(e){
 	if (e.code == 'ENOENT'){
-		console.log('Could not find config file %s', file);
+		console.error('Could not find config file %s', file);
 	} else {
-		console.log('Could not parse config file: %s', e.message);
+		console.error('Could not parse config file: %s', e.message);
 	}
 	process.exit();
 }
