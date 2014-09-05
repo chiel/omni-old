@@ -1,7 +1,8 @@
 'use strict';
 
 var forOwn = require('mout/object/forOwn'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	isArray = require('mout/lang/isArray');
 
 var types = {
 	text: String,
@@ -39,7 +40,11 @@ module.exports = function(mod){
 			o = o[p];
 		}
 
-		def = { type: types[field.type] };
+		if (isArray(types[field.type])){
+			def = { type: types[field.type][0] };
+		} else {
+			def = { type: types[field.type] };
+		}
 
 		if (field.required){
 			def.required = true;
@@ -47,6 +52,14 @@ module.exports = function(mod){
 
 		if (field.unique){
 			def.index = { unique: true };
+		}
+
+		if (field.type == 'db_multi_option'){
+			def.ref = field.module;
+		}
+
+		if (isArray(types[field.type])){
+			def = [def];
 		}
 
 		o[p] = def;
