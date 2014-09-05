@@ -1,6 +1,8 @@
 'use strict';
 
-var auth = require('../auth/lib');
+var auth = require('../auth/lib'),
+	forOwn = require('mout/object/forOwn'),
+	mixIn = require('mout/object/mixIn');
 
 module.exports = function(){
 	var router = require('express').Router();
@@ -27,6 +29,19 @@ module.exports = function(){
 			if (err){
 				return res.render(__dirname + '/views/login', {error: err.message});
 			}
+
+			var rights = {};
+
+			data.roles.forEach(function(role){
+				forOwn(role.modules, function(roleRights, moduleName){
+					if (!rights[moduleName]) rights[moduleName] = {};
+
+					mixIn(rights[moduleName], roleRights);
+				});
+			});
+
+			data.rights = rights;
+
 			req.session.userData = data;
 			res.redirect(req.body.forward || '/');
 		});

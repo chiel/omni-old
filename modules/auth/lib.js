@@ -16,7 +16,7 @@ var withPassword = function(email, password, cb){
 		return;
 	}
 
-	modules.user.Model.findOne({email: email}, function(err, doc){
+	modules.user.Model.findOne({email: email}).populate('roles').exec(function(err, doc){
 		if (err) return cb(err);
 
 		if (!doc){
@@ -32,7 +32,7 @@ var withPassword = function(email, password, cb){
 				return cb(new AuthError('EAUTHWRONGPASS', 'Incorrect password'));
 			}
 
-			cb(null, doc);
+			cb(null, doc.toObject());
 		});
 	});
 };

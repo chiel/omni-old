@@ -9,7 +9,9 @@ var SessionUser = function(data){
 };
 
 SessionUser.prototype.can = function(right, moduleName){
-	return this.data.superadmin;
+	return this.data.superadmin ||
+		(this.data.rights[moduleName] &&
+		this.data.rights[moduleName][right] === true);
 };
 
 module.exports = SessionUser;
