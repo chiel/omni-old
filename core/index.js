@@ -6,4 +6,5 @@ require('./settings');
 
 require('./loadmodules')(process.cwd() + '/modules');
 
+require('./db');
 require('./listen');

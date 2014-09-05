@@ -1,11 +1,6 @@
 'use strict';
 
-var express = require('express'),
-	mongoose = require('mongoose'),
-	config = require('../../core/config'),
-	db = mongoose.connection;
-
-db.on('error', console.error);
+var express = require('express');
 
 module.exports = function(mod){
 	var router = express.Router();
@@ -22,12 +17,9 @@ module.exports = function(mod){
 		}
 
 		mod.Model.find(function(err, items){
-			db.close();
-
 			locals.items = items;
 			res.render(mod.path + '/views/list', locals);
 		});
-		mongoose.connect(config.mongo);
 	});
 
 	router.get('/new/', function(req, res){
@@ -43,28 +35,22 @@ module.exports = function(mod){
 			return res.redirect('/' + mod.manifest.slug + '/new/');
 		}
 
-		db.once('open', function(){
-			new mod.Model(req.body).save(function(err){
-				db.close();
-				if (err){
-					console.error(err);
-					return res.render(mod.path + '/views/form', {
-						manifest: mod.manifest,
-						error: err.message,
-						formData: req.body
-					});
-				}
+		new mod.Model(req.body).save(function(err){
+			if (err){
+				console.error(err);
+				return res.render(mod.path + '/views/form', {
+					manifest: mod.manifest,
+					error: err.message,
+					formData: req.body
+				});
+			}
 
-				res.redirect('/' + mod.manifest.slug + '/');
-			});
+			res.redirect('/' + mod.manifest.slug + '/');
 		});
-		mongoose.connect(config.mongo);
 	});
 
 	router.get('/edit/:id/', function(req, res){
 		mod.Model.find({_id: req.params.id}, function(err, docs){
-			db.close();
-
 			if (err){
 				console.error(err);
 			}
@@ -80,7 +66,6 @@ module.exports = function(mod){
 				formData: docs[0]
 			});
 		});
-		mongoose.connect(config.mongo);
 	});
 
 	router.post('/edit/:id/', function(req, res){
@@ -90,7 +75,6 @@ module.exports = function(mod){
 		}
 
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
-			db.close();
 			if (err){
 				console.error(err);
 				mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
@@ -102,7 +86,6 @@ module.exports = function(mod){
 
 			res.redirect('/' + mod.manifest.slug + '/');
 		});
-		mongoose.connect(config.mongo);
 	});
 
 	router.get('/delete/:id/', function(req, res){
@@ -112,13 +95,11 @@ module.exports = function(mod){
 		}
 
 		mod.Model.remove({_id: req.params.id}, function(err){
-			db.close();
 			if (err){
 				console.error(err);
 			}
 			res.redirect('/' + mod.manifest.slug + '/');
 		});
-		mongoose.connect(config.mongo);
 	});
 
 	return router;
