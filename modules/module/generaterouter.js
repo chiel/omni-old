@@ -1,6 +1,7 @@
 'use strict';
 
-var express = require('express');
+var express = require('express'),
+	expandFields = require('../../lib/expandfields');
 
 module.exports = function(mod){
 	var router = express.Router();
@@ -18,8 +19,12 @@ module.exports = function(mod){
 
 	router.get('/new/', function(req, res){
 		mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/new/';
-		res.render(mod.path + '/views/form', {
-			manifest: mod.manifest
+
+		expandFields(mod.manifest.formSpec.fields, function(err, fields){
+			mod.manifest.formSpec.fields = fields;
+			res.render(mod.path + '/views/form', {
+				manifest: mod.manifest
+			});
 		});
 	});
 
@@ -51,9 +56,13 @@ module.exports = function(mod){
 			}
 
 			mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
-			res.render(mod.path + '/views/form', {
-				manifest: mod.manifest,
-				formData: docs[0]
+
+			expandFields(mod.manifest.formSpec.fields, function(err, fields){
+				mod.manifest.formSpec.fields = fields;
+				res.render(mod.path + '/views/form', {
+					manifest: mod.manifest,
+					formData: docs[0]
+				});
 			});
 		});
 	});
@@ -63,10 +72,14 @@ module.exports = function(mod){
 			if (err){
 				console.error(err);
 				mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
-				return res.render(mod.path + '/views/form', {
-					manifest: mod.manifest,
-					error: err.message,
-					formData: req.body
+
+				return expandFields(mod.manifest.formSpec.fields, function(err, fields){
+					mod.manifest.formSpec.fields = fields;
+					res.render(mod.path + '/views/form', {
+						manifest: mod.manifest,
+						error: err.message,
+						formData: req.body
+					});
 				});
 			}
 

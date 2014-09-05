@@ -22,8 +22,11 @@
 		"mout": "0.9",
 		"node-bourbon": "1.2",
 		"normalize.css": "3.0",
+		"prime": "0.4",
+		"promise": "5.0",
 		"serve-static": "1.4",
-		"swig": "1.1"
+		"swig": "1.1",
+		"then-all": "2.0"
 	},
 	"devDependencies": {
 		"grunt": "0.4",

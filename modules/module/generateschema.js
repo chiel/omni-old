@@ -13,7 +13,8 @@ var types = {
 	time: String,
 	boolean: Boolean,
 	single_option: String,
-	multi_option: Array
+	multi_option: [String],
+	db_multi_option: [mongoose.Schema.Types.ObjectId]
 };
 
 module.exports = function(mod){
