@@ -8,4 +8,8 @@ var SessionUser = function(data){
 	this.data = data;
 };
 
+SessionUser.prototype.can = function(right, moduleName){
+	return this.data.superadmin;
+};
+
 module.exports = SessionUser;

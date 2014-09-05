@@ -4,6 +4,25 @@
 	"unit": "user",
 	"units": "users",
 
+	"rights": [
+		{
+			"key": "view",
+			"description": "View existing users"
+		},
+		{
+			"key": "create",
+			"description": "Create new users"
+		},
+		{
+			"key": "update",
+			"description": "Update existing users"
+		},
+		{
+			"key": "delete",
+			"description": "Remove users"
+		}
+	],
+
 	"formSpec": {
 		"method": "post",
 		"action": "/users/new/",

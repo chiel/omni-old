@@ -16,6 +16,10 @@
 		{
 			"key": "update",
 			"description": "Update existing roles"
+		},
+		{
+			"key": "delete",
+			"description": "Remove roles"
 		}
 	],
 

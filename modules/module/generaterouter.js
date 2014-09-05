@@ -9,6 +9,10 @@ module.exports = function(mod){
 	if (!mod.Model) return router;
 
 	router.get('/', function(req, res){
+		if (!req.session.user.can('view', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		mod.Model.find(function(err, items){
 			res.render(mod.path + '/views/list', {
 				manifest: mod.manifest,
@@ -18,6 +22,10 @@ module.exports = function(mod){
 	});
 
 	router.get('/new/', function(req, res){
+		if (!req.session.user.can('create', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/new/';
 
 		expandFields(mod.manifest.formSpec.fields, function(err, fields){
@@ -29,6 +37,10 @@ module.exports = function(mod){
 	});
 
 	router.post('/new/', function(req, res){
+		if (!req.session.user.can('create', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		new mod.Model(req.body).save(function(err){
 			if (err){
 				console.error(err);
@@ -44,6 +56,10 @@ module.exports = function(mod){
 	});
 
 	router.get('/edit/:id/', function(req, res){
+		if (!req.session.user.can('update', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		mod.Model.find({_id: req.params.id}, function(err, docs){
 			if (err){
 				console.error(err);
@@ -68,6 +84,10 @@ module.exports = function(mod){
 	});
 
 	router.post('/edit/:id/', function(req, res){
+		if (!req.session.user.can('update', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
 			if (err){
 				console.error(err);
@@ -88,6 +108,10 @@ module.exports = function(mod){
 	});
 
 	router.get('/delete/:id/', function(req, res){
+		if (!req.session.user.can('delete', mod.dirName)){
+			return res.send('You are not authorised to view this page');
+		}
+
 		mod.Model.remove({_id: req.params.id}, function(err){
 			if (err){
 				console.error(err);
