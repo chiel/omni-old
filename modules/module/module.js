@@ -49,7 +49,7 @@ Module.prototype.loadSchema = function(){
 
 Module.prototype.loadModel = function(){
 	if (this.schema){
-		this.Model = mongoose.model(this.manifest.slug, this.schema, this.manifest.slug);
+		this.Model = mongoose.model(this.dirName, this.schema, this.dirName);
 	}
 };
 
