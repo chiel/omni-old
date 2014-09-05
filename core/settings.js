@@ -17,7 +17,7 @@ app
 	.use(require('body-parser').urlencoded({extended: true}))
 	.use(session({
 		store: new RedisStore(),
-		name: config.session.name || 'omni.sid',
+		name: config.session.name,
 		secret: config.session.secret,
 		resave: true,
 		saveUninitialized: true
