@@ -5,20 +5,14 @@ var express = require('express');
 module.exports = function(mod){
 	var router = express.Router();
 
+	if (!mod.Model) return router;
+
 	router.get('/', function(req, res){
-		var locals = {
-			manifest: mod.manifest
-		};
-
-		if (!mod.Model){
-			console.error('No model found for module %s', mod.manifest.name);
-			locals.error = 'No model found for this module';
-			return res.render(mod.path + '/views/list', locals);
-		}
-
 		mod.Model.find(function(err, items){
-			locals.items = items;
-			res.render(mod.path + '/views/list', locals);
+			res.render(mod.path + '/views/list', {
+				manifest: mod.manifest,
+				items: items
+			});
 		});
 	});
 
@@ -30,11 +24,6 @@ module.exports = function(mod){
 	});
 
 	router.post('/new/', function(req, res){
-		if (!mod.Model){
-			console.error('No model found for module %s', mod.manifest.name);
-			return res.redirect('/' + mod.manifest.slug + '/new/');
-		}
-
 		new mod.Model(req.body).save(function(err){
 			if (err){
 				console.error(err);
@@ -53,6 +42,7 @@ module.exports = function(mod){
 		mod.Model.find({_id: req.params.id}, function(err, docs){
 			if (err){
 				console.error(err);
+				return res.redirect('/' + mod.manifest.slug + '/');
 			}
 
 			if (!docs.length){
@@ -69,17 +59,13 @@ module.exports = function(mod){
 	});
 
 	router.post('/edit/:id/', function(req, res){
-		if (!mod.Model){
-			console.error('No model found for module %s', mod.manifest.name);
-			return res.redirect('/' + mod.manifest.slug + '/edit/' + req.params.id + '/');
-		}
-
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
 			if (err){
 				console.error(err);
 				mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
 				return res.render(mod.path + '/views/form', {
 					manifest: mod.manifest,
+					error: err.message,
 					formData: req.body
 				});
 			}
@@ -89,11 +75,6 @@ module.exports = function(mod){
 	});
 
 	router.get('/delete/:id/', function(req, res){
-		if (!mod.Model){
-			console.error('No model found for module %s', mod.manifest.name);
-			return res.redirect('/' + mod.manifest.slug + '/');
-		}
-
 		mod.Model.remove({_id: req.params.id}, function(err){
 			if (err){
 				console.error(err);
