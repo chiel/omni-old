@@ -11,6 +11,7 @@ var Module = function(modulePath){
 	}
 
 	this.path = modulePath;
+	this.dirName = this.path.match(/([^\/]+)$/)[0];
 
 	this.loadManifest();
 	this.loadSchema();
@@ -29,8 +30,7 @@ Module.prototype.loadManifest = function(){
 	}
 
 	if (!this.manifest.slug){
-		this.manifest.slug = this.path.match(/([^\/]+)$/)[0];
-		if (this.manifest.slug == 'root') this.manifest.slug = '';
+		this.manifest.slug = this.dirName == 'root' ? this.manifest.slug = '' : this.dirName;
 	}
 
 	if (fs.existsSync(this.path + '/manifest.js')){

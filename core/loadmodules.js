@@ -25,7 +25,7 @@ module.exports = function(modulesPath){
 		) continue;
 
 		mod = new Module(modulePath);
-		modules.push(mod);
+		modules[mod.dirName] = mod;
 
 		if (mod.router){
 			app.use('/' + mod.manifest.slug, mod.router);
