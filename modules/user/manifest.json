@@ -1,0 +1,49 @@
+{
+	"name": "Users",
+	"slug": "users",
+	"unit": "user",
+	"units": "users",
+
+	"formSpec": {
+		"method": "post",
+		"action": "/users/new/",
+		"save": {},
+		"pages": [
+			{
+				"groups": ["group1"]
+			}
+		],
+		"groups": {
+			"group1": {
+				"fields": ["email", "password", "roles"]
+			}
+		},
+		"fields": {
+			"email": {
+				"type": "email",
+				"label": "E-mail",
+				"required": true,
+				"unique": true
+			},
+			"password": {
+				"type": "password",
+				"label": "Password",
+				"required": true
+			},
+			"roles": {
+				"type": "db_multi_option",
+				"label": "Roles",
+				"module": "role"
+			}
+		}
+	},
+
+	"listSpec": {
+		"fields": [
+			{
+				"name": "email",
+				"label": "E-mail"
+			}
+		]
+	}
+}

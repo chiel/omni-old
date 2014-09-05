@@ -1,49 +1,38 @@
 'use strict';
 
-var client = require('mongodb').MongoClient,
-	bcrypt = require('bcrypt'),
+var bcrypt = require('bcrypt'),
 	AuthError = require('./autherror'),
-	config = require('../../core/config');
+	modules = require('../../core/modules');
 
 /**
  * Authenticate with email and password
  * @param {String} email
  * @param {String} password
- * @param {Function} fn
+ * @param {Function} cb
  */
-var withPassword = function(email, password, fn){
+var withPassword = function(email, password, cb){
 	if (!email || !password){
-		fn(new Error('E-mail or password not provided'));
+		cb(new Error('E-mail or password not provided'));
 		return;
 	}
 
-	client.connect(config.mongo, function(err, db){
-		if (err){
-			return fn(new Error('Failed to connect to MongoDB'));
+	modules.user.Model.findOne({email: email}, function(err, doc){
+		if (err) return cb(err);
+
+		if (!doc){
+			return cb(new AuthError('EUSERNEXIST', 'Could not find user with that email'));
 		}
 
-		var collection = db.collection('user');
-		collection.findOne({email: email}, function(err, doc){
-			db.close();
+		bcrypt.compare(password, doc.password, function(err, equal){
 			if (err){
-				return fn(new Error('Failed to query collection'));
+				return cb(new Error('Failed to do bcrypt compare'));
 			}
 
-			if (!doc){
-				return fn(new AuthError('EUSERNOEXIST', 'Could not find user with that email'));
+			if (!equal){
+				return cb(new AuthError('EAUTHWRONGPASS', 'Incorrect password'));
 			}
 
-			bcrypt.compare(password, doc.password, function(err, equal){
-				if (err){
-					return fn(new Error('Failed to do bcrypt compare'));
-				}
-
-				if (!equal){
-					return fn(new AuthError('EAUTHWRONGPASS', 'Incorrect password'));
-				}
-
-				fn(null, doc);
-			});
+			cb(null, doc);
 		});
 	});
 };

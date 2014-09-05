@@ -1,36 +1,29 @@
 #!/usr/bin/env node
 'use strict';
 
-var readline = require('readline'),
-	client = require('mongodb').MongoClient,
-	bcrypt = require('bcrypt'),
-	config = require('./core/config');
+require('./core/db');
 
-var rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-});
+var readline = require('readline'),
+	Module = require('./modules/module/module'),
+	mod = new Module(__dirname + '/modules/user'),
+	rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout
+	});
 
 rl.question('E-mail: ', function(email){
 	rl.question('Password: ', function(pass){
-		bcrypt.hash(pass, 10, function(err, hash) {
-			client.connect(config.mongo, function(err, db){
-				if (err){
-					console.log('Failed to connect to mongodb');
-					return;
-				}
+		new mod.Model({
+			email: email,
+			password: pass
+		}).save(function(err){
+			if (err){
+				console.error(err);
+				process.exit(1);
+			}
 
-				var doc = {email: email, password: hash};
-				db.collection('user').insert(doc, function(err){
-					if (err){
-						console.log('Failed to create user');
-						return;
-					}
-
-					console.log('User created');
-					process.exit(0);
-				});
-			});
+			console.log('User created');
+			process.exit(0);
 		});
 	});
 });
