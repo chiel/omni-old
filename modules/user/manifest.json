@@ -34,6 +34,12 @@
 				"type": "db_multi_option",
 				"label": "Roles",
 				"module": "role"
+			},
+			"superadmin": {
+				"type": "boolean",
+				"label": "Super admin",
+				"value": false,
+				"hidden": true
 			}
 		}
 	},

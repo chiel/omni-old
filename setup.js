@@ -15,7 +15,8 @@ rl.question('E-mail: ', function(email){
 	rl.question('Password: ', function(pass){
 		new mod.Model({
 			email: email,
-			password: pass
+			password: pass,
+			superadmin: true
 		}).save(function(err){
 			if (err){
 				console.error(err);
