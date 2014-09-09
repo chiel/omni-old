@@ -57,7 +57,7 @@
 			"superadmin": {
 				"type": "boolean",
 				"label": "Super admin",
-				"value": false,
+				"default": false,
 				"hidden": true
 			}
 		}

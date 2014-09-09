@@ -50,6 +50,10 @@ module.exports = function(mod){
 			def.required = true;
 		}
 
+		if (field.default !== undefined){
+			def.default = field.default;
+		}
+
 		if (field.unique){
 			def.index = { unique: true };
 		}
