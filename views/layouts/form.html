@@ -2,11 +2,16 @@
 
 {% block content %}
 <div class="wrap">
-	{% if formData %}
-		<h2>Edit {{ manifest.unit }}</h2>
-	{% else %}
-		<h2>Add new {{ manifest.unit }}</h2>
-	{% endif %}
+	<header class="module-header">
+		{% if formData %}
+			<h2>Edit {{ manifest.unit }}</h2>
+		{% else %}
+			<h2>Add new {{ manifest.unit }}</h2>
+		{% endif %}
+		<ul class="actions">
+			<li><a href="/{{ manifest.slug }}/new/">New</a></li>
+		</ul>
+	</header>
 	{% if error %}
 		{{ error }}
 	{% endif %}

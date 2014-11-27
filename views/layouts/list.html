@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class="wrap">
-	<h2>{{ manifest.units|capitalize }}</h2>
-	<ul class="actions">
-		<li><a href="/{{ manifest.slug }}/new/">New</a></li>
-	</ul>
+	<header class="module-header">
+		<h2>{{ manifest.units|capitalize }}</h2>
+		<ul class="actions">
+			<li><a href="/{{ manifest.slug }}/new/">New</a></li>
+		</ul>
+	</header>
 	<table class="item-list">
 		<thead>
 			<tr>
@@ -27,7 +29,7 @@
 							<td>{{ item[field.name] }}</td>
 						{% endif %}
 					{% endfor %}
-					<td><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
+					<td class="actions"><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
 				</tr>
 			{% endfor %}
 			{% if !items.length %}

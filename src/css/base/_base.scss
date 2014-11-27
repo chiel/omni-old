@@ -12,6 +12,7 @@ body {
 }
 
 h2 {
+	margin: 0;
 	font-size: 24px;
 	line-height: 48px;
 	font-weight: 300;
@@ -69,9 +70,51 @@ form {
 	}
 	input[type=submit] {
 		width: auto;
+		margin: 12px 0 0;
 		padding: 6px 24px;
 	}
+}
+
+.module-header {
+	overflow: hidden;
+	height: 48px;
+	margin: 24px 0;
+	h2 {
+		float: left;
+	}
 	.actions {
-		margin: 12px 0 0;
+		float: left;
+		margin: 0 0 0 24px;
+		padding: 0;
+		list-style: none;
+		line-height: 56px;
+	}
+}
+
+.item-list {
+	width: 100%;
+	line-height: 32px;
+	th {
+		padding: 0 12px;
+		text-align: left;
+	}
+	td {
+		padding: 0 12px;
+	}
+	th:first-child, td:first-child {
+		width: 24px;
+		padding-right: 0;
+	}
+	tbody {
+		tr {
+			border-top: 1px solid #ccc;
+		}
+		tr:nth-child(odd) {
+			background: #fafafa;
+		}
+	}
+	.actions {
+		padding: 0 12px 0 0;
+		text-align: right;
 	}
 }
