@@ -31,9 +31,9 @@ module.exports = function(grunt){
 		},
 
 		browserify: {
-			base: {
+			omni: {
 				files: {
-					'public/js/base.js': 'src/js/base.js'
+					'public/js/omni.js': 'src/js/index.js'
 				}
 			}
 		},
@@ -45,7 +45,7 @@ module.exports = function(grunt){
 		watch: {
 			js: {
 				files: ['src/js/*.js', 'src/js/**.js'],
-				tasks: ['browserify:base']
+				tasks: ['browserify:omni']
 			}
 		}
 	};
