@@ -24,7 +24,11 @@ module.exports = function(grunt){
 			}
 		},
 
-		sass: {},
+		sass: {
+			options: {
+				includePaths: ['src/css']
+			}
+		},
 
 		browserify: {
 			base: {
