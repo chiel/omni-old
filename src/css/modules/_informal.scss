@@ -1,0 +1,62 @@
+.informal {
+	fieldset {
+		margin: 24px 0 0;
+		padding: 0;
+		border: 0;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	legend {
+		margin: 0 0 6px;
+		font-weight: 400;
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		margin: 6px 0 0;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	label {
+		display: inline-block;
+		width: 250px;
+		vertical-align: top;
+	}
+	input, select, textarea {
+		width: 400px;
+		padding: 6px 9px;
+		border: 1px solid #ccc;
+		border-radius: 2px;
+		background: #fff;
+	}
+	input[type=submit] {
+		width: auto;
+		margin: 12px 0 0;
+		padding: 6px 24px;
+	}
+
+	.nav-pager {
+		ul {
+			@include clearfix();
+		}
+		li {
+			float: left;
+			margin: 0 0 0 6px;
+			padding: 3px 18px;
+			border: 1px solid #ccc;
+			border-bottom: 0;
+			opacity: .4;
+			&:first-child {
+				margin-left: 0;
+			}
+			&.active {
+				opacity: 1;
+			}
+		}
+	}
+}

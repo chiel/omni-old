@@ -1,0 +1,27 @@
+.item-list {
+	width: 100%;
+	line-height: 32px;
+	th {
+		padding: 0 12px;
+		text-align: left;
+	}
+	td {
+		padding: 0 12px;
+	}
+	th:first-child, td:first-child {
+		width: 24px;
+		padding-right: 0;
+	}
+	tbody {
+		tr {
+			border-top: 1px solid #ccc;
+		}
+		tr:nth-child(odd) {
+			background: #fafafa;
+		}
+	}
+	.actions {
+		padding: 0 12px 0 0;
+		text-align: right;
+	}
+}

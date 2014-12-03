@@ -34,7 +34,7 @@
 		],
 		"groups": {
 			"group1": {
-				"fields": ["email", "password", "roles"]
+				"fields": ["email", "password", "roles", "superadmin"]
 			}
 		},
 		"fields": {
