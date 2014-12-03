@@ -33,7 +33,7 @@ module.exports = function(grunt){
 		browserify: {
 			omni: {
 				files: {
-					'public/js/omni.js': 'src/js/index.js'
+					'public/js/omni.js': ['src/js/index.js']
 				}
 			}
 		},
@@ -89,12 +89,36 @@ module.exports = function(grunt){
 		}
 	};
 
+	var readJsDir = function(dir){
+		if (!fs.existsSync(dir + '/index.js')) return;
+
+		config.browserify.omni.files['public/js/omni.js'].push(dir + '/index.js');
+
+		var filePath, hasSubdirs;
+
+		fs.readdirSync(dir)
+		.forEach(function(fileName){
+			if (/^_/.test(fileName)) return;
+
+			filePath = dir + '/' + fileName;
+			if (fs.statSync(filePath).isDirectory()){
+				hasSubdirs = true;
+			}
+		});
+
+		config.watch.js.files.push(dir + '/*.js');
+		if (hasSubdirs){
+			config.watch.js.files.push(dir + '/**/*.js');
+		}
+	};
+
 	readCssDir(__dirname + '/src/css', 'base');
 
 	fs.readdirSync(__dirname + '/modules')
 	.forEach(function(moduleName){
 		var modulePath = __dirname + '/modules/' + moduleName;
 		readCssDir(modulePath + '/css', moduleName);
+		readJsDir(modulePath + '/js', moduleName);
 	});
 
 	grunt.initConfig(config);
