@@ -90,9 +90,7 @@ module.exports = function(grunt){
 	fs.readdirSync(__dirname + '/modules')
 	.forEach(function(moduleName){
 		var modulePath = __dirname + '/modules/' + moduleName;
-		if (fs.existsSync(modulePath + '/css')){
-			readCssDir(modulePath + '/css', moduleName);
-		}
+		readCssDir(modulePath + '/css', moduleName);
 	});
 
 	grunt.initConfig(config);
