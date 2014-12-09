@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 module.exports = function(mod){
-	var dir = process.cwd() + '/modules',
+	var dir = __dirname + '/..',
 		modules = fs.readdirSync(dir),
 		modulePath, moduleManifest, fields;
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+require('./lib/loadconfig')(__dirname + '/config.json');
 require('./core/db');
 
 var readline = require('readline'),

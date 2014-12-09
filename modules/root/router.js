@@ -8,7 +8,7 @@ module.exports = function(){
 	var router = require('express').Router();
 
 	router.get('/', function(req, res){
-		res.render('dashboard');
+		res.redirect('/dashboard/');
 	});
 
 	router.get('/login/', function(req, res){

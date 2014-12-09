@@ -1,42 +1,39 @@
 {
-	"name": "omni",
-	"version": "0.0.1-dev",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/chielkunkels/omni.git"
-	},
-	"author": "Chiel Kunkels <chiel@kunkels.me>",
-	"main": "app.js",
-	"dependencies": {
-		"bcrypt": "0.8",
-		"behaviour": "0.1",
-		"body-parser": "1.6",
-		"node-bourbon": "1.2",
-		"connect-redis": "2.0",
-		"connect-slashes": "1.2",
-		"consolidate": "0.9",
-		"express": "4.7",
-		"express-session": "1.7",
-		"informal": "0.2",
-		"mongodb": "1.4",
-		"mongoose": "3.8",
-		"mout": "0.9",
-		"node-bourbon": "1.2",
-		"normalize.css": "3.0",
-		"prime": "0.4",
-		"promise": "5.0",
-		"serve-static": "1.4",
-		"swig": "1.1",
-		"then-all": "2.0"
-	},
-	"devDependencies": {
-		"grunt": "0.4",
-		"grunt-browserify": "3.0",
-		"grunt-concurrent": "0.5",
-		"grunt-contrib-watch": "0.6",
-		"grunt-mkdir": "0.1",
-		"grunt-nodemon": "0.1",
-		"grunt-sass": "0.14",
-		"matchdep": "0.3"
-	}
+  "name": "omni",
+  "version": "0.1.0-dev",
+  "main": "index.js",
+  "author": "chielkunkels",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chielkunkels/omni.git"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.0",
+    "behaviour": "^0.1.0",
+    "body-parser": "^1.10.0",
+    "connect-redis": "^2.1.0",
+    "connect-slashes": "^1.3.0",
+    "express": "^4.10.4",
+    "express-session": "^1.9.3",
+    "mongoose": "^3.8.20",
+    "mout": "^0.11.0",
+    "node-bourbon": "^1.2.3",
+    "normalize.css": "^3.0.2",
+    "prime": "^0.4.2",
+    "promise": "^6.0.1",
+    "serve-static": "^1.7.1",
+    "swig": "^1.4.2",
+    "then-all": "^2.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.2.1",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-nodemon": "^0.3.0",
+    "grunt-sass": "^0.17.0",
+    "load-grunt-tasks": "^1.0.0",
+    "matchdep": "^0.3.0"
+  }
 }

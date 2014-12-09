@@ -1,5 +1,5 @@
 {
-	"listen": 5000,
+	"listen": "5000",
 	"mongo": "mongodb://127.0.0.1:27017/omni",
 	"session": {
 		"name": "omni.sid",
