@@ -15,9 +15,10 @@
 	{% if error %}
 		{{ error }}
 	{% endif %}
-	<div data-informal>
+	<form method="post" action="/{{ manifest.slug }}/new/" data-informal>
 		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
-	</div>
+		<input type="submit" value="Save">
+	</form>
 </div>
 {% endblock %}

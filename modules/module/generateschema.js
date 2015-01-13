@@ -15,7 +15,8 @@ var types = {
 	boolean: Boolean,
 	single_option: String,
 	multi_option: [String],
-	db_multi_option: [mongoose.Schema.Types.ObjectId]
+	db_multi_option: [mongoose.Schema.Types.ObjectId],
+	value_list: mongoose.Schema.Types.Mixed
 };
 
 module.exports = function(mod){

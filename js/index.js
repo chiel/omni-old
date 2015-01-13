@@ -3,7 +3,8 @@
 var behaviour = require('behaviour'),
 	informal = require('informal');
 
-informal.registerField('db_multi_option', require('./fields/db_multi_option'));
+informal.registerField('db_multi_option', require('informal/src/fields/multi_option'));
+informal.registerField('value_list', require('./fields/value_list'));
 
 behaviour.register('data-informal', function(el){
 	var spec = el.querySelector('[data-informal-spec]'),
