@@ -15,7 +15,8 @@ var ValueList = function(form, name, value){
 		return new ValueList(form, name, value);
 	}
 
-	this.items = [];
+	this.items = {};
+	this.itemIndex = 0;
 	Base.call(this, form, name, value);
 };
 
@@ -29,27 +30,26 @@ ValueList.prototype.build = function(){
 
 	this.wrap = document.createElement('div');
 	this.wrap.classList.add('informal--field');
-	this.wrap.innerHTML = '<label>' + this.spec.label + '</label>' +
+	this.wrap.innerHTML = '<label>' + (this.spec.label || '') + '</label>' +
 		'<fieldset>' +
 			'<ul class="value-list--values"></ul>' +
-			'<div class="value-list--new"></div>' +
+			'<button class="value-list--add">Add</button>' +
 		'</fieldset>';
 
 	this.values = this.wrap.querySelector('.value-list--values');
-	var newDiv = this.wrap.querySelector('.value-list--new');
-
-	this.form = new informal.Form(this.spec.form);
-	newDiv.appendChild(this.form.wrap);
-
-	var btn = document.createElement('button');
-	btn.innerText = 'Add';
-	newDiv.appendChild(btn);
+	var addBtn = this.wrap.querySelector('.value-list--add');
 
 	var self = this;
-	btn.addEventListener('click', function(e){
+	addBtn.addEventListener('click', function(e){
 		e.preventDefault();
-		self.addValue(self.form.getValues());
-		self.form.clear();
+		self.addValue();
+	});
+
+	this.values.addEventListener('click', function(e){
+		if (e.target.classList.contains('btn-remove')){
+			e.preventDefault();
+			e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+		}
 	});
 
 	if (this.value && kindOf(this.value) == 'Array' && this.value.length){
@@ -61,22 +61,32 @@ ValueList.prototype.build = function(){
 
 /**
  * Add a value to the list
+ * @param {Object} data
  */
 ValueList.prototype.addValue = function(data){
 	var li = document.createElement('li'),
-		form = new informal.Form(this.spec.form, data);
+		form = new informal.Form(this.spec.form, data),
+		removeBtn = document.createElement('button'),
+		index = this.itemIndex ++;
+
+	removeBtn.classList.add('btn-remove');
+	removeBtn.innerText = 'Remove';
+
 	li.appendChild(form.wrap);
+	li.appendChild(removeBtn);
+	li.setAttribute('data-index', index);
 	this.values.appendChild(li);
-	this.items.push(form);
+	this.items[index] = form;
 };
 
 /**
  * Get all values
  */
 ValueList.prototype.getValue = function(){
-	var values = [], i;
-	for (i = 0; i < this.items.length; i++){
-		values.push(this.items[i].getValues());
+	var values = [], i, index;
+	for (i = 0; i < this.values.childNodes.length; i++){
+		index = this.values.childNodes[i].getAttribute('data-index');
+		values.push(this.items[index].getValues());
 	}
 	return values;
 };
@@ -85,11 +95,10 @@ ValueList.prototype.getValue = function(){
  * Clear values
  */
 ValueList.prototype.clear = function(){
-	this.items = [];
+	this.items = {};
 	while (this.values.firstChild){
 		this.values.removeChild(this.values.firstChild);
 	}
-	this.form.clear();
 };
 
 module.exports = ValueList;
