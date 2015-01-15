@@ -18,7 +18,9 @@
 	<form method="post" action="/{{ manifest.slug }}/new/" data-informal>
 		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
-		<input type="submit" value="Save">
+		<footer class="form-footer">
+			<input type="submit" value="Save" class="btn btn-primary">
+		</footer>
 	</form>
 </div>
 {% endblock %}
