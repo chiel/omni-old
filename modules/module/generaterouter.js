@@ -41,17 +41,18 @@ module.exports = function(mod){
 			return res.send('You are not authorised to view this page');
 		}
 
-		new mod.Model(req.body).save(function(err){
+		new mod.Model(req.body).save(function(err, doc){
 			if (err){
-				console.error(err);
-				return res.render(mod.path + '/views/form', {
-					manifest: mod.manifest,
-					error: err.message,
-					formData: req.body
+				return res.json({
+					error: {
+						message: err.message
+					}
 				});
 			}
 
-			res.redirect('/' + mod.manifest.slug + '/');
+			res.status(201)
+				.location('/' + mod.manifest.slug + '/edit/' + doc._id + '/')
+				.json(req.body);
 		});
 	});
 
@@ -90,20 +91,15 @@ module.exports = function(mod){
 
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
 			if (err){
-				console.error(err);
-				mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
-
-				return expandFields(mod.manifest.formSpec.fields, function(err, fields){
-					mod.manifest.formSpec.fields = fields;
-					res.render(mod.path + '/views/form', {
-						manifest: mod.manifest,
-						error: err.message,
-						formData: req.body
-					});
+				return res.json({
+					error: {
+						message: err.message
+					}
 				});
 			}
 
-			res.redirect('/' + mod.manifest.slug + '/');
+			res.location('/' + mod.manifest.slug + '/edit/' + req.params.id + '/')
+				.json(req.body);
 		});
 	});
 
