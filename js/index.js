@@ -31,11 +31,13 @@ behaviour.register('data-informal', function(el){
 				return;
 			}
 
-			if (history.pushState){
-				history.pushState(null, null, response.header.location);
-				el.setAttribute('action', response.header.location);
-			} else {
-				window.location = response.header.location;
+			if (response.header.location){
+				if (history.pushState){
+					history.pushState(null, null, response.header.location);
+					el.setAttribute('action', response.header.location);
+				} else {
+					window.location = response.header.location;
+				}
 			}
 		});
 	});
