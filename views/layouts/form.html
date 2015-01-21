@@ -15,7 +15,7 @@
 	{% if error %}
 		{{ error }}
 	{% endif %}
-	<form method="post" action="/{{ manifest.slug }}/new/" data-informal>
+	<form method="post" action="{{ action }}" data-informal>
 		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
 		<footer class="form-footer">

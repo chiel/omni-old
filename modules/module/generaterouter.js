@@ -31,6 +31,7 @@ module.exports = function(mod){
 		expandFields(mod.manifest.formSpec.fields, function(err, fields){
 			mod.manifest.formSpec.fields = fields;
 			res.render(mod.path + '/views/form', {
+				action: '/' + mod.manifest.slug + '/new/',
 				manifest: mod.manifest
 			});
 		});
@@ -77,6 +78,7 @@ module.exports = function(mod){
 			expandFields(mod.manifest.formSpec.fields, function(err, fields){
 				mod.manifest.formSpec.fields = fields;
 				res.render(mod.path + '/views/form', {
+					action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
 					manifest: mod.manifest,
 					formData: docs[0]
 				});
