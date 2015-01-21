@@ -14,9 +14,11 @@ module.exports = function(gulp, config){
 
 		gulp.watch(jsGlobs, ['browserify']);
 
-		for (i = 0; i < config.sass.length; i++){
-			for (j = 0; j < config.sass[i].watch.length; j++){
-				sassGlobs.push(config.sass[i].watch[j]);
+		targets = config.sass.targets;
+
+		for (i = 0; i < targets.length; i++){
+			for (j = 0; j < targets[i].watch.length; j++){
+				sassGlobs.push(targets[i].watch[j]);
 			}
 		}
 
