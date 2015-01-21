@@ -40,7 +40,7 @@ Module.prototype.loadManifest = function(){
 
 Module.prototype.loadSchema = function(){
 	if (fs.existsSync(this.path + '/schema.js')){
-		this.schema = require(this.path + '/schema')(this);
+		this.schema = require(this.path + '/schema')(this, generateSchema);
 		return;
 	}
 
@@ -55,7 +55,7 @@ Module.prototype.loadModel = function(){
 
 Module.prototype.loadRouter = function(){
 	if (fs.existsSync(this.path + '/router.js')){
-		this.router = require(this.path + '/router')(this);
+		this.router = require(this.path + '/router')(this, generateRouter);
 		return;
 	}
 
