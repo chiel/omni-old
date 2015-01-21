@@ -33,6 +33,10 @@ Module.prototype.loadManifest = function(){
 		this.manifest.slug = this.dirName == 'root' ? this.manifest.slug = '' : this.dirName;
 	}
 
+	if (!this.manifest.unit){
+		this.manifest.unit = this.dirName.match(/(?:omni\.cm-)?(.*)/)[1];
+	}
+
 	if (fs.existsSync(this.path + '/manifest.js')){
 		this.manifest = require(this.path + '/manifest')(this);
 	}
@@ -49,7 +53,7 @@ Module.prototype.loadSchema = function(){
 
 Module.prototype.loadModel = function(){
 	if (this.schema){
-		this.Model = mongoose.model(this.dirName, this.schema, this.dirName);
+		this.Model = mongoose.model(this.manifest.unit, this.schema, this.manifest.unit);
 	}
 };
 
