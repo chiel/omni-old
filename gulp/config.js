@@ -5,7 +5,7 @@ var root = __dirname + '/..';
 var config = {
 	sass: {
 		options: {
-			includePaths: [root + '/assets/css']
+			includePaths: [root + '/assets/stylesheets']
 		},
 		targets: []
 	},
