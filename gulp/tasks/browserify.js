@@ -22,7 +22,7 @@ module.exports = function(gulp, config){
 
 		return browserify(inputs)
 			.transform(aliasify, { global: true })
-			.plugin('factor-bundle', { outputs: outputs })
+			.plugin(require('factor-bundle'), { outputs: outputs })
 			.bundle().pipe(fs.createWriteStream(config.browserify.common));
 	};
 };
