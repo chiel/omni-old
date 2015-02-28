@@ -4,10 +4,12 @@ var fs = require('fs'),
 	config = require('./config'),
 	readCssDir = require('./readcssdir'),
 	readJsDir = require('./readjsdir'),
+	readImg = require('./readimg'),
 	root = __dirname + '/..';
 
 readCssDir(root + '/assets/styles', 'omni');
 readJsDir(root + '/assets/scripts', 'omni');
+readImg(root + '/assets/images', 'omni');
 
 module.exports = function(gulp){
 	var match;
@@ -16,6 +18,6 @@ module.exports = function(gulp){
 		gulp.task(match[1], require(__dirname + '/tasks/' + fileName)(gulp, config));
 	});
 
-	gulp.task('default', ['browserify', 'sass', 'watch', 'nodemon']);
-	gulp.task('build', ['browserify', 'sass']);
+	gulp.task('default', ['browserify', 'sass', 'symlink', 'watch', 'nodemon']);
+	gulp.task('build', ['browserify', 'sass', 'symlink']);
 };

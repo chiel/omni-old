@@ -19,6 +19,12 @@ var config = {
 			includePaths: [root + '/assets/styles']
 		},
 		targets: []
+	},
+	symlink: {
+		options: {
+			force: true
+		},
+		targets: []
 	}
 };
 
