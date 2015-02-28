@@ -20,7 +20,7 @@ var types = {
 	expanding_textarea: String
 };
 
-module.exports = function(mod){
+var generateSchema = function(mod){
 	if (!mod.manifest || !mod.manifest.formSpec) return;
 
 	var fields = mod.manifest.formSpec.fields,
@@ -73,3 +73,8 @@ module.exports = function(mod){
 
 	return new mongoose.Schema(schema);
 };
+
+generateSchema.types = types;
+generateSchema.mongooseTypes = mongoose.Schema.Types;
+
+module.exports = generateSchema;
