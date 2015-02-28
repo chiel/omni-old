@@ -11,6 +11,15 @@ var config = {
 		targets: []
 	},
 	nodemon: {
+		ext: 'js json',
+		ignore: [
+			'.git/',
+			'assets/',
+			'gulp/',
+			'gulpfile.js',
+			'node_modules/',
+			'public/'
+		],
 		script: './app.js',
 		watch: []
 	},

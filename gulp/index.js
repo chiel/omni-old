@@ -7,6 +7,8 @@ var fs = require('fs'),
 	readImg = require('./readimg'),
 	root = __dirname + '/..';
 
+config.nodemon.watch.push(root);
+
 readCssDir(root + '/assets/styles', 'omni');
 readJsDir(root + '/assets/scripts', 'omni');
 readImg(root + '/assets/images', 'omni');
