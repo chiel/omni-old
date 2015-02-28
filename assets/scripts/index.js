@@ -5,7 +5,7 @@ var behaviour = require('behaviour'),
 	request = require('superagent');
 
 informal.registerField('db_multi_option', require('informal/src/fields/multi_option'));
-informal.registerField('value_list', require('./fields/value_list'));
+informal.registerField('list', require('./fields/list'));
 informal.registerField('expanding_textarea', require('./fields/expanding_textarea'));
 
 behaviour.register('data-informal', function(el){

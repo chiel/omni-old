@@ -73,6 +73,20 @@
 		}
 	}
 
+	.field-type--list {
+		.list--placeholder {
+			margin: 0;
+			border-radius: 3px;
+			background: rgba(#000, .1);
+		}
+		.drag-handle {
+			display: block;
+			width: 20px;
+			height: 20px;
+			background: red;
+		}
+	}
+
 	.informal--pager {
 		padding: 6px 12px 0;
 		border: 1px solid #ccc;
