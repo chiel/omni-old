@@ -6,7 +6,7 @@ var fs = require('fs'),
 	readJsDir = require('./readjsdir'),
 	root = __dirname + '/..';
 
-readCssDir(root + '/assets/stylesheets', 'omni');
+readCssDir(root + '/assets/styles', 'omni');
 readJsDir(root + '/assets/scripts', 'omni');
 
 module.exports = function(gulp){

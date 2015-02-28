@@ -3,12 +3,6 @@
 var root = __dirname + '/..';
 
 var config = {
-	sass: {
-		options: {
-			includePaths: [root + '/assets/stylesheets']
-		},
-		targets: []
-	},
 	browserify: {
 		aliases: {
 			informal: root + '/node_modules/informal'
@@ -19,6 +13,12 @@ var config = {
 	nodemon: {
 		script: './app.js',
 		watch: []
+	},
+	sass: {
+		options: {
+			includePaths: [root + '/assets/styles']
+		},
+		targets: []
 	}
 };
 
