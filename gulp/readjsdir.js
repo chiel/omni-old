@@ -6,22 +6,20 @@ var fs = require('fs'),
 
 module.exports = function(dir, target){
 	dir = path.normalize(dir);
-	if (!fs.existsSync(dir) || !fs.existsSync(dir + '/index.js')) return;
+	if (!fs.existsSync(dir)) return;
 
-	var output = path.normalize(__dirname + '/../public/js/' + target + '/index.js'),
-		watch = [dir + '/*.js'], filePath;
+	if (fs.existsSync(dir + '/index.js')){
+		var output = path.normalize(__dirname + '/../public/js/' + target + '/index.js'),
+			watch = [ dir + '/*.js', dir + '/**/*.js' ];
 
-	fs.readdirSync(dir)
-	.forEach(function(fileName){
-		filePath = dir + '/' + fileName;
-		if (fs.statSync(filePath).isDirectory()){
-			watch.push(dir + '/**/*.js');
-		}
-	});
+		config.browserify.targets.push({
+			input: dir + '/index.js',
+			output: output,
+			watch: watch
+		});
+	}
 
-	config.browserify.targets.push({
-		input: dir + '/index.js',
-		output: output,
-		watch: watch
-	});
+	if (fs.existsSync(dir + '/blocks.js')){
+		config.browserify.blocks.push(dir + '/blocks.js');
+	}
 };

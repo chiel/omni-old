@@ -7,6 +7,7 @@ var config = {
 		aliases: {
 			informal: root + '/node_modules/informal'
 		},
+		blocks: [],
 		common: root + '/public/js/common.js',
 		targets: []
 	},

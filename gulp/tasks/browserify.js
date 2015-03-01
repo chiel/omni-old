@@ -3,11 +3,24 @@
 var fs = require('fs'),
 	path = require('path'),
 	mkdirp = require('mkdirp'),
-	browserify = require('browserify');
+	browserify = require('browserify'),
+	root = __dirname + '/../..';
 
 module.exports = function(gulp, config){
 	return function(){
-		var inputs = [], outputs = [], i, target;
+		var inputs = [], outputs = [], i, target,
+			contents = '"use strict";';
+
+		var filePath = '/tmp/pageblocks.js';
+		for (i = 0; i < config.browserify.blocks.length; i++){
+			contents += 'require("' + config.browserify.blocks[i] + '");';
+		}
+		fs.writeFileSync(filePath, contents);
+		config.browserify.targets.push({
+			input: filePath,
+			output: path.normalize(root + '/public/js/page/blocks.js'),
+			watch: []
+		});
 
 		for (i = 0; i < config.browserify.targets.length; i++){
 			target = config.browserify.targets[i];
