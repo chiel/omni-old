@@ -6,15 +6,20 @@ var fs = require('fs'),
 
 module.exports = {
 	resolve: function(to, from){
-		if (/^\$core/.test(to)){
-			return to.replace('$core', views);
+		var m = to.match(/^\$([^\/]+)/);
+		if (m){
+			if (m[1] == 'core'){
+				return to.replace(m[0], views);
+			} else {
+				return to.replace(m[0], process.cwd() + '/modules/' + m[1] + '/views');
+			}
 		}
 		from = from ? path.dirname(from) : views;
 		return path.resolve(from, to);
 	},
 
 	load: function(identifier, cb){
-		if (cb) {
+		if (cb){
 			fs.readFile(identifier, 'utf8', cb);
 			return;
 		}

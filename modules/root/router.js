@@ -12,14 +12,14 @@ module.exports = function(){
 	});
 
 	router.get('/login/', function(req, res){
-		res.render(__dirname + '/views/login', {
+		res.render('$auth/login', {
 			forward: req.query.forward
 		});
 	});
 
 	router.post('/login/', function(req, res){
 		if (!req.body.email || !req.body.password){
-			res.render(__dirname + '/views/login', {
+			res.render('$auth/login', {
 				error: 'Email or password missing'
 			});
 			return;
@@ -27,7 +27,7 @@ module.exports = function(){
 
 		auth.withPassword(req.body.email, req.body.password, function(err, data){
 			if (err){
-				return res.render(__dirname + '/views/login', {error: err.message});
+				return res.render('$auth/login', {error: err.message});
 			}
 
 			var rights = {};
