@@ -26,7 +26,7 @@ var config = {
 	},
 	sass: {
 		options: {
-			includePaths: [root + '/assets/styles']
+			includePaths: [ root + '/assets/styles' ]
 		},
 		targets: []
 	},
