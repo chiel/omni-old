@@ -6,8 +6,8 @@ var fs = require('fs'),
 
 module.exports = {
 	resolve: function(to, from){
-		if (/^\$omni/.test(to)){
-			return to.replace('$omni', views);
+		if (/^\$core/.test(to)){
+			return to.replace('$core', views);
 		}
 		from = from ? path.dirname(from) : views;
 		return path.resolve(from, to);

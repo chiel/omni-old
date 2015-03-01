@@ -1,12 +1,20 @@
 'use strict';
 
 var express = require('express'),
+	fs = require('fs'),
 	expandFields = require('../../lib/expandfields');
 
+/**
+ * Generate a router with standard CRUD functionality
+ */
 module.exports = function(mod){
-	var router = express.Router();
+	var router = express.Router(),
+		listView = mod.path + '/views/list.html',
+		formView = mod.path + '/views/form.html';
 
 	if (!mod.Model) return router;
+	if (!fs.existsSync(listView)) listView = 'layouts/list';
+	if (!fs.existsSync(formView)) formView = 'layouts/form';
 
 	router.get('/', function(req, res){
 		if (!req.session.user.can('view', mod.dirName)){
@@ -14,7 +22,7 @@ module.exports = function(mod){
 		}
 
 		mod.Model.find(function(err, items){
-			res.render(mod.path + '/views/list', {
+			res.render(listView, {
 				manifest: mod.manifest,
 				items: items
 			});
@@ -30,7 +38,7 @@ module.exports = function(mod){
 
 		expandFields(mod.manifest.formSpec.fields, function(err, fields){
 			mod.manifest.formSpec.fields = fields;
-			res.render(mod.path + '/views/form', {
+			res.render(formView, {
 				action: '/' + mod.manifest.slug + '/new/',
 				manifest: mod.manifest
 			});
@@ -77,7 +85,7 @@ module.exports = function(mod){
 
 			expandFields(mod.manifest.formSpec.fields, function(err, fields){
 				mod.manifest.formSpec.fields = fields;
-				res.render(mod.path + '/views/form', {
+				res.render(formView, {
 					action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
 					manifest: mod.manifest,
 					formData: docs[0]
