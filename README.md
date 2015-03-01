@@ -1,17 +1,12 @@
 # Omni
 
-Omni is a small frontend-less cms. As such, it's aimed at developers to server
+Omni is a small frontend-less cms. As such, it's aimed at developers to serve
 as a base to be extended with modules. These modules can be generic modules
 which can be re-used between cms', or cms-specific modules.
 
 Since omni has no frontend, it only has an API which spits out data. This
 separation helps keep the cms clean of cruft and allows the user to use
 whichever frontend they desire.
-
-
-This separation helps keep the cms clean and allows you to use whatever kind of
-frontend you wish to use. There will of course be a boilerplate for the frontend
-which'll help you kickstart new projects.
 
 
 ## Dependencies
