@@ -1,0 +1,107 @@
+{
+	"name": "Pages",
+	"slug": "pages",
+	"unit": "page",
+	"units": "pages",
+
+	"rights": [
+		{
+			"key": "view",
+			"description": "View existing pages"
+		},
+		{
+			"key": "create",
+			"description": "Create new pages"
+		},
+		{
+			"key": "update",
+			"description": "Update existing pages"
+		},
+		{
+			"key": "delete",
+			"description": "Remove pages"
+		}
+	],
+
+	"formSpec": {
+		"method": "post",
+		"action": "/pages/new",
+		"save": {},
+		"pager": {
+			"type": "named",
+			"position": "top"
+		},
+		"pages": [
+			{
+				"name": "Details",
+				"groups": "group1"
+			},
+			{
+				"name": "Content",
+				"groups": "zones"
+			},
+			{
+				"name": "Publishing",
+				"groups": "publish"
+			}
+		],
+		"groups": {
+			"group1": {
+				"fields": ["title", "slug", "summary"]
+			},
+			"zones": {
+				"fields": ["template", "zones"]
+			},
+			"publish": {
+				"fields": ["publish_from", "publish_until"]
+			}
+		},
+		"fields": {
+			"title": {
+				"type": "text",
+				"label": "Title"
+			},
+			"slug": {
+				"type": "text",
+				"label": "Slug"
+			},
+			"summary": {
+				"type": "expanding_textarea",
+				"label": "Summary"
+			},
+			"template": {
+				"type": "single_option",
+				"label": "Page template",
+				"options": [
+					{ "value": "menu-left" },
+					{ "value": "single-column" }
+				]
+			},
+			"zones": {
+				"type": "zone_builder",
+				"subscribe": "template"
+			},
+			"publish_from": {
+				"type": "date",
+				"label": "Publish from"
+			},
+			"publish_until": {
+				"type": "date",
+				"label": "Publish until"
+			}
+		}
+	},
+
+	"listSpec": {
+		"fields": [
+			{
+				"name": "title",
+				"label": "Title"
+			},
+			{
+				"name": "slug",
+				"label": "Slug"
+			}
+		]
+	}
+}

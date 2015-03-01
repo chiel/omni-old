@@ -7,6 +7,7 @@
 		<title>Omni</title>
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,500">
 		<link rel="stylesheet" href="/css/omni/base.css">
+		{% block styles %}{% endblock %}
 	</head>
 
 	<body>
@@ -22,6 +23,7 @@
 							</ul>
 						</li>
 						<li><a href="/dashboard/">Dashboard</a></li>
+						<li><a href="/pages/">Pages</a></li>
 					</ul>
 				</nav>
 				<nav class="user-nav">
@@ -34,6 +36,7 @@
 		</header>
 		{% block content %}{% endblock %}
 		<script src="/js/common.js"></script>
+		{% block scripts %}{% endblock %}
 		<script src="/js/omni/index.js"></script>
 	</body>
 </html>
