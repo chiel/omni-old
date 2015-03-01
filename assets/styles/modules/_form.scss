@@ -40,6 +40,9 @@
 		background: #fff url(/img/omni/select-arrow.svg) no-repeat right 9px center;
 		background-size: 10px 8px;
 		-webkit-appearance: none;
+		&[multiple] {
+			background-image: none;
+		}
 	}
 	input[type=submit] {
 		width: auto;
