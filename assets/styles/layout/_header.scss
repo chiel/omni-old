@@ -2,6 +2,21 @@
 	line-height: 48px;
 	border-bottom: 1px solid rgba(0, 0, 0, .2);
 	@include clearfix();
+	a {
+		color: #444;
+	}
+}
+
+.main-logo {
+	float: left;
+	margin: 0 24px 0 0;
+	font: 700 24px/48px Ubuntu, sans-serif;
+	letter-spacing: -.05em;
+	text-transform: uppercase;
+	a {
+		display: block;
+		text-decoration: none;
+	}
 }
 
 .main-nav, .user-nav {
