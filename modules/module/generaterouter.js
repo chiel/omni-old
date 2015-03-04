@@ -17,7 +17,7 @@ module.exports = function(mod){
 	if (!fs.existsSync(formView)) formView = 'layouts/form';
 
 	router.get('/', function(req, res){
-		if (!req.session.user.can('view', mod.dirName)){
+		if (!req.user.can('view', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 
@@ -30,7 +30,7 @@ module.exports = function(mod){
 	});
 
 	router.get('/new/', function(req, res){
-		if (!req.session.user.can('create', mod.dirName)){
+		if (!req.user.can('create', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 
@@ -46,7 +46,7 @@ module.exports = function(mod){
 	});
 
 	router.post('/new/', function(req, res){
-		if (!req.session.user.can('create', mod.dirName)){
+		if (!req.user.can('create', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 
@@ -66,7 +66,7 @@ module.exports = function(mod){
 	});
 
 	router.get('/edit/:id/', function(req, res){
-		if (!req.session.user.can('update', mod.dirName)){
+		if (!req.user.can('update', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 
@@ -95,7 +95,7 @@ module.exports = function(mod){
 	});
 
 	router.post('/edit/:id/', function(req, res){
-		if (!req.session.user.can('update', mod.dirName)){
+		if (!req.user.can('update', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 
@@ -114,7 +114,7 @@ module.exports = function(mod){
 	});
 
 	router.get('/delete/:id/', function(req, res){
-		if (!req.session.user.can('delete', mod.dirName)){
+		if (!req.user.can('delete', mod.dirName)){
 			return res.send('You are not authorised to view this page');
 		}
 

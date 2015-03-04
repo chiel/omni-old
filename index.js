@@ -8,7 +8,7 @@ module.exports = function(configPath){
 	loadConfig(__dirname + '/config.json');
 	loadConfig(configPath);
 	require('./core/setup');
-	require('./core/preroutes');
+	require('./core/middleware');
 
 	fs.readdirSync(__dirname + '/modules').forEach(function(moduleName){
 		loadModule(__dirname + '/modules/' + moduleName);
