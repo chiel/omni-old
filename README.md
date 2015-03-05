@@ -73,7 +73,7 @@ Modules are structured a bit like this:
 |  |- form.html
 |  `- list.html
 |
-|- gulpfile.js         (optional)
+|- gulp.js             (optional)
 |- manifest.js         (optional)
 |- manifest.json
 |- router.js           (optional)

@@ -3,6 +3,7 @@
 var root = __dirname + '/..';
 
 var config = {
+	gulpfiles: [],
 	browserify: {
 		aliases: {
 			informal: root + '/node_modules/informal'

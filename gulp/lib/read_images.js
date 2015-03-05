@@ -2,7 +2,7 @@
 
 var fs = require('fs'),
 	path = require('path'),
-	config = require('./config');
+	config = require('../config');
 
 module.exports = function(dir, target){
 	dir = path.normalize(dir);
@@ -10,6 +10,6 @@ module.exports = function(dir, target){
 
 	config.symlink.targets.push({
 		src: dir,
-		dest: path.normalize(__dirname + '/../public/img/' + target)
+		dest: path.normalize(__dirname + '/../../public/img/' + target)
 	});
 };

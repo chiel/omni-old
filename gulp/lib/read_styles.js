@@ -2,7 +2,7 @@
 
 var fs = require('fs'),
 	path = require('path'),
-	config = require('./config');
+	config = require('../config');
 
 module.exports = function(dir, target){
 	dir = path.normalize(dir);
@@ -28,7 +28,7 @@ module.exports = function(dir, target){
 	if (hasFiles){
 		config.sass.targets.push({
 			src: dir + '/*.scss',
-			dest: path.normalize(__dirname + '/../public/css/' + target),
+			dest: path.normalize(__dirname + '/../../public/css/' + target),
 			watch: watch
 		});
 	}
