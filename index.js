@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs'),
+	cache = require('./core/cache'),
 	loadConfig = require('./lib/loadconfig'),
 	loadModule = require('./lib/loadmodule');
 
@@ -18,6 +19,9 @@ module.exports = function(configPath){
 		loadModule: loadModule,
 		listen: function(){
 			require('./core/listen')();
+		},
+		setNavigation: function(nav){
+			cache.set('navigation', nav);
 		}
 	};
 };

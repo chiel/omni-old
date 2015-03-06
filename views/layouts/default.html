@@ -15,16 +15,7 @@
 			<div class="wrap">
 				<h1 class="main-logo"><a href="/dashboard/">Omni</a></h1>
 				<nav class="main-nav">
-					<ul>
-						<li>
-							<span>Administration</span>
-							<ul>
-								<li><a href="/roles/">Roles</a></li>
-								<li><a href="/users/">Users</a></li>
-							</ul>
-						</li>
-						<li><a href="/pages/">Pages</a></li>
-					</ul>
+					{{ navigation|render_nav }}
 				</nav>
 				<nav class="user-nav">
 					<ul>

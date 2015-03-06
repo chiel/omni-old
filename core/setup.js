@@ -20,3 +20,4 @@ if (app.settings.env == 'development'){
 }
 
 swig.setDefaults(swigDefaults);
+swig.setFilter('render_nav', require('./swig/filters/render_nav'));

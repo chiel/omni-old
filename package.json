@@ -24,6 +24,7 @@
     "node-bourbon": "^1.2.3",
     "normalize.css": "^3.0.2",
     "promise": "^6.0.1",
+    "relic": "^0.2.0",
     "serve-static": "^1.7.1",
     "superagent": "^0.21.0",
     "swig": "^1.4.2",
