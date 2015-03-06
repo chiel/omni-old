@@ -7,9 +7,13 @@
 	}
 	.actions {
 		float: left;
-		margin: 0 0 0 24px;
+		margin: 0;
 		padding: 0;
 		list-style: none;
 		line-height: 56px;
+		li {
+			display: inline-block;
+			margin: 0 0 0 24px;
+		}
 	}
 }
