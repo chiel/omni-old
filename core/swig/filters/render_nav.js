@@ -8,7 +8,7 @@ var renderNav = function(nodes){
 		node = nodes[i];
 		html.push('<li>');
 		if (node.url){
-			html.push('<a href="', node.slug, '">', node.label, '</a>');
+			html.push('<a href="', node.url, '">', node.label, '</a>');
 		} else {
 			html.push('<span>', node.label, '</span>');
 		}
