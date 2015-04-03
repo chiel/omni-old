@@ -17,7 +17,16 @@
 			margin-top: 0;
 		}
 	}
-	&.dragover {
+	&.is-droppable {
 		background-color: #cff7e1;
+	}
+	&.is-not-droppable {
+		background-color: lighten(#ce494c, 30);
+	}
+	&.dragover-droppable {
+		background-color: green;
+	}
+	&.dragover-not-droppable {
+		background-color: #ce494c;
 	}
 }
