@@ -42,6 +42,9 @@
 			cursor: -webkit-grab;
 			cursor: -moz-grab;
 			cursor: grab;
+			&.is-disabled {
+				display: none;
+			}
 		}
 		.block-description {
 			display: none;
