@@ -1,46 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-	http = require('http'),
-	net = require('net'),
-	isString = require('mout/lang/isString'),
-	server = http.createServer(require('./app')),
-	config = require('./config');
+var app = require('./app');
+var config = require('./config');
+var listen = require('listen.js');
 
 module.exports = function(){
-	if (isString(config.listen)){
-		server.on('error', function(e){
-			if (e.code != 'EADDRINUSE') return;
-
-			var clientSocket = new net.Socket();
-			clientSocket.on('error', function(e){
-				if (e.code != 'ECONNREFUSED') return;
-
-				fs.unlinkSync(config.listen);
-				server.listen(config.listen);
-			});
-
-			clientSocket.connect({path: config.listen}, function(){
-				console.error('Socket %s is in use, exiting...', config.listen);
-				process.exit(1);
-			});
-		});
-	} else {
-		server.on('error', function(e){
-			if (e.code != 'EADDRINUSE') return;
-
-			console.error('Port %d is in use, exiting...', config.listen);
-			process.exit(1);
-		});
-	}
-
-	server.on('listening', function(){
-		if (isString(config.listen)){
-			console.log('Omni is listening on socket %s', config.listen);
-		} else {
-			console.log('Omni is listening on port %d', config.listen);
-		}
-	});
-
-	server.listen(config.listen);
+	listen(app, config.listen);
 };
