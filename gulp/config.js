@@ -10,7 +10,8 @@ var config = {
 		},
 		blocks: [],
 		common: root + '/public/js/common.js',
-		targets: []
+		targets: [],
+		templates: []
 	},
 	nodemon: {
 		ext: 'js json',

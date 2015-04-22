@@ -9,9 +9,9 @@ var fs = require('fs'),
 module.exports = function(gulp, config){
 	return function(){
 		var inputs = [], outputs = [], i, target,
+			filePath = '/tmp/pageblocks.js',
 			contents = '"use strict";';
 
-		var filePath = '/tmp/pageblocks.js';
 		for (i = 0; i < config.browserify.blocks.length; i++){
 			contents += 'require("' + config.browserify.blocks[i] + '");';
 		}
@@ -19,6 +19,22 @@ module.exports = function(gulp, config){
 		config.browserify.targets.push({
 			input: filePath,
 			output: path.normalize(root + '/public/js/page/blocks.js'),
+			watch: []
+		});
+
+		filePath = '/tmp/pagetemplates.js';
+		contents = '"use strict";var templates = require("builder/templates");var fs = require("fs");';
+
+		var tpl, tplName;
+		for (i = 0; i < config.browserify.templates.length; i++){
+			tpl = config.browserify.templates[i];
+			tplName = tpl.match(/([^\/]+)$/)[1];
+			contents += 'templates["' + tplName + '"] = fs.readFileSync("' + tpl + '/index.html", "utf8");';
+		}
+		fs.writeFileSync(filePath, contents);
+		config.browserify.targets.push({
+			input: filePath,
+			output: path.normalize(root + '/public/js/page/templates.js'),
 			watch: []
 		});
 
@@ -35,6 +51,7 @@ module.exports = function(gulp, config){
 
 		return browserify(inputs)
 			.transform(aliasify, { global: true })
+			.transform(require('brfs'), { global: true })
 			.plugin(require('factor-bundle'), { outputs: outputs })
 			.bundle().pipe(fs.createWriteStream(config.browserify.common));
 	};

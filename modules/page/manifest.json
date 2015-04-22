@@ -71,11 +71,7 @@
 			},
 			"template": {
 				"type": "single_option",
-				"label": "Page template",
-				"options": [
-					{ "value": "menu-left" },
-					{ "value": "single-column" }
-				]
+				"label": "Page template"
 			},
 			"zones": {
 				"type": "zone_builder",
