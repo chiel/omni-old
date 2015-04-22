@@ -3,7 +3,7 @@
 var fs = require('fs'),
 	cache = require('./core/cache'),
 	loadConfig = require('./lib/loadconfig'),
-	loadModule = require('./lib/loadmodule');
+	registerModule = require('./lib/register_module');
 
 module.exports = function(configPath){
 	loadConfig(__dirname + '/config.json');
@@ -12,11 +12,11 @@ module.exports = function(configPath){
 	require('./core/middleware');
 
 	fs.readdirSync(__dirname + '/modules').forEach(function(moduleName){
-		loadModule(__dirname + '/modules/' + moduleName);
+		registerModule(__dirname + '/modules/' + moduleName);
 	});
 
 	return {
-		loadModule: loadModule,
+		registerModule: registerModule,
 		listen: function(){
 			require('./core/listen')();
 		},
