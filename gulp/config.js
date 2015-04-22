@@ -19,6 +19,8 @@ var config = {
 			'assets/',
 			'gulp/',
 			'gulpfile.js',
+			'modules/**/assets/',
+			'modules/**/node_modules/',
 			'node_modules/',
 			'public/'
 		],
