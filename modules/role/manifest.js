@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-module.exports = function(mod){
+module.exports = function(manifest){
 	var dir = __dirname + '/..',
 		modules = fs.readdirSync(dir),
 		modulePath, moduleManifest, fields;
@@ -21,7 +21,7 @@ module.exports = function(mod){
 
 		fields = [];
 		moduleManifest.rights.forEach(function(right){
-			mod.manifest.formSpec.fields[moduleName + '_' + right.key] = {
+			manifest.formSpec.fields[moduleName + '_' + right.key] = {
 				type: 'boolean',
 				name: 'modules[' + moduleName + '][' + right.key + ']',
 				label: right.description
@@ -29,13 +29,13 @@ module.exports = function(mod){
 			fields.push(moduleName + '_' + right.key);
 		});
 
-		mod.manifest.formSpec.groups[moduleName] = {
+		manifest.formSpec.groups[moduleName] = {
 			name: moduleManifest.name || moduleName,
 			fields: fields
 		};
 
-		mod.manifest.formSpec.pages[0].groups.push(moduleName);
+		manifest.formSpec.pages[0].groups.push(moduleName);
 	});
 
-	return mod.manifest;
+	return manifest;
 };

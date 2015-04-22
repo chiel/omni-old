@@ -20,26 +20,26 @@ var Module = function(modulePath){
 };
 
 Module.prototype.loadManifest = function(){
-	try {
-		this.manifest = JSON.parse(fs.readFileSync(this.path + '/manifest.json', 'utf8'));
-	} catch(e){
-		if (e.code != 'ENOENT'){
-			console.error(e.message);
-		}
-		this.manifest = {};
+	var manifest;
+	if (fs.existsSync(this.path + '/manifest.json')){
+		manifest = require(this.path + '/manifest.json');
+	} else {
+		manifest = {};
 	}
 
-	if (!this.manifest.slug){
-		this.manifest.slug = this.dirName == 'root' ? this.manifest.slug = '' : this.dirName;
+	if (!manifest.slug){
+		manifest.slug = this.dirName == 'root' ? manifest.slug = '' : this.dirName;
 	}
 
-	if (!this.manifest.unit){
-		this.manifest.unit = this.dirName.match(/(?:omni\.cm-)?(.*)/)[1];
+	if (!manifest.unit){
+		manifest.unit = this.dirName.match(/(?:omni\.cm-)?(.*)/)[1];
 	}
 
 	if (fs.existsSync(this.path + '/manifest.js')){
-		this.manifest = require(this.path + '/manifest')(this);
+		manifest = require(this.path + '/manifest')(manifest);
 	}
+
+	this.manifest = manifest;
 };
 
 Module.prototype.loadSchema = function(){
