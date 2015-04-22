@@ -20,7 +20,7 @@
     "informal": "^0.3.0",
     "inherits": "^2.0.1",
     "listen.js": "^1.0.0",
-    "mongoose": "^3.8.20",
+    "mongoose": "~3.8.20",
     "mout": "^0.11.0",
     "node-bourbon": "^1.2.3",
     "normalize.css": "^3.0.2",
