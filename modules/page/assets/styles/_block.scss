@@ -69,6 +69,15 @@
 		background-size: 8px 6px;
 	}
 
+	.action-minimize {
+		background: #f4d26a url(/img/omni/minus.svg) no-repeat center;
+		background-size: 60%;
+	}
+	.action-delete {
+		background: #e95050 url(/img/omni/cross.svg) no-repeat center;
+		background-size: 60%;
+	}
+
 	&.is-minimized {
 		.block--header {
 			border-bottom: 1px solid #ccc;
@@ -80,13 +89,8 @@
 		.block--content {
 			display: none;
 		}
-	}
-
-	.action-minimize {
-		background: #f4d26a;
-	}
-	.action-delete {
-		background: #e95050 url(/img/omni/cross.svg) no-repeat center;
-		background-size: 60%;
+		.action-minimize {
+			background-image: url(/img/omni/plus.svg);
+		}
 	}
 }
