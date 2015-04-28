@@ -1,5 +1,6 @@
 @import 'vendor/bourbon/bourbon';
 @import 'vendor/normalize';
+@import 'vendor/finder';
 
 @import 'base/base';
 
@@ -8,6 +9,7 @@
 
 @import 'modules/module-header';
 @import 'modules/item-list';
+@import 'modules/field-finder';
 @import 'modules/form';
 @import 'modules/login-form';
 @import 'modules/button';

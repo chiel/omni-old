@@ -17,7 +17,8 @@ var types = {
 	multi_option: [String],
 	db_multi_option: [mongoose.Schema.Types.ObjectId],
 	list: mongoose.Schema.Types.Mixed,
-	expanding_textarea: String
+	expanding_textarea: String,
+	finder: String
 };
 
 var generateSchema = function(mod){
