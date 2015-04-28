@@ -1,18 +1,21 @@
 'use strict';
 
-var fs = require('fs'),
-	map = require('mout/array/map'),
-	Promise = require('promise'),
-	uploads = require('path').normalize(__dirname + '/../../public/uploads');
+var fs = require('fs');
+var map = require('mout/array/map');
+var Promise = require('promise');
+var rtrim = require('mout/string/rtrim');
+var uploads = require('path').normalize(__dirname + '/../../public/uploads');
 
 var stat = function(file){
 	return new Promise(function(resolve, reject){
 		fs.stat(file, function(err, stats){
 			if (err) return reject(err);
 
+			var fullPath = file + (stats.isDirectory() ? '/' : '');
+
 			resolve({
-				absolute_path: file,
-				relative_path: file.replace(uploads, ''),
+				absolute_path: fullPath,
+				relative_path: fullPath.replace(uploads, ''),
 				name: file.match(/[^\/]+$/)[0],
 				type: stats.isFile() ? 'file' : 'directory',
 				size: stats.size,
@@ -34,8 +37,34 @@ var readdir = function(dir){
 			if (err) return reject(err);
 
 			resolve(map(files, function(file){
-				return dir + '/' + file;
+				return dir + file;
 			}));
+		});
+	});
+};
+
+var readfile = function(path){
+	return new Promise(function(resolve, reject){
+		stat(path).then(resolve, reject);
+	});
+};
+
+var readpath = function(path){
+	return new Promise(function(resolve, reject){
+		fs.stat(path, function(err, stats){
+			if (err){
+				console.error(err);
+			}
+			if (stats.isDirectory()){
+				readdir(path + '/').then(statFiles).then(function(files){
+					resolve({
+						type: 'directory',
+						files: files
+					});
+				}, reject);
+			} else {
+				readfile(path).then(resolve, reject);
+			}
 		});
 	});
 };
@@ -44,13 +73,13 @@ module.exports = function(mod, generate){
 	var router = generate(mod);
 
 	router.get('/', function(req, res){
-		readdir(uploads + (req.query.path || ''))
-			.then(statFiles)
-			.then(function(files){
-				res.json(files);
-			}, function(err){
-				console.error(err);
-			});
+		var path = rtrim(req.query.path || '', '/');
+
+		readpath(uploads + path).then(function(data){
+			res.json(data);
+		}, function(err){
+			console.error(err);
+		});
 	});
 
 	return router;
