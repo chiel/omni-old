@@ -1,8 +1,8 @@
 'use strict';
 
-var auth = require('../auth/lib'),
-	forOwn = require('mout/object/forOwn'),
-	mixIn = require('mout/object/mixIn');
+var auth = require('../auth/lib');
+var forOwn = require('mout/object/forOwn');
+var mixIn = require('mout/object/mixIn');
 
 module.exports = function(){
 	var router = require('express').Router();

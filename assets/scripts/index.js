@@ -1,8 +1,8 @@
 'use strict';
 
-var behaviour = require('behaviour'),
-	informal = require('informal'),
-	request = require('superagent');
+var behaviour = require('behaviour');
+var informal = require('informal');
+var request = require('superagent');
 
 informal.registerField('db_multi_option', require('informal/src/fields/multi_option'));
 informal.registerField('list', require('./fields/list'));
@@ -10,8 +10,9 @@ informal.registerField('expanding_textarea', require('./fields/expanding_textare
 informal.registerField('finder', require('./fields/finder'));
 
 behaviour.register('data-informal', function(el){
-	var spec = el.querySelector('[data-informal-spec]'),
-		data = el.querySelector('[data-informal-data]');
+	var spec = el.querySelector('[data-informal-spec]');
+	var data = el.querySelector('[data-informal-data]');
+
 	if (!spec) return;
 
 	try {
@@ -24,8 +25,8 @@ behaviour.register('data-informal', function(el){
 	el.addEventListener('submit', function(e){
 		e.preventDefault();
 
-		var method = el.getAttribute('method'),
-			action = el.getAttribute('action');
+		var method = el.getAttribute('method');
+		var action = el.getAttribute('action');
 
 		request[method](action).send(form.getValues()).end(function(err, response){
 			if (err){

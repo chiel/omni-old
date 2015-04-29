@@ -1,16 +1,16 @@
 'use strict';
 
-var express = require('express'),
-	fs = require('fs'),
-	expandFields = require('../../lib/expandfields');
+var express = require('express');
+var fs = require('fs');
+var expandFields = require('../../lib/expandfields');
 
 /**
  * Generate a router with standard CRUD functionality
  */
 module.exports = function(mod){
-	var router = express.Router(),
-		listView = mod.path + '/views/list.html',
-		formView = mod.path + '/views/form.html';
+	var router = express.Router();
+	var listView = mod.path + '/views/list.html';
+	var formView = mod.path + '/views/form.html';
 
 	if (!mod.Model) return router;
 	if (!fs.existsSync(listView)) listView = 'layouts/list';

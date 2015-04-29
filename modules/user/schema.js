@@ -1,7 +1,7 @@
 'use strict';
 
-var bcrypt = require('bcrypt'),
-	generateSchema = require('../module/generateschema');
+var bcrypt = require('bcrypt');
+var generateSchema = require('../module/generateschema');
 
 module.exports = function(mod){
 	var schema = generateSchema(mod);

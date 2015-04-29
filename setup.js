@@ -4,13 +4,14 @@
 require('./lib/loadconfig')(__dirname + '/config.json');
 require('./core/db');
 
-var readline = require('readline'),
-	Module = require('./modules/module/module'),
-	mod = new Module(__dirname + '/modules/user'),
-	rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout
-	});
+var readline = require('readline');
+var Module = require('./modules/module/module');
+var mod = new Module(__dirname + '/modules/user');
+
+var rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
 
 rl.question('E-mail: ', function(email){
 	rl.question('Password: ', function(pass){

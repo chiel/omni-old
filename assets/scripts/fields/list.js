@@ -1,9 +1,9 @@
 'use strict';
 
-var informal = require('informal'),
-	Base = informal.fields.base,
-	indexOf = require('mout/array/indexOf'),
-	kindOf = require('mout/lang/kindOf');
+var informal = require('informal');
+var Base = informal.fields.base;
+var indexOf = require('mout/array/indexOf');
+var kindOf = require('mout/lang/kindOf');
 
 /**
  * List input
@@ -153,11 +153,11 @@ List.prototype.getItem = function(el){
  * @param {Object} data
  */
 List.prototype.addItem = function(data){
-	var li = document.createElement('li'),
-		dragHandle = document.createElement('span'),
-		form = new informal.Form(this.spec.form, data),
-		removeBtn = document.createElement('button'),
-		index = this.itemIndex ++;
+	var li = document.createElement('li');
+	var dragHandle = document.createElement('span');
+	var form = new informal.Form(this.spec.form, data);
+	var removeBtn = document.createElement('button');
+	var index = this.itemIndex ++;
 
 	dragHandle.classList.add('drag-handle');
 	removeBtn.classList.add('btn-remove');

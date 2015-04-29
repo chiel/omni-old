@@ -1,16 +1,16 @@
 'use strict';
 
-var fs = require('fs'),
-	path = require('path'),
-	mkdirp = require('mkdirp'),
-	browserify = require('browserify'),
-	root = __dirname + '/../..';
+var fs = require('fs');
+var path = require('path');
+var mkdirp = require('mkdirp');
+var browserify = require('browserify');
+var root = __dirname + '/../..';
 
 module.exports = function(gulp, config){
 	return function(){
-		var inputs = [], outputs = [], i, target,
-			filePath = '/tmp/pageblocks.js',
-			contents = '"use strict";';
+		var inputs = [], outputs = [], i, target;
+		var filePath = '/tmp/pageblocks.js';
+		var contents = '"use strict";';
 
 		for (i = 0; i < config.browserify.blocks.length; i++){
 			contents += 'require("' + config.browserify.blocks[i] + '");';

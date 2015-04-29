@@ -1,9 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-	config = require('./config'),
-	readModule = require('./lib/read_module'),
-	root = __dirname + '/..';
+var fs = require('fs');
+var config = require('./config');
+var readModule = require('./lib/read_module');
+var root = __dirname + '/..';
 
 config.nodemon.watch.push(root);
 

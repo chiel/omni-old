@@ -1,8 +1,8 @@
 'use strict';
 
-var bcrypt = require('bcrypt'),
-	AuthError = require('./autherror'),
-	modules = require('../../core/modules');
+var bcrypt = require('bcrypt');
+var AuthError = require('./autherror');
+var modules = require('../../core/modules');
 
 /**
  * Authenticate with email and password

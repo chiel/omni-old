@@ -1,13 +1,12 @@
 'use strict';
 
-var fs = require('fs'),
-	config = require('../config'),
-	readImages = require('./read_images'),
-	readScripts = require('./read_scripts'),
-	readStyles = require('./read_styles'),
-	readTemplates = require('./read_templates');
-
+var fs = require('fs');
 var path = require('path');
+var config = require('../config');
+var readImages = require('./read_images');
+var readScripts = require('./read_scripts');
+var readStyles = require('./read_styles');
+var readTemplates = require('./read_templates');
 
 module.exports = function(dir, target){
 	dir = path.normalize(dir);

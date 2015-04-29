@@ -1,15 +1,15 @@
 'use strict';
 
-var app = require('./app'),
-	swig = require('swig');
+var app = require('./app');
+var swig = require('swig');
 
 require('./db');
 
 app
-	.engine('html', swig.renderFile)
-	.set('view engine', 'html')
-	.set('views', __dirname + '/../views')
-	.enable('strict routing');
+.engine('html', swig.renderFile)
+.set('view engine', 'html')
+.set('views', __dirname + '/../views')
+.enable('strict routing');
 
 var swigDefaults = {
 	loader: require('./swig/loader')

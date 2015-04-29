@@ -1,9 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-	mongoose = require('mongoose'),
-	generateSchema = require('./generateschema'),
-	generateRouter = require('./generaterouter');
+var fs = require('fs');
+var mongoose = require('mongoose');
+var generateSchema = require('./generateschema');
+var generateRouter = require('./generaterouter');
 
 var Module = function(modulePath){
 	if (!(this instanceof Module)){

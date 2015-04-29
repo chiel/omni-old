@@ -1,7 +1,7 @@
 'use strict';
 
-var fs = require('fs'),
-	getTemplatePath = require('../../lib/get_template_path');
+var fs = require('fs');
+var getTemplatePath = require('../../lib/get_template_path');
 
 module.exports = {
 	resolve: function(to, from){

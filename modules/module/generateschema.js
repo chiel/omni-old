@@ -1,8 +1,8 @@
 'use strict';
 
-var forOwn = require('mout/object/forOwn'),
-	mongoose = require('mongoose'),
-	isArray = require('mout/lang/isArray');
+var forOwn = require('mout/object/forOwn');
+var mongoose = require('mongoose');
+var isArray = require('mout/lang/isArray');
 
 var types = {
 	text: String,
@@ -24,8 +24,8 @@ var types = {
 var generateSchema = function(mod){
 	if (!mod.manifest || !mod.manifest.formSpec) return;
 
-	var fields = mod.manifest.formSpec.fields,
-		schema = {}, o, p, def;
+	var fields = mod.manifest.formSpec.fields;
+	var schema = {}, o, p, def;
 
 	forOwn(fields, function(field, name){
 		name = field.name || name;

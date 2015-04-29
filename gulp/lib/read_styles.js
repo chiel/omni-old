@@ -1,8 +1,8 @@
 'use strict';
 
-var fs = require('fs'),
-	path = require('path'),
-	config = require('../config');
+var fs = require('fs');
+var path = require('path');
+var config = require('../config');
 
 module.exports = function(dir, target){
 	dir = path.normalize(dir);

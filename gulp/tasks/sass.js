@@ -1,7 +1,7 @@
 'use strict';
 
-var sass = require('gulp-sass'),
-	merge = require('merge-stream');
+var sass = require('gulp-sass');
+var merge = require('merge-stream');
 
 module.exports = function(gulp, config){
 	return function(){
@@ -10,8 +10,8 @@ module.exports = function(gulp, config){
 		for (i = 0; i < config.sass.targets.length; i++){
 			target = config.sass.targets[i];
 			stream = gulp.src(target.src)
-				.pipe(sass(config.sass.options))
-				.pipe(gulp.dest(target.dest));
+			.pipe(sass(config.sass.options))
+			.pipe(gulp.dest(target.dest));
 
 			streams.push(stream);
 		}

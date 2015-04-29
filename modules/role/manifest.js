@@ -3,9 +3,9 @@
 var fs = require('fs');
 
 module.exports = function(manifest){
-	var dir = __dirname + '/..',
-		modules = fs.readdirSync(dir),
-		modulePath, moduleManifest, fields;
+	var dir = __dirname + '/..';
+	var modules = fs.readdirSync(dir);
+	var modulePath, moduleManifest, fields;
 
 	modules.forEach(function(moduleName){
 		modulePath = dir + '/' + moduleName;

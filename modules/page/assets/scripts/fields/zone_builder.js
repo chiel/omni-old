@@ -1,9 +1,8 @@
 'use strict';
 
-var forOwn = require('mout/object/forOwn'),
-	isObject = require('mout/lang/isObject'),
-	Base = require('informal').fields.base;
-
+var forOwn = require('mout/object/forOwn');
+var isObject = require('mout/lang/isObject');
+var Base = require('informal').fields.base;
 var Builder = require('builder');
 
 /**

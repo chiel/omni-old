@@ -1,9 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-	cache = require('./core/cache'),
-	loadConfig = require('./lib/loadconfig'),
-	registerModule = require('./lib/register_module');
+var fs = require('fs');
+var cache = require('./core/cache');
+var loadConfig = require('./lib/loadconfig');
+var registerModule = require('./lib/register_module');
 
 module.exports = function(configPath){
 	loadConfig(__dirname + '/config.json');
