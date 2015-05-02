@@ -18,6 +18,7 @@
     "elements": "^0.5.0",
     "express": "^4.10.4",
     "express-session": "^1.9.3",
+    "finder.js": "^0.1.0",
     "informal": "^0.3.0",
     "inherits": "^2.0.1",
     "listen.js": "^1.0.0",
