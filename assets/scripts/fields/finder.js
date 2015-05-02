@@ -1,17 +1,17 @@
 'use strict';
 
 var Finder = require('finder.js');
-var Text = require('informal').fields.text;
+var TextField = require('informal').fields.text;
 
 var FinderField = function(spec, value){
 	if (!(this instanceof FinderField)) return new FinderField(spec, value);
-	Text.call(this, spec, value);
+	TextField.call(this, spec, value);
 };
 
-require('inherits')(FinderField, Text);
+require('inherits')(FinderField, TextField);
 
 FinderField.prototype.build = function(){
-	Text.prototype.build.call(this);
+	TextField.prototype.build.call(this);
 
 	var btn = document.createElement('button');
 	btn.setAttribute('type', 'button');
@@ -34,19 +34,29 @@ FinderField.prototype.build = function(){
 };
 
 FinderField.prototype.setEvents = function(){
-	Text.prototype.setEvents.call(this);
+	TextField.prototype.setEvents.call(this);
 
 	var self = this;
 	this.addButton.addEventListener('click', function(e){
 		e.preventDefault();
 		self.open();
 	});
+
+	this.finder.on('file.selected', function(path){
+		self.input.value = path;
+		self.close();
+	});
 };
 
 FinderField.prototype.open = function(){
 	this.overlay.classList.add('is-shown');
 	this.content.classList.add('is-shown');
-	this.finder.attach(this.content);
+	this.finder.open(this.content, this.input.value);
+};
+
+FinderField.prototype.close = function(){
+	this.overlay.classList.remove('is-shown');
+	this.content.classList.remove('is-shown');
 };
 
 module.exports = FinderField;
