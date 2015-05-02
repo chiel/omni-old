@@ -82,5 +82,19 @@ module.exports = function(mod, generate){
 		});
 	});
 
+	router.post('/upload/', function(req, res){
+		req.busboy.on('file', function(fieldname, file, filename){
+			var dest = uploads + rtrim(req.query.path || '', '/') + '/' + filename;
+			var stream = fs.createWriteStream(dest);
+			file.pipe(stream);
+		});
+
+		req.busboy.on('finish', function(){
+			res.json({ status: 'ok' });
+		});
+
+		req.pipe(req.busboy);
+	});
+
 	return router;
 };

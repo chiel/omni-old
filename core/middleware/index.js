@@ -7,6 +7,7 @@ var RedisStore = require('connect-redis')(session);
 require('../app')
 .use(require('serve-static')(__dirname + '/../../public'))
 .use(require('connect-slashes')())
+.use(require('connect-busboy')())
 .use(require('body-parser').urlencoded({extended: true}))
 .use(require('body-parser').json())
 .use(session({
