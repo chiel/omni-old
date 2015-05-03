@@ -72,7 +72,13 @@ var generateSchema = function(mod){
 		o[p] = def;
 	});
 
-	return new mongoose.Schema(schema);
+	schema = new mongoose.Schema(schema);
+
+	schema.options.toJSON = { transform: function(doc, ret, options){
+		delete ret.__v;
+	}};
+
+	return schema;
 };
 
 generateSchema.types = types;
