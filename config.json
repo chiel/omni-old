@@ -1,7 +1,12 @@
 {
 	"listen": "5000",
 	"api": {
-		"listen": 5001
+		"listen": 5001,
+		"key": "client",
+		"secret": "",
+		"token": {
+			"secret": ""
+		}
 	},
 	"mongo": "mongodb://127.0.0.1:27017/omni",
 	"session": {
