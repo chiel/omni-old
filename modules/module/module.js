@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var mongoose = require('mongoose');
+var auth = require('../../core/middleware/auth');
 var generateSchema = require('./generateschema');
 var generateRouter = require('./generaterouter');
 
@@ -60,7 +61,7 @@ Module.prototype.loadModel = function(){
 
 Module.prototype.loadApiRouter = function(){
 	if (fs.existsSync(this.path + '/api_router.js')){
-		this.apiRouter = require(this.path + '/api_router')(this);
+		this.apiRouter = require(this.path + '/api_router')(this, auth);
 		return;
 	}
 };
