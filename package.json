@@ -21,6 +21,7 @@
     "finder.js": "^0.1.0",
     "informal": "^0.3.0",
     "inherits": "^2.0.1",
+    "jsonwebtoken": "^5.0.0",
     "listen.js": "^1.0.0",
     "mongoose": "~3.8.20",
     "mout": "^0.11.0",

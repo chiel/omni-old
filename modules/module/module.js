@@ -2,6 +2,8 @@
 
 var fs = require('fs');
 var mongoose = require('mongoose');
+var adaptors = require('../../core/adaptors');
+var auth = require('../../core/middleware/auth');
 var generateSchema = require('./generateschema');
 var generateRouter = require('./generaterouter');
 
@@ -16,6 +18,8 @@ var Module = function(modulePath){
 	this.loadManifest();
 	this.loadSchema();
 	this.loadModel();
+	this.loadAdaptors();
+	this.loadApiRouter();
 	this.loadRouter();
 };
 
@@ -54,6 +58,27 @@ Module.prototype.loadSchema = function(){
 Module.prototype.loadModel = function(){
 	if (this.schema){
 		this.Model = mongoose.model(this.manifest.unit, this.schema, this.manifest.unit);
+	}
+};
+
+Module.prototype.loadAdaptors = function(){
+	var dir = this.path + '/adaptors';
+	if (!fs.existsSync(dir)) return;
+
+	var match;
+	var files = fs.readdirSync(dir);
+	for (var i = 0; i < files.length; i++){
+		match = files[i].match(/^(.*)\.js$/);
+		if (match){
+			adaptors[match[1]] = require(dir + '/' + match[1]);
+		}
+	}
+};
+
+Module.prototype.loadApiRouter = function(){
+	if (fs.existsSync(this.path + '/api_router.js')){
+		this.apiRouter = require(this.path + '/api_router')(this, auth);
+		return;
 	}
 };
 
