@@ -20,3 +20,7 @@ require('../app')
 .use(require('./ensure_auth'))
 .use(require('./custom_render'))
 .use(require('./view_locals'));
+
+require('../api')
+.use(require('connect-slashes')(false))
+.use(require('body-parser').json());

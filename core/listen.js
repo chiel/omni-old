@@ -1,5 +1,6 @@
 'use strict';
 
+var api = require('./api');
 var app = require('./app');
 var cache = require('./cache');
 var config = require('./config');
@@ -12,4 +13,5 @@ module.exports = function(){
 		loadModule(modules[i]);
 	}
 	listen(app, config.listen);
+	listen(api, config.api.listen);
 };
