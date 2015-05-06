@@ -33,8 +33,8 @@
     "mkdirp": "^0.5.0",
     "mongoose": "~3.8.20",
     "mout": "^0.11.0",
-    "nodemon": "^1.2.1",
     "node-bourbon": "^1.2.3",
+    "nodemon": "^1.2.1",
     "normalize.css": "^3.0.2",
     "promise": "^6.0.1",
     "relic": "^0.2.0",
@@ -42,6 +42,7 @@
     "superagent": "^0.21.0",
     "swig": "^1.4.2",
     "then-all": "^2.0.0",
-    "vinyl-source-stream": "^1.0.0"
+    "vinyl-source-stream": "^1.0.0",
+    "yargs": "^3.8.0"
   }
 }
