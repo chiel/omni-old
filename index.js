@@ -5,9 +5,9 @@ var cache = require('./core/cache');
 var loadConfig = require('./lib/loadconfig');
 var registerModule = require('./lib/register_module');
 
-module.exports = function(configPath){
-	loadConfig(__dirname + '/config.json');
-	loadConfig(configPath);
+module.exports = function(config){
+	loadConfig(require(__dirname + '/config.json'));
+	loadConfig(config);
 	require('./core/setup');
 	require('./core/middleware');
 
