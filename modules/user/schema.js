@@ -9,7 +9,7 @@ module.exports = function(mod){
 	schema.pre('save', function(next){
 		var self = this;
 
-		bcrypt.hash(self.password, 10, function(err, hash) {
+		bcrypt.hash(self.password, 10, function(err, hash){
 			if (err) return next(err);
 
 			self.password = hash;
