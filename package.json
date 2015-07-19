@@ -23,6 +23,7 @@
     "express-session": "^1.9.3",
     "factor-bundle": "^2.3.3",
     "finder.js": "^0.1.0",
+    "gm": "^1.18.1",
     "gulp-sass": "^1.3.3",
     "gulp-symlink": "^2.1.0",
     "informal": "^0.3.0",
