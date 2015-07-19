@@ -8,6 +8,7 @@ informal.registerField('db_multi_option', require('informal/src/fields/multi_opt
 informal.registerField('list', require('./fields/list'));
 informal.registerField('expanding_textarea', require('./fields/expanding_textarea'));
 informal.registerField('finder', require('./fields/finder'));
+informal.registerField('markdown', require('./fields/markdown'));
 
 behaviour.register('data-informal', function(el){
 	var spec = el.querySelector('[data-informal-spec]');

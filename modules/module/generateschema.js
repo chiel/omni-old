@@ -18,6 +18,7 @@ var types = {
 	db_multi_option: [ mongoose.Schema.Types.ObjectId ],
 	list: mongoose.Schema.Types.Mixed,
 	expanding_textarea: String,
+	markdown: String,
 	finder: String
 };
 
