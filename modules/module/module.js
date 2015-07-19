@@ -24,11 +24,9 @@ var Module = function(modulePath){
 };
 
 Module.prototype.loadManifest = function(){
-	var manifest;
+	var manifest = {};
 	if (fs.existsSync(this.path + '/manifest.json')){
 		manifest = require(this.path + '/manifest.json');
-	} else {
-		manifest = {};
 	}
 
 	if (!manifest.slug){

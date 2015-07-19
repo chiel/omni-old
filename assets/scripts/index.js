@@ -15,10 +15,10 @@ behaviour.register('data-informal', function(el){
 
 	if (!spec) return;
 
-	try {
+	try{
 		spec = JSON.parse(spec.textContent);
 		data = JSON.parse(data.textContent);
-	} catch(e){}
+	} catch (e){}
 
 	var form = new informal.Form(spec, data);
 	el.insertBefore(form.wrap, el.firstChild);
@@ -38,7 +38,7 @@ behaviour.register('data-informal', function(el){
 				if (history.pushState){
 					history.pushState(null, null, response.header.location);
 					el.setAttribute('action', response.header.location);
-				} else {
+				} else{
 					window.location = response.header.location;
 				}
 			}

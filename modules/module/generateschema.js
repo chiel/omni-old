@@ -14,8 +14,8 @@ var types = {
 	time: String,
 	boolean: Boolean,
 	single_option: String,
-	multi_option: [String],
-	db_multi_option: [mongoose.Schema.Types.ObjectId],
+	multi_option: [ String ],
+	db_multi_option: [ mongoose.Schema.Types.ObjectId ],
 	list: mongoose.Schema.Types.Mixed,
 	expanding_textarea: String,
 	finder: String
@@ -45,7 +45,7 @@ var generateSchema = function(mod){
 
 		if (isArray(types[field.type])){
 			def = { type: types[field.type][0] };
-		} else {
+		} else{
 			def = { type: types[field.type] };
 		}
 
@@ -66,7 +66,7 @@ var generateSchema = function(mod){
 		}
 
 		if (isArray(types[field.type])){
-			def = [def];
+			def = [ def ];
 		}
 
 		o[p] = def;
