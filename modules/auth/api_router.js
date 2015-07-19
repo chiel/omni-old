@@ -15,6 +15,16 @@ module.exports = function(mod){
 			});
 		}
 
+		var keyValid = config.api.key === req.body.key;
+		var secretValid = config.api.secret === req.body.secret;
+		if (!keyValid || !secretValid){
+			return res.status(401).json({
+				error: {
+					message: 'Key/secret combination invalid'
+				}
+			});
+		}
+
 		var token = jwt.sign({}, config.api.secret + config.api.token.secret, { subject: config.api.key });
 		res.json({ token: token });
 	});
