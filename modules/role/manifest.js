@@ -1,19 +1,20 @@
 'use strict';
 
+var cache = require('../../core/cache');
 var fs = require('fs');
 
 module.exports = function(manifest){
 	var dir = __dirname + '/..';
 	var modules = fs.readdirSync(dir);
-	var modulePath, moduleManifest, fields;
+	var moduleName, moduleManifest, fields;
 
-	modules.forEach(function(moduleName){
-		modulePath = dir + '/' + moduleName;
+	cache.get('modules').forEach(function(modulePath){
+		moduleName = modulePath.split('/').pop();
 
-		try {
+		try{
 			moduleManifest = fs.readFileSync(modulePath + '/manifest.json', 'utf8');
 			moduleManifest = JSON.parse(moduleManifest);
-		} catch(e){
+		} catch (e){
 			return;
 		}
 
