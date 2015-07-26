@@ -1,7 +1,8 @@
 'use strict';
 
 var gm = require('gm');
-var uploads = require('path').normalize(__dirname + '/../../public/uploads');
+var config = require('../../core/config');
+var uploads = require('path').normalize(config.upload.path);
 
 module.exports = function(mod, auth){
 	var router = require('express').Router();

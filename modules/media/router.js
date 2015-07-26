@@ -4,7 +4,8 @@ var fs = require('fs');
 var map = require('mout/array/map');
 var Promise = require('promise');
 var rtrim = require('mout/string/rtrim');
-var uploads = require('path').normalize(__dirname + '/../../public/uploads');
+var config = require('../../core/config');
+var uploads = require('path').normalize(config.upload.path);
 
 var stat = function(file){
 	return new Promise(function(resolve, reject){
@@ -53,7 +54,7 @@ var readpath = function(path){
 	return new Promise(function(resolve, reject){
 		fs.stat(path, function(err, stats){
 			if (err){
-				console.error(err);
+				return console.error(err);
 			}
 			if (stats.isDirectory()){
 				readdir(path + '/').then(statFiles).then(function(files){
@@ -62,7 +63,7 @@ var readpath = function(path){
 						files: files
 					});
 				}, reject);
-			} else {
+			} else{
 				readfile(path).then(resolve, reject);
 			}
 		});
