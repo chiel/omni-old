@@ -27,6 +27,7 @@
     "gm": "^1.18.1",
     "gulp": "^3.9.0",
     "gulp-postcss": "^5.1.10",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-symlink": "^2.1.0",
     "informal": "^0.3.0",
     "inherits": "^2.0.1",
