@@ -4,10 +4,13 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Omni</title>
+		<title>{% block title %}Omni{% endblock %}</title>
 	</head>
 
 	<body>
 		{% block content %}{% endblock %}
+
+		<script src="/js/common.js"></script>
+		<script src="/js/omni/index.js"></script>
 	</body>
 </html>

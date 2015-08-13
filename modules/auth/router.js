@@ -4,7 +4,7 @@ var auth = require('../auth/lib');
 var forOwn = require('mout/object/forOwn');
 var mixIn = require('mout/object/mixIn');
 
-module.exports = function(){
+module.exports = function(mod){
 	var router = require('express').Router();
 
 	router.get('/', function(req, res){
@@ -13,7 +13,8 @@ module.exports = function(){
 
 	router.get('/login/', function(req, res){
 		res.render('$auth/login', {
-			forward: req.query.forward
+			forward: req.query.forward,
+			manifest: mod.manifest
 		});
 	});
 

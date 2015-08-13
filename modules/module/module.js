@@ -29,7 +29,7 @@ Module.prototype.loadManifest = function(){
 		manifest = require(this.path + '/manifest.json');
 	}
 
-	if (!manifest.slug){
+	if (manifest.slug === undefined){
 		manifest.slug = this.dirName == 'root' ? manifest.slug = '' : this.dirName;
 	}
 

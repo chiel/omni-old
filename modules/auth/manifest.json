@@ -1,0 +1,28 @@
+{
+	"slug": "",
+
+	"loginForm": {
+		"tabs": [
+			{
+				"objects": [
+					"email",
+					"password"
+				]
+			}
+		],
+
+		"fields": {
+			"email": {
+				"type": "email",
+				"label": "Email",
+				"placeholder": "e.g. john.doe@example.com",
+				"autofocus": true
+			},
+			"password": {
+				"type": "password",
+				"label": "Password",
+				"placeholder": "e.g. Cpt.Mc4wes0me!"
+			}
+		}
+	}
+}

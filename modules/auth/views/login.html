@@ -1,17 +1,25 @@
 {% extends "$core/layouts/plain.html" %}
 
+{% block title %}Login &middot; Omni{% endblock title %}
+
 {% block content %}
-<form method="post" action="/login/" class="login-form">
-	{% if error %}
-		<p class="error">{{error}}</p>
-	{% endif %}
-	<fieldset>
-		<input type="email" name="email" placeholder="E-mail" autofocus>
-		<input type="password" name="password" placeholder="Password">
-		<input type="submit" value="Sign in">
-	</fieldset>
+<form method="post" action="/login/" class="form-login" data-form>
+	<header class="form-login-header">
+		<h1 class="logo">Omni</h1>
+	</header>
+
+	<section class="form-login-body">
+		{% if error %}
+			<p class="error">{{ error }}</p>
+		{% endif %}
+		<script type="application/json" data-informal-spec>{{ manifest.loginForm|json|safe }}</script>
+		<input type="submit" class="btn btn-primary" value="Log in">
+	</section>
+
 	{% if forward %}
-		<input type="hidden" name="forward" value="{{forward}}">
+		<input type="hidden" name="forward" value="{{ forward }}">
 	{% endif %}
+
+	<footer class="form-login-footer">v{{ package.version }}</footer>
 </form>
 {% endblock %}
