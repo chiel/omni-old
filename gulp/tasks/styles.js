@@ -3,6 +3,7 @@
 var postcss = require('gulp-postcss');
 var merge = require('merge-stream');
 var sourcemaps = require('gulp-sourcemaps');
+var gutil = require('gulp-util');
 
 module.exports = function(gulp, config){
 	return function(){
@@ -19,6 +20,7 @@ module.exports = function(gulp, config){
 				require('postcss-hexrgba'),
 				require('autoprefixer-core')({ browsers: [ 'last 2 versions' ]})
 			]))
+			.pipe(gutil.env.production ? require('gulp-cssnano')() : gutil.noop())
 			.pipe(sourcemaps.write('.'))
 			.pipe(gulp.dest(target.dest));
 
