@@ -2,7 +2,7 @@
 
 module.exports = function(gulp, config){
 	return function(){
-		var jsGlobs = [], sassGlobs = [], targets, i, j;
+		var jsGlobs = [], stylesGlobs = [], targets, i, j;
 
 		targets = config.browserify.targets;
 
@@ -12,16 +12,16 @@ module.exports = function(gulp, config){
 			}
 		}
 
-		gulp.watch(jsGlobs, ['browserify']);
+		gulp.watch(jsGlobs, [ 'browserify' ]);
 
-		targets = config.sass.targets;
+		targets = config.styles.targets;
 
 		for (i = 0; i < targets.length; i++){
 			for (j = 0; j < targets[i].watch.length; j++){
-				sassGlobs.push(targets[i].watch[j]);
+				stylesGlobs.push(targets[i].watch[j]);
 			}
 		}
 
-		gulp.watch(sassGlobs, ['sass']);
+		gulp.watch(stylesGlobs, [ 'styles' ]);
 	};
 };

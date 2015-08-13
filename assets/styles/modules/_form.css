@@ -1,0 +1,90 @@
+@keyframes loginFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-3px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.form {
+	&-login {
+		max-width: 300px;
+		margin: 150px auto 0;
+		opacity: 0;
+		animation: loginFadeIn .5s ease-out .25s forwards;
+
+		.logo {
+			font-size: 36px;
+			text-align: center;
+		}
+
+		.btn {
+			display: block;
+			width: 100%;
+			margin-top: 24px
+		}
+
+		&-body {
+			padding: 20px;
+			background: #fafafa;
+			border-radius: 6px;
+		}
+
+		&-footer {
+			color: #aaa;
+			font-size: 12px;
+			text-align: center;
+		}
+	}
+}
+
+.informal {
+	&-tab {
+		display: none;
+
+		&.is-shown {
+			display: block;
+		}
+	}
+
+	&-field {
+		margin: 24px -10px 0;
+		padding: 0 10px;
+
+		label {
+			display: block;
+			padding: 0 6px;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	&-input {
+		display: flex;
+		width: 100%;
+
+		input {
+			flex-grow: 1;
+			width: 100%;
+			padding: 9px 12px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background: #fff;
+			font: inherit;
+			transition: border-color .1s ease-out, box-shadow .1s ease-out;
+
+			&:focus {
+				outline: 0;
+				border-color: var(--blue);
+				box-shadow: 0 0 5px rgba(var(--blue), .6);
+			}
+		}
+	}
+
+}
+

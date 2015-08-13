@@ -28,10 +28,7 @@ var config = {
 		script: './app.js',
 		watch: []
 	},
-	sass: {
-		options: {
-			includePaths: [ root + '/assets/styles' ]
-		},
+	styles: {
 		targets: []
 	},
 	symlink: {
