@@ -14,7 +14,7 @@ require('../app')
 	store: new RedisStore(),
 	name: config.session.name,
 	secret: config.session.secret,
-	resave: true,
+	resave: false,
 	saveUninitialized: true
 }))
 .use(require('./ensure_auth'))
