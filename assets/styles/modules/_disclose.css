@@ -1,0 +1,7 @@
+.disclose-notification {
+	width: 420px;
+
+	.disclose-btn-close {
+		background: url(/img/omni/cross-red.svg) no-repeat center / 50%;
+	}
+}

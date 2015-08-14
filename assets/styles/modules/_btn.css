@@ -5,7 +5,7 @@
 	border: 0;
 	border-radius: 3px;
 	border: 2px solid #ccc;
-	background: #fff;
+	background: #fff no-repeat calc(100% - 6px) center / auto 24px;
 	color: #aaa;
 	cursor: pointer;
 	font-family: Ubuntu;
@@ -28,6 +28,16 @@
 		transition: background-color .1s ease-out, border-color .1s ease-in-out, color .1s ease-in-out;
 	}
 
+	&[disabled] {
+		opacity: .5;
+		pointer-events: none;
+		transition: opacity .15s ease-out;
+	}
+
+	&.is-pending {
+		background-image: url(/img/omni/pending.svg);
+	}
+
 	&-primary {
 		border-color: var(--blue);
 		color: var(--blue);
@@ -40,6 +50,11 @@
 		&:hover {
 			background-color: var(--blue);
 			color: #fff;
+		}
+
+		&[disabled]:hover {
+			background-color: #fff;
+			color: var(--blue);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 var informal = require('informal/all');
+var disclose = require('../disclose');
 
 module.exports = function(el){
 	var specEl = el.querySelector('[data-informal-spec]');
@@ -17,4 +18,35 @@ module.exports = function(el){
 
 	var form = informal(spec);
 	specEl.parentNode.insertBefore(form.wrap, specEl);
+
+	var btn = el.querySelector('[type=submit]');
+	el.addEventListener('submit', function(e){
+		e.preventDefault();
+
+		btn.disabled = true;
+		btn.classList.add('is-pending');
+
+		fetch(el.action, {
+			method: el.method,
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+			body: JSON.stringify(form.getValues())
+		})
+		.then(function(res){
+			res.json().then(function(json){
+				console.log(json);
+				if (res.status < 200 || res.status > 299){
+					disclose.error(json.error.message, { sticky: true });
+				} else{
+					window.location = '/dashboard/';
+				}
+
+				btn.disabled = false;
+				btn.classList.remove('is-pending');
+			});
+		});
+	});
 };

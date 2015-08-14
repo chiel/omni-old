@@ -1,4 +1,5 @@
 @import 'normalize.css/normalize';
+@import 'disclose.js/disclose';
 
 @import 'base/_variables';
 @import 'base/_base';
