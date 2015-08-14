@@ -2,9 +2,11 @@
 
 var app = require('./app');
 var swig = require('swig');
+var debug = require('debug')('omni:core:setup');
 
 require('./db');
 
+debug('global app settings');
 app
 .engine('html', swig.renderFile)
 .set('view engine', 'html')
@@ -16,6 +18,7 @@ var swigDefaults = {
 };
 
 if (app.settings.env == 'development'){
+	debug('disabling swig cache');
 	swigDefaults.cache = false;
 }
 

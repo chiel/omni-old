@@ -1,9 +1,11 @@
 'use strict';
 
+var debug = require('debug')('omni:core:middleware');
 var config = require('../config');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
+debug('registering app middleware');
 require('../app')
 .use(require('serve-static')(__dirname + '/../../public'))
 .use(require('connect-slashes')())
@@ -21,6 +23,7 @@ require('../app')
 .use(require('./custom_render'))
 .use(require('./view_locals'));
 
+debug('registering api middleware');
 require('../api')
 .use(require('connect-slashes')(false))
 .use(require('body-parser').json());
