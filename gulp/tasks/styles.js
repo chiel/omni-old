@@ -19,6 +19,7 @@ module.exports = function(gulp, config){
 				require('postcss-custom-properties'),
 				require('postcss-hexrgba'),
 				require('postcss-clearfix'),
+				require('postcss-color-function'),
 				require('autoprefixer-core')({ browsers: [ 'last 2 versions' ]})
 			]))
 			.pipe(gutil.env.production ? require('gulp-cssnano')() : gutil.noop())

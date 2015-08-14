@@ -9,7 +9,7 @@
 	li {
 		position: relative;
 		float: left;
-		margin: 0 0 0 24px;
+		margin: 0 0 0 12px;
 
 		&:first-child {
 			margin-left: 0;
@@ -17,6 +17,28 @@
 
 		a, span {
 			display: block;
+			padding: 0 6px;
+		}
+
+		a {
+			overflow: hidden;
+			position: relative;
+			text-decoration: none;
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: var(--blue);
+				transition: transform .2s var(--easing);
+			}
+
+			&:hover:after {
+				transform: translateY(-3px);
+			}
 		}
 
 		ul {
@@ -39,6 +61,21 @@
 
 			a, span {
 				padding: 0 18px;
+			}
+
+			a {
+				&:after {
+					top: 0;
+					left: 100%;
+					right: auto;
+					bottom: 0;
+					width: 5px;
+					height: auto;
+				}
+
+				&:hover:after {
+					transform: translateX(-5px);
+				}
 			}
 		}
 

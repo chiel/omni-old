@@ -15,4 +15,9 @@ body {
 
 a {
 	color: var(--blue);
+	transition: color .4s var(--easing);
+
+	&:hover {
+		color: color(var(--blue) lightness(40%))
+	}
 }
