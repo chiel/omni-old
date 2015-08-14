@@ -35,20 +35,7 @@ var config = {
 		options: {
 			force: true
 		},
-		targets: [
-			{
-				src: root + '/node_modules/finder.js/index.scss',
-				dest: root + '/assets/styles/vendor/_finder.scss'
-			},
-			{
-				src: root + '/node_modules/normalize.css/normalize.css',
-				dest: root + '/assets/styles/vendor/_normalize.scss'
-			},
-			{
-				src: root + '/node_modules/node-bourbon/assets/stylesheets',
-				dest: root + '/assets/styles/vendor/bourbon'
-			}
-		]
+		targets: []
 	}
 };
 

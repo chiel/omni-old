@@ -24,6 +24,6 @@ module.exports = function(gulp){
 		require(file)(gulp, config);
 	});
 
-	gulp.task('default', [ 'browserify', 'styles', 'watch', 'nodemon' ]);
-	gulp.task('build', [ 'browserify', 'styles' ]);
+	gulp.task('default', [ 'symlink', 'browserify', 'styles', 'watch', 'nodemon' ]);
+	gulp.task('build', [ 'symlink', 'browserify', 'styles' ]);
 };
