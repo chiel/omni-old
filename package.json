@@ -4,6 +4,8 @@
   "main": "index.js",
   "author": "chielkunkels",
   "license": "MIT",
+  "homepage": "https://github.com/chielkunkels/omni",
+  "bugs": "https://github.com/chielkunkels/omni/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/chielkunkels/omni.git"
