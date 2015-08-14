@@ -1,0 +1,57 @@
+.nav {
+	ul {
+		clear: fix;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		position: relative;
+		float: left;
+		margin: 0 0 0 24px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		a, span {
+			display: block;
+		}
+
+		ul {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: -18px;
+			right: -18px;
+			min-width: 100%;
+			margin-top: -1px;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-top: 0;
+			line-height: 36px;
+		}
+
+		li {
+			float: none;
+			margin-left: 0;
+
+			a, span {
+				padding: 0 18px;
+			}
+		}
+
+		&:hover ul {
+			display: block;
+		}
+	}
+
+	&-primary {
+		float: left;
+	}
+
+	&-user {
+		float: right;
+	}
+}

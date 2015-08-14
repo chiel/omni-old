@@ -1,0 +1,22 @@
+.main-header {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 48px;
+	border-bottom: 1px solid #ccc;
+	background: #fff;
+	line-height: 48px;
+
+	.wrap {
+		clear: fix;
+		height: 100%;
+	}
+
+	.logo {
+		float: left;
+		height: 100%;
+		margin-right: 36px;
+	}
+}

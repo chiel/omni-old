@@ -13,11 +13,11 @@
 	<body>
 		<header class="main-header">
 			<div class="wrap">
-				<h1 class="main-logo"><a href="/dashboard/">Omni</a></h1>
-				<nav class="main-nav">
+				<h1 class="logo"><a href="/dashboard/">Omni <span>v{{ package.version }}</span></a></h1>
+				<nav class="nav nav-primary">
 					{{ navigation|render_nav }}
 				</nav>
-				<nav class="user-nav">
+				<nav class="nav nav-user">
 					<ul>
 						<li><span>{{ user.data.email }}</span></li>
 						<li><a href="/logout/">Log out</a></li>
