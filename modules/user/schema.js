@@ -1,10 +1,16 @@
 'use strict';
 
 var bcrypt = require('bcrypt');
-var generateSchema = require('../module/generateschema');
 
-module.exports = function(mod){
+module.exports = function(mod, generateSchema){
 	var schema = generateSchema(mod);
+
+	schema.options.toObject = {
+		transform: function(doc, ret, options){
+			delete ret.password;
+			delete ret.__v;
+		}
+	};
 
 	schema.pre('save', function(next){
 		var self = this;

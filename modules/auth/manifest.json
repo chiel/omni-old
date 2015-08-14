@@ -16,12 +16,14 @@
 				"type": "email",
 				"label": "Email",
 				"placeholder": "e.g. john.doe@example.com",
-				"autofocus": true
+				"autofocus": true,
+				"required": true
 			},
 			"password": {
 				"type": "password",
 				"label": "Password",
-				"placeholder": "e.g. Cpt.Mc4wes0me!"
+				"placeholder": "e.g. Cpt.Mc4wes0me!",
+				"required": true
 			}
 		}
 	}
