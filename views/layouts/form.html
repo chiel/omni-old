@@ -8,10 +8,9 @@
 		{% else %}
 			<h2>Add new {{ manifest.unit }}</h2>
 		{% endif %}
-		<ul class="actions">
-			<li><a href="/{{ manifest.slug }}/">Overview</a></li>
-			<li><a href="/{{ manifest.slug }}/new/">New</a></li>
-		</ul>
+		<nav class="btn-group">
+			<a class="btn btn-small" href="/{{ manifest.slug }}/">Overview</a>
+		</nav>
 	</header>
 	{% if error %}
 		{{ error }}

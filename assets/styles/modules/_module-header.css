@@ -1,0 +1,12 @@
+.module-header {
+	clear: fix;
+
+	h2 {
+		float: left;
+	}
+
+	.btn-group {
+		float: left;
+		margin: 12px 0 0 24px;
+	}
+}

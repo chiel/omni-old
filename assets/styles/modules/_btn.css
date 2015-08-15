@@ -4,7 +4,7 @@
 	padding: 0 24px;
 	border: 0;
 	border-radius: 3px;
-	border: 2px solid #ccc;
+	border: 2px solid #aaa;
 	background: #fff no-repeat calc(100% - 6px) center / auto 24px;
 	color: #aaa;
 	cursor: pointer;
@@ -13,6 +13,7 @@
 	font-weight: 400;
 	line-height: 36px;
 	text-align: center;
+	text-decoration: none;
 	text-transform: uppercase;
 	white-space: nowrap;
 
@@ -23,7 +24,7 @@
 	}
 
 	&:hover {
-		background-color: #ccc;
+		background-color: #aaa;
 		color: #fff;
 		transition: background-color .1s ease-out, border-color .1s ease-in-out, color .1s ease-in-out;
 	}
@@ -36,6 +37,13 @@
 
 	&.is-pending {
 		background-image: url(/img/omni/pending.svg);
+	}
+
+	&-small {
+		padding: 0 12px;
+		border-width: 1px;
+		font-size: 9px;
+		line-height: 24px;
 	}
 
 	&-primary {
