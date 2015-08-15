@@ -20,19 +20,19 @@
 	&:focus {
 		outline: 0;
 		box-shadow: 0 0 5px rgba(#ccc, .6);
-		transition: box-shadow .1s ease-out;
+		transition: box-shadow .4s var(--easing);
 	}
 
 	&:hover {
 		background-color: #aaa;
 		color: #fff;
-		transition: background-color .1s ease-out, border-color .1s ease-in-out, color .1s ease-in-out;
+		transition: background-color .4s var(--easing), border-color .4s var(--easing), color .4s var(--easing);
 	}
 
 	&[disabled] {
 		opacity: .5;
 		pointer-events: none;
-		transition: opacity .15s ease-out;
+		transition: opacity .4s var(--easing);
 	}
 
 	&.is-pending {

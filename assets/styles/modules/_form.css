@@ -76,7 +76,7 @@
 			border-radius: 3px;
 			background: #fff;
 			font: inherit;
-			transition: border-color .1s ease-out, box-shadow .1s ease-out;
+			transition: border-color .4s var(--easing), box-shadow .4s var(--easing);
 
 			&:focus {
 				outline: 0;

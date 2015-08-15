@@ -33,7 +33,7 @@
 				right: 0;
 				height: 3px;
 				background: var(--blue);
-				transition: transform .2s var(--easing);
+				transition: transform .4s var(--easing);
 			}
 
 			&:hover:after {
