@@ -12,9 +12,7 @@
 			<a class="btn btn-small" href="/{{ manifest.slug }}/">Overview</a>
 		</nav>
 	</header>
-	{% if error %}
-		{{ error }}
-	{% endif %}
+
 	<form method="post" action="{{ action }}" data-informal>
 		<script type="application/json" data-informal-spec>{{ manifest.formSpec|json|safe }}</script>
 		<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
