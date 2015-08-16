@@ -30,7 +30,9 @@
 							<td>{{ item[field.name] }}</td>
 						{% endif %}
 					{% endfor %}
-					<td class="module-overview-actions"><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
+					<td class="module-overview-actions">
+						<a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/" data-action="delete">Delete</a>
+					</td>
 				</tr>
 			{% endfor %}
 			{% if !items.length %}
