@@ -31,6 +31,34 @@ input[type='checkbox'] {
 }
 
 .form {
+	&-wrap {
+		position: relative;
+	}
+
+	&-main {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 324px;
+		padding: 24px 0;
+	}
+
+	&-options {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 300px;
+		padding: 24px 0;
+
+		> div {
+			margin-top: 24px;
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
 	&-login {
 		max-width: 300px;
 		margin: 150px auto 0;
@@ -78,6 +106,19 @@ input[type='checkbox'] {
 		label {
 			display: block;
 			padding: 0 6px;
+
+			button {
+				margin: 0 0 0 12px;
+				padding: 0;
+				background: transparent;
+				border: 0;
+				color: #66afe9;
+
+				&:focus {
+					outline: 0;
+					text-decoration: underline;
+				}
+			}
 		}
 
 		&:first-child {
@@ -89,7 +130,7 @@ input[type='checkbox'] {
 		display: flex;
 		width: 100%;
 
-		input {
+		input, select {
 			flex-grow: 1;
 			width: 100%;
 			padding: 9px 12px;
@@ -103,6 +144,18 @@ input[type='checkbox'] {
 				outline: 0;
 				border-color: var(--blue);
 				box-shadow: 0 0 5px rgba(var(--blue), .6);
+			}
+		}
+
+		select {
+			option {
+				padding: 3px 6px;
+				font: inherit;
+			}
+
+			&[multiple] {
+				padding-left: 6px;
+				padding-right: 6px;
 			}
 		}
 	}
