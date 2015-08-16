@@ -9,6 +9,27 @@
 	}
 }
 
+input[type='checkbox'] {
+	display: block;
+	width: 14px;
+	height: 14px;
+	border: 1px solid var(--blue);
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: inset 0 0 0 1px #fff;
+	cursor: pointer;
+	transition: background-color .4s var(--easing);
+	-webkit-appearance: none;
+
+	&:checked {
+		background-color: var(--blue);
+	}
+
+	&:focus {
+		outline: 0;
+	}
+}
+
 .form {
 	&-login {
 		max-width: 300px;

@@ -8,7 +8,8 @@
 			<a class="btn btn-small" href="/{{ manifest.slug }}/new/">New</a>
 		</nav>
 	</header>
-	<table class="item-list">
+
+	<table class="module-overview" data-overview>
 		<thead>
 			<tr>
 				<th><input type="checkbox"></th>
@@ -29,7 +30,7 @@
 							<td>{{ item[field.name] }}</td>
 						{% endif %}
 					{% endfor %}
-					<td class="actions"><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
+					<td class="module-overview-actions"><a href="/{{ manifest.slug }}/delete/{{ item._id.toString() }}/">Delete</a></td>
 				</tr>
 			{% endfor %}
 			{% if !items.length %}
