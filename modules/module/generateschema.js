@@ -23,15 +23,17 @@ var types = {
 };
 
 var generateSchema = function(mod){
-	if (!mod.manifest || !mod.manifest.formSpec) return;
+	if (!mod.manifest || !mod.manifest.form) return;
 
-	var fields = mod.manifest.formSpec.fields;
+	var fields = mod.manifest.form.fields;
 	var schema = {}, o, p, def;
 
 	forOwn(fields, function(field, name){
 		name = field.name || name;
 		name = name.replace('][', '.').replace('[', '.').replace(/\]$/, '');
 		name = name.split('.');
+
+		field.type = field.type || 'text';
 
 		o = schema;
 		while (name.length){

@@ -13,7 +13,7 @@ var Module = function(modulePath){
 	}
 
 	this.path = modulePath;
-	this.dirName = this.path.match(/([^\/]+)$/)[0];
+	this.dirname = this.path.split('/').pop();
 
 	this.loadManifest();
 	this.loadSchema();
@@ -29,12 +29,10 @@ Module.prototype.loadManifest = function(){
 		manifest = require(this.path + '/manifest.json');
 	}
 
-	if (manifest.slug === undefined){
-		manifest.slug = this.dirName == 'root' ? manifest.slug = '' : this.dirName;
-	}
+	manifest.slug = manifest.slug !== undefined ? manifest.slug : this.dirname;
 
-	if (!manifest.unit){
-		manifest.unit = this.dirName.match(/(?:omni\.cm-)?(.*)/)[1];
+	if (!manifest.collection){
+		manifest.collection = this.dirname.match(/(?:omni\.cm-)?(.*)/)[1];
 	}
 
 	if (fs.existsSync(this.path + '/manifest.js')){
@@ -55,7 +53,7 @@ Module.prototype.loadSchema = function(){
 
 Module.prototype.loadModel = function(){
 	if (this.schema){
-		this.Model = mongoose.model(this.manifest.unit, this.schema, this.manifest.unit);
+		this.Model = mongoose.model(this.manifest.collection, this.schema, this.manifest.collection);
 	}
 };
 

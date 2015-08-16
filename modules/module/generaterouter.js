@@ -34,10 +34,8 @@ module.exports = function(mod){
 			return res.send('You are not authorised to view this page');
 		}
 
-		mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/new/';
-
-		expandFields(mod.manifest.formSpec.fields, function(err, fields){
-			mod.manifest.formSpec.fields = fields;
+		expandFields(mod.manifest.form.fields, function(err, fields){
+			mod.manifest.form.fields = fields;
 			res.render(formView, {
 				action: '/' + mod.manifest.slug + '/new/',
 				manifest: mod.manifest
@@ -81,10 +79,8 @@ module.exports = function(mod){
 				return res.redirect('/' + mod.manifest.slug + '/new/');
 			}
 
-			mod.manifest.formSpec.action = '/' + mod.manifest.slug + '/edit/' + req.params.id + '/';
-
-			expandFields(mod.manifest.formSpec.fields, function(err, fields){
-				mod.manifest.formSpec.fields = fields;
+			expandFields(mod.manifest.form.fields, function(err, fields){
+				mod.manifest.form.fields = fields;
 				res.render(formView, {
 					action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
 					manifest: mod.manifest,
