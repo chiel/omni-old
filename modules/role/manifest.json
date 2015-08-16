@@ -4,7 +4,7 @@
 	"unit": "role",
 	"units": "roles",
 
-	"rights": [
+	"permissions": [
 		{
 			"key": "view",
 			"description": "View existing roles"
@@ -23,28 +23,21 @@
 		}
 	],
 
-	"formSpec": {
-		"method": "post",
-		"action": "/roles/new/",
-		"save": {},
-		"pages": [
+	"form": {
+		"tabs": [
 			{
-				"groups": ["group1"]
+				"objects": [
+					"name"
+				]
 			}
 		],
-		"groups": {
-			"group1": {
-				"fields": ["name"]
-			}
-		},
+
 		"fields": {
 			"name": {
-				"type": "text",
 				"label": "Name",
+				"placeholder": "e.g. Editors",
 				"required": true,
-				"attributes": {
-					"autofocus": true
-				}
+				"autofocus": true
 			}
 		}
 	},

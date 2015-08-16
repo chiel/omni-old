@@ -6,36 +6,32 @@ var fs = require('fs');
 module.exports = function(manifest){
 	var dir = __dirname + '/..';
 	var modules = fs.readdirSync(dir);
-	var moduleName, moduleManifest, fields;
+	var moduleManifest;
+	var moduleName;
+	var field;
 
 	cache.get('modules').forEach(function(modulePath){
+		if (!fs.existsSync(modulePath + '/manifest.json')) return;
+
+		moduleManifest = require(modulePath + '/manifest.json');
+		if (!moduleManifest.permissions) return;
+
 		moduleName = modulePath.split('/').pop();
-
-		try{
-			moduleManifest = fs.readFileSync(modulePath + '/manifest.json', 'utf8');
-			moduleManifest = JSON.parse(moduleManifest);
-		} catch (e){
-			return;
-		}
-
-		if (!moduleManifest.rights) return;
-
-		fields = [];
-		moduleManifest.rights.forEach(function(right){
-			manifest.formSpec.fields[moduleName + '_' + right.key] = {
-				type: 'boolean',
-				name: 'modules[' + moduleName + '][' + right.key + ']',
-				label: right.description
-			};
-			fields.push(moduleName + '_' + right.key);
-		});
-
-		manifest.formSpec.groups[moduleName] = {
-			name: moduleManifest.name || moduleName,
-			fields: fields
+		field = {
+			type: 'multi_option',
+			label: (moduleManifest.name || moduleName) + ' permissions',
+			options: []
 		};
 
-		manifest.formSpec.pages[0].groups.push(moduleName);
+		moduleManifest.permissions.forEach(function(permission){
+			field.options.push({
+				value: permission.key,
+				label: permission.description
+			});
+		});
+
+		manifest.form.fields[moduleName] = field;
+		manifest.form.tabs[0].objects.push(moduleName);
 	});
 
 	return manifest;
