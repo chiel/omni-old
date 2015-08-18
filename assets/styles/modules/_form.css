@@ -130,6 +130,32 @@ input[type='checkbox'] {
 		display: flex;
 		width: 100%;
 
+		&-options {
+			flex-grow: 1;
+			margin: 0;
+			padding: 0;
+			border: 0;
+
+			label {
+				clear: fix;
+				padding-left: 0;
+			}
+
+			input {
+				float: left;
+
+				&:checked + span {
+					opacity: 1;
+				}
+			}
+
+			span {
+				float: left;
+				opacity: .5;
+				transition: opacity .4s var(--easing);
+			}
+		}
+
 		input, select {
 			flex-grow: 1;
 			width: 100%;
@@ -144,6 +170,18 @@ input[type='checkbox'] {
 				outline: 0;
 				border-color: var(--blue);
 				box-shadow: 0 0 5px rgba(var(--blue), .6);
+			}
+		}
+
+		input[type=checkbox] {
+			flex-grow: unset;
+			width: 14px;
+			margin: 5px 12px 0 0;
+			padding: 0;
+			border-color: var(--blue);
+
+			&:focus {
+				box-shadow: 0 0 5px rgba(var(--blue), .6), inset 0 0 0 1px #fff;
 			}
 		}
 
