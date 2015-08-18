@@ -19,6 +19,7 @@ module.exports = function(manifest){
 		moduleName = modulePath.split('/').pop();
 		field = {
 			type: 'multi_option',
+			style: 'checkbox',
 			label: (moduleManifest.name || moduleName) + ' permissions',
 			options: []
 		};
