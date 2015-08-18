@@ -21,11 +21,16 @@ module.exports = function(mod){
 			return res.send('You are not authorised to view this page');
 		}
 
+
 		mod.Model.find(function(err, items){
-			res.render(listView, {
-				manifest: mod.manifest,
-				items: items
-			});
+			if (req.headers.accept === 'application/json'){
+				res.json(items);
+			} else{
+				res.render(listView, {
+					manifest: mod.manifest,
+					items: items
+				});
+			}
 		});
 	});
 
