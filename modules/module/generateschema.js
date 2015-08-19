@@ -15,7 +15,7 @@ var types = {
 	boolean: Boolean,
 	single_option: String,
 	multi_option: [ String ],
-	db_multi_option: [ mongoose.Schema.Types.ObjectId ],
+	api_multi_option: [ mongoose.Schema.Types.ObjectId ],
 	list: mongoose.Schema.Types.Mixed,
 	expanding_textarea: String,
 	markdown: String,
