@@ -1,10 +1,9 @@
 {
 	"name": "Users",
 	"slug": "users",
-	"unit": "user",
-	"units": "users",
+	"collection": "user",
 
-	"rights": [
+	"permissions": [
 		{
 			"key": "view",
 			"description": "View existing users"
@@ -23,20 +22,18 @@
 		}
 	],
 
-	"formSpec": {
-		"method": "post",
-		"action": "/users/new/",
-		"save": {},
-		"pages": [
+	"form": {
+		"tabs": [
 			{
-				"groups": ["group1"]
+				"objects": [
+					"email",
+					"password",
+					"roles",
+					"superadmin"
+				]
 			}
 		],
-		"groups": {
-			"group1": {
-				"fields": ["email", "password", "roles", "superadmin"]
-			}
-		},
+
 		"fields": {
 			"email": {
 				"type": "email",
@@ -50,9 +47,12 @@
 				"required": true
 			},
 			"roles": {
-				"type": "db_multi_option",
+				"type": "api_multi_option",
+				"style": "checkbox",
 				"label": "Roles",
-				"module": "role"
+				"endpoint": "/roles/",
+				"valueField": "_id",
+				"labelField": "name"
 			},
 			"superadmin": {
 				"type": "boolean",
