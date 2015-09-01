@@ -41,7 +41,7 @@
 		display: flex;
 		width: 100%;
 
-		input, select {
+		input, select, textarea {
 			flex-grow: 1;
 			width: 100%;
 		}

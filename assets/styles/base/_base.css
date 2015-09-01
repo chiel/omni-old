@@ -32,7 +32,7 @@ a {
 	}
 }
 
-input, select {
+input, select, textarea {
 	padding: 9px 12px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -86,4 +86,8 @@ select {
 		-webkit-appearance: none;
 		background: url(/img/omni/caret.svg) no-repeat calc(100% - 12px) 20px / 12px auto;
 	}
+}
+
+textarea {
+	min-height: calc(24px * 4 + 20);
 }
