@@ -35,6 +35,16 @@
 		&:first-child {
 			margin-top: 0;
 		}
+
+		&-group {
+			clear: fix;
+			margin: 24px -10px 0;
+
+			.informal-field {
+				float: left;
+				margin: 0;
+			}
+		}
 	}
 
 	&-input {
