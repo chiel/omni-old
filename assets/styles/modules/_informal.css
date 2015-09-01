@@ -121,4 +121,29 @@
 			border-bottom-right-radius: 3px;
 		}
 	}
+
+	&-input-topbar {
+		padding: 6px;
+		border: 1px solid #ccc;
+		border-bottom: 0;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		background: #f6f6f6;
+
+		& + .informal-input > :first-child {
+			border-top-left-radius: 0;
+		}
+
+		& + .informal-input > :last-child {
+			border-top-right-radius: 0;
+		}
+
+		& + .informal-input > .informal-input-expand:first-child textarea {
+			border-top-left-radius: 0;
+		}
+
+		& + .informal-input > .informal-input-expand:last-child textarea {
+			border-top-right-radius: 0;
+		}
+	}
 }

@@ -1,34 +1,88 @@
 'use strict';
 
-var Textarea = require('informal').fields.textarea;
+var TextareaField = require('informal/fields/textarea');
 
-var Markdown = function(spec, data){
-	if (!(this instanceof Markdown)) return new Markdown(spec, data);
-	Textarea.call(this, spec, data);
+/**
+ * MarkdownField
+ *
+ * @param {String} name
+ * @param {Object} spec
+ *
+ * @return {MarkdownField}
+ */
+var MarkdownField = function(name, spec){
+	if (!(this instanceof MarkdownField)){
+		return new MarkdownField(name, spec);
+	}
+
+	TextareaField.call(this, name, spec);
 };
 
-require('inherits')(Markdown, Textarea);
+require('util').inherits(MarkdownField, TextareaField);
 
-Markdown.prototype.build = function(){
-	Textarea.prototype.build.call(this);
+/**
+ * Build the field
+ */
+MarkdownField.prototype.build = function(){
+	if (this.wrap) return;
 
-	this.textwrap = document.createElement('div');
-	this.textwrap.classList.add('expanding-textarea');
-	this.input.parentNode.insertBefore(this.textwrap, this.input.nextSibling);
-	this.textwrap.appendChild(this.input);
+	TextareaField.prototype.build.call(this);
 
-	var pre = document.createElement('pre'),
-		span = document.createElement('span');
-	pre.appendChild(span);
-	pre.appendChild(document.createElement('br'));
-	this.textwrap.appendChild(pre);
+	var topbar = document.createElement('div');
+	topbar.classList.add('informal-input-topbar', 'btn-group');
 
-	span.textContent = this.input.value;
+	var actions = [ 'bold', 'italic', 'url' ];
+	var btn;
+
+	for (var i = 0; i < actions.length; i++){
+		btn = document.createElement('button');
+		btn.classList.add('btn', 'btn-primary', 'btn-small');
+		btn.type = 'button';
+		btn.tabIndex = -1;
+		btn.dataset.action = actions[i];
+		btn.textContent = actions[i];
+		topbar.appendChild(btn);
+	}
 
 	var self = this;
-	this.input.addEventListener('input', function(){
-		span.textContent = self.input.value;
+	topbar.addEventListener('click', function(e){
+		var action = e.target.dataset.action;
+		if (!action) return;
+
+		switch (action){
+			case 'bold':
+				self.wrapSelection('**', '**');
+				break;
+			case 'italic':
+				self.wrapSelection('*', '*');
+				break;
+			case 'url':
+				var url = prompt('Link to where?');
+				self.wrapSelection('[', '](' + url + ')');
+				break;
+		}
 	});
+
+	this.wrap.insertBefore(topbar, this.inputWrap);
 };
 
-module.exports = Markdown;
+/**
+ * Wrap currently selected text in additional characters
+ *
+ * @param {String} before - Characters to prepend to selection
+ * @param {String} after - Characters to append to selection
+ */
+MarkdownField.prototype.wrapSelection = function(before, after){
+	var start = this.input.selectionStart;
+	var end = this.input.selectionEnd;
+	var value = this.input.value;
+	var selected = value.substring(start, end);
+	var replace = before + selected + after;
+	var caret = (start + replace.length);
+
+	this.input.value = value.substring(0, start) + replace + value.substring(end, value.length);
+	this.input.focus();
+	this.input.setSelectionRange(start + before.length, start + before.length + selected.length);
+};
+
+module.exports = MarkdownField;
