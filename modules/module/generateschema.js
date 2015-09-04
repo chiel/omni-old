@@ -19,7 +19,8 @@ var types = {
 	list: mongoose.Schema.Types.Mixed,
 	expanding_textarea: String,
 	markdown: String,
-	finder: String
+	finder: String,
+	slug: String
 };
 
 var generateSchema = function(mod){
