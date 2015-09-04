@@ -18,8 +18,4 @@ module.exports = function(dir, target){
 			watch: watch
 		});
 	}
-
-	if (fs.existsSync(dir + '/blocks.js')){
-		config.browserify.blocks.push(dir + '/blocks.js');
-	}
 };
