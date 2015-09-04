@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(gulp, config){
-	return function(){
+	gulp.task('watch', function(){
 		var jsGlobs = [], stylesGlobs = [], targets, i, j;
 
 		targets = config.browserify.targets;
@@ -23,5 +23,5 @@ module.exports = function(gulp, config){
 		}
 
 		gulp.watch(stylesGlobs, [ 'styles' ]);
-	};
+	});
 };

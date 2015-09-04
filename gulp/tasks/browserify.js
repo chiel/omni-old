@@ -7,7 +7,7 @@ var browserify = require('browserify');
 var root = __dirname + '/../..';
 
 module.exports = function(gulp, config){
-	return function(){
+	gulp.task('browserify', function(){
 		var inputs = [], outputs = [], i, target;
 		var filePath = '/tmp/pageblocks.js';
 		var contents = '"use strict";';
@@ -54,5 +54,5 @@ module.exports = function(gulp, config){
 			.transform(require('brfs'), { global: true })
 			.plugin(require('factor-bundle'), { outputs: outputs })
 			.bundle().pipe(fs.createWriteStream(config.browserify.common));
-	};
+	});
 };

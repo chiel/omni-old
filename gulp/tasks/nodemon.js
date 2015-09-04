@@ -3,7 +3,7 @@
 var nodemon = require('nodemon');
 
 module.exports = function(gulp, config){
-	return function(){
+	gulp.task('nodemon', function(){
 		nodemon(config.nodemon);
-	};
+	});
 };

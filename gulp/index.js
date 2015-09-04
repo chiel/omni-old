@@ -14,10 +14,8 @@ fs.readdirSync(root + '/modules').forEach(function(moduleName){
 });
 
 module.exports = function(gulp){
-	var match;
 	fs.readdirSync(__dirname + '/tasks').forEach(function(fileName){
-		match = fileName.match(/(.*)\.[^.]+/);
-		gulp.task(match[1], require(__dirname + '/tasks/' + fileName)(gulp, config));
+		require(__dirname + '/tasks/' + fileName)(gulp, config);
 	});
 
 	config.gulpfiles.forEach(function(file){

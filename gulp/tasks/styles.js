@@ -6,7 +6,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 
 module.exports = function(gulp, config){
-	return function(){
+	gulp.task('styles', function(){
 		var streams = [], i, stream, target;
 
 		for (i = 0; i < config.styles.targets.length; i++){
@@ -31,5 +31,5 @@ module.exports = function(gulp, config){
 		}
 
 		return merge.apply(merge, streams);
-	};
+	});
 };
