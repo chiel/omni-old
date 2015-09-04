@@ -1,4 +1,3 @@
 gulp/tmp/
-node_modules/*
-!node_modules/builder/
+node_modules/
 public/

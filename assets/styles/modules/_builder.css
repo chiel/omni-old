@@ -1,0 +1,97 @@
+.is-builder-dragging {
+	cursor: -webkit-grabbing;
+	cursor: -moz-grabbing;
+	cursor: grabbing;
+}
+
+.builder {
+	display: flex;
+	width: 100%;
+	min-height: 400px;
+
+	&-blocks {
+		min-width: 200px;
+		padding: 0 6px 0 0;
+
+		> article {
+			margin: 6px 0;
+			padding: 12px;
+			border-radius: 3px;
+			background: rgba(#000, .2);
+			cursor: -webkit-grab;
+			cursor: -moz-grab;
+			cursor: grab;
+			white-space: nowrap;
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
+	&-template {
+		margin: -6px;
+		padding: 3px;
+		flex-grow: 1;
+
+		.zone-wrapper {
+			padding: 3px;
+		}
+
+		.zone {
+			clear: fix;
+			min-height: 102px;
+			/*margin: 6px;*/
+			padding: 6px;
+			border-radius: 3px;
+			background: rgba(#000, .1);
+			line-height: 48px;
+
+			&.is-block-droppable {
+				background: rgba(#79c174, .3);
+			}
+
+			&.is-not-block-droppable {
+				opacity: .5;
+				background: rgba(#de9186, .6);
+			}
+
+			> article {
+				margin: 0 0 6px;
+				padding: 0 12px;
+				border-radius: 3px;
+				background: rgba(#fff, 1);
+			}
+
+			:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&-placeholder {
+		margin: 0 0 6px;
+		padding: 0 12px;
+		border-radius: 3px;
+		background: #fff;
+		opacity: .5;
+	}
+
+	&.has-no-layout {
+		.builder-blocks {
+			display: none;
+		}
+
+		.builder-template:before {
+			content: 'Select a template to get started.';
+			display: block;
+			margin: 6px;
+			padding: 120px 0;
+			background: #eee;;
+			color: #bbb;
+			font-size: 26px;
+			text-align: center;
+			text-shadow: rgba(#fff, .8) 1px 1px;
+		}
+	}
+}

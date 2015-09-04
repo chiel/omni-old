@@ -20,7 +20,8 @@ var types = {
 	expanding_textarea: String,
 	markdown: String,
 	finder: String,
-	slug: String
+	slug: String,
+	builder: mongoose.Schema.Types.Mixed
 };
 
 var generateSchema = function(mod){
