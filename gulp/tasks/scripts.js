@@ -4,6 +4,7 @@ var browserify = require('browserify');
 var concat = require('concat-stream');
 var file = require('gulp-file');
 var gutil = require('gulp-util');
+var livereload = require('gulp-livereload');
 var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
@@ -27,7 +28,8 @@ module.exports = function(gulp, config){
 					.pipe(sourcemaps.init({ loadMaps: true }))
 					.pipe(gutil.env.production ? uglify() : gutil.noop())
 					.pipe(sourcemaps.write('.'))
-					.pipe(gulp.dest(path.dirname(name)));
+					.pipe(gulp.dest(path.dirname(name)))
+					.pipe(livereload());
 			});
 		};
 

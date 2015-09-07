@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var gutil = require('gulp-util');
+var livereload = require('gulp-livereload');
 var config = require('./config');
 var readModule = require('./lib/read_module');
 var root = __dirname + '/..';
@@ -26,6 +27,7 @@ module.exports = function(gulp){
 	var tasks = [ 'scripts', 'styles', 'symlink' ];
 	if (!gutil.env.production){
 		tasks.push('nodemon', 'watch');
+		livereload.listen();
 	}
 
 	gulp.task('default', tasks);

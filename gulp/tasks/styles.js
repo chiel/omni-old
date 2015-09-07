@@ -1,9 +1,10 @@
 'use strict';
 
-var postcss = require('gulp-postcss');
-var merge = require('merge-stream');
-var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var livereload = require('gulp-livereload');
+var merge = require('merge-stream');
+var postcss = require('gulp-postcss');
+var sourcemaps = require('gulp-sourcemaps');
 
 module.exports = function(gulp, config){
 	gulp.task('styles', function(){
@@ -25,7 +26,8 @@ module.exports = function(gulp, config){
 			]))
 			.pipe(gutil.env.production ? require('gulp-cssnano')() : gutil.noop())
 			.pipe(sourcemaps.write('.'))
-			.pipe(gulp.dest(target.dest));
+			.pipe(gulp.dest(target.dest))
+			.pipe(livereload());
 
 			streams.push(stream);
 		}
