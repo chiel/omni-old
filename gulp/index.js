@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var gutil = require('gulp-util');
 var config = require('./config');
 var readModule = require('./lib/read_module');
 var root = __dirname + '/..';
@@ -22,6 +23,10 @@ module.exports = function(gulp){
 		require(file)(gulp, config);
 	});
 
-	gulp.task('default', [ 'symlink', 'scripts', 'styles', 'watch', 'nodemon' ]);
-	gulp.task('build', [ 'symlink', 'scripts', 'styles' ]);
+	var tasks = [ 'scripts', 'styles', 'symlink' ];
+	if (!gutil.env.production){
+		tasks.push('nodemon', 'watch');
+	}
+
+	gulp.task('default', tasks);
 };
