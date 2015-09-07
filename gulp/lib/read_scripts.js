@@ -9,13 +9,10 @@ module.exports = function(dir, target){
 	if (!fs.existsSync(dir)) return;
 
 	if (fs.existsSync(dir + '/index.js')){
-		var output = path.normalize(__dirname + '/../../public/js/' + target + '/index.js');
-		var watch = [ dir + '/*.js', dir + '/**/*.js' ];
-
 		config.scripts.targets.push({
 			input: dir + '/index.js',
-			output: output,
-			watch: watch
+			output: path.normalize(__dirname + '/../../public/js/' + target + '/index.js'),
+			watch: [ dir + '/*.js', dir + '/**/*.js' ]
 		});
 	}
 };
