@@ -1,3 +1,4 @@
 gulp/tmp/
 node_modules/
 public/
+*.orig
