@@ -2,16 +2,12 @@
 
 module.exports = function(gulp, config){
 	gulp.task('watch', function(){
-		var stylesGlobs = [];
-		var targets = config.styles.targets;
-		var j;
+		var globs = config.styles.targets.map(function(target){
+			return target.watch;
+		}).reduce(function(a, b){
+			return a.concat(b);
+		});
 
-		for (var i = 0; i < targets.length; i++){
-			for (j = 0; j < targets[i].watch.length; j++){
-				stylesGlobs.push(targets[i].watch[j]);
-			}
-		}
-
-		gulp.watch(stylesGlobs, [ 'styles' ]);
+		gulp.watch(globs, [ 'styles' ]);
 	});
 };
