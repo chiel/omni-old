@@ -6,6 +6,7 @@ var file = require('gulp-file');
 var gutil = require('gulp-util');
 var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
 var watchify = require('watchify');
 
 module.exports = function(gulp, config){
@@ -24,6 +25,7 @@ module.exports = function(gulp, config){
 			return concat(function(body){
 				return file(path.basename(name), body, { src: true })
 					.pipe(sourcemaps.init({ loadMaps: true }))
+					.pipe(gutil.env.production ? uglify() : gutil.noop())
 					.pipe(sourcemaps.write('.'))
 					.pipe(gulp.dest(path.dirname(name)));
 			});
