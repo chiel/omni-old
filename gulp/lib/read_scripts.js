@@ -12,7 +12,7 @@ module.exports = function(dir, target){
 		var output = path.normalize(__dirname + '/../../public/js/' + target + '/index.js');
 		var watch = [ dir + '/*.js', dir + '/**/*.js' ];
 
-		config.browserify.targets.push({
+		config.scripts.targets.push({
 			input: dir + '/index.js',
 			output: output,
 			watch: watch

@@ -9,7 +9,7 @@ var file = require('gulp-file');
 var root = __dirname + '/../..';
 
 module.exports = function(gulp, config){
-	gulp.task('browserify', [ 'blocks', 'templates' ], function(){
+	gulp.task('scripts', [ 'blocks', 'templates' ], function(){
 		var handleBundle = function(name){
 			return concat(function(body){
 				return file(path.basename(name), body, { src: true })
@@ -21,20 +21,20 @@ module.exports = function(gulp, config){
 		var outputs = [];
 		var target;
 
-		for (var i = 0; i < config.browserify.targets.length; i++){
-			target = config.browserify.targets[i];
+		for (var i = 0; i < config.scripts.targets.length; i++){
+			target = config.scripts.targets[i];
 			inputs.push(target.input);
 			outputs.push(handleBundle(target.output));
 		}
 
 		var aliasify = require('aliasify').configure({
-			aliases: config.browserify.aliases
+			aliases: config.scripts.aliases
 		});
 
 		return browserify(inputs)
 			.transform(aliasify, { global: true })
 			.transform(require('brfs'), { global: true })
 			.plugin(require('factor-bundle'), { outputs: outputs })
-			.bundle().pipe(handleBundle(config.browserify.common));
+			.bundle().pipe(handleBundle(config.scripts.common));
 	});
 };

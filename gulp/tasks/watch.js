@@ -4,7 +4,7 @@ module.exports = function(gulp, config){
 	gulp.task('watch', function(){
 		var jsGlobs = [], stylesGlobs = [], targets, i, j;
 
-		targets = config.browserify.targets;
+		targets = config.scripts.targets;
 
 		for (i = 0; i < targets.length; i++){
 			for (j = 0; j < targets[i].watch.length; j++){
@@ -12,7 +12,7 @@ module.exports = function(gulp, config){
 			}
 		}
 
-		gulp.watch(jsGlobs, [ 'browserify' ]);
+		gulp.watch(jsGlobs, [ 'scripts' ]);
 
 		targets = config.styles.targets;
 

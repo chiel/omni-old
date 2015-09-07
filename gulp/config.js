@@ -6,7 +6,7 @@ var config = {
 	gulpfiles: [],
 	blocks: [],
 	templates: [],
-	browserify: {
+	scripts: {
 		aliases: {
 			builder: root + '/assets/scripts/builder',
 			'builder/blocks': root + '/gulp/tmp/blocks.js',
