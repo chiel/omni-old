@@ -5,6 +5,7 @@ var concat = require('concat-stream');
 var file = require('gulp-file');
 var gutil = require('gulp-util');
 var path = require('path');
+var sourcemaps = require('gulp-sourcemaps');
 var watchify = require('watchify');
 
 module.exports = function(gulp, config){
@@ -22,11 +23,13 @@ module.exports = function(gulp, config){
 		var handleBundle = function(name){
 			return concat(function(body){
 				return file(path.basename(name), body, { src: true })
+					.pipe(sourcemaps.init({ loadMaps: true }))
+					.pipe(sourcemaps.write('.'))
 					.pipe(gulp.dest(path.dirname(name)));
 			});
 		};
 
-		var bundler = browserify(entries)
+		var bundler = browserify({ entries: entries, debug: true })
 			.transform(require('aliasify').configure({
 				aliases: config.scripts.aliases
 			}), { global: true })
