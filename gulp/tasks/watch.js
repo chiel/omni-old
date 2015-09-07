@@ -2,21 +2,11 @@
 
 module.exports = function(gulp, config){
 	gulp.task('watch', function(){
-		var jsGlobs = [], stylesGlobs = [], targets, i, j;
+		var stylesGlobs = [];
+		var targets = config.styles.targets;
+		var j;
 
-		targets = config.scripts.targets;
-
-		for (i = 0; i < targets.length; i++){
-			for (j = 0; j < targets[i].watch.length; j++){
-				jsGlobs.push(targets[i].watch[j]);
-			}
-		}
-
-		gulp.watch(jsGlobs, [ 'scripts' ]);
-
-		targets = config.styles.targets;
-
-		for (i = 0; i < targets.length; i++){
+		for (var i = 0; i < targets.length; i++){
 			for (j = 0; j < targets[i].watch.length; j++){
 				stylesGlobs.push(targets[i].watch[j]);
 			}

@@ -1,15 +1,24 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
 var browserify = require('browserify');
 var concat = require('concat-stream');
-var sourcemaps = require('gulp-sourcemaps');
 var file = require('gulp-file');
-var root = __dirname + '/../..';
+var gutil = require('gulp-util');
+var path = require('path');
+var watchify = require('watchify');
 
 module.exports = function(gulp, config){
 	gulp.task('scripts', [ 'blocks', 'templates' ], function(){
+		var entries = config.scripts.targets.map(function(target){
+			return target.input;
+		});
+
+		var createOutputStreams = function(){
+			return config.scripts.targets.map(function(target){
+				return handleBundle(target.output);
+			});
+		};
+
 		var handleBundle = function(name){
 			return concat(function(body){
 				return file(path.basename(name), body, { src: true })
@@ -17,24 +26,22 @@ module.exports = function(gulp, config){
 			});
 		};
 
-		var inputs = [];
-		var outputs = [];
-		var target;
+		var bundler = browserify(entries)
+			.transform(require('aliasify').configure({
+				aliases: config.scripts.aliases
+			}), { global: true })
+			.transform(require('brfs'), { global: true })
+			.plugin(require('factor-bundle'), { outputs: createOutputStreams });
 
-		for (var i = 0; i < config.scripts.targets.length; i++){
-			target = config.scripts.targets[i];
-			inputs.push(target.input);
-			outputs.push(handleBundle(target.output));
+		var bundle = function(){
+			return bundler.bundle().pipe(handleBundle(config.scripts.common));
 		}
 
-		var aliasify = require('aliasify').configure({
-			aliases: config.scripts.aliases
-		});
+		if (!gutil.env.production){
+			bundler = watchify(bundler);
+			bundler.on('update', bundle);
+		}
 
-		return browserify(inputs)
-			.transform(aliasify, { global: true })
-			.transform(require('brfs'), { global: true })
-			.plugin(require('factor-bundle'), { outputs: outputs })
-			.bundle().pipe(handleBundle(config.scripts.common));
+		return bundle();
 	});
 };
