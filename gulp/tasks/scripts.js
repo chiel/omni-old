@@ -5,6 +5,7 @@ var concat = require('concat-stream');
 var file = require('gulp-file');
 var gutil = require('gulp-util');
 var livereload = require('gulp-livereload');
+var notify = require('gulp-notify');
 var path = require('path');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
@@ -41,8 +42,12 @@ module.exports = function(gulp, config){
 			.plugin(require('factor-bundle'), { outputs: createOutputStreams });
 
 		var bundle = function(){
-			return bundler.bundle().pipe(handleBundle(config.scripts.common));
-		}
+			return bundler.bundle()
+				.on('error', notify.onError(function(err){
+					return err.message;
+				}))
+				.pipe(handleBundle(config.scripts.common));
+		};
 
 		if (!gutil.env.production){
 			bundler = watchify(bundler);
