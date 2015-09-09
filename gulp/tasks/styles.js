@@ -3,6 +3,7 @@
 var gutil = require('gulp-util');
 var livereload = require('gulp-livereload');
 var merge = require('merge-stream');
+var notify = require('gulp-notify');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
 
@@ -24,6 +25,9 @@ module.exports = function(gulp, config){
 				require('postcss-color-function'),
 				require('autoprefixer-core')({ browsers: [ 'last 2 versions' ]})
 			]))
+			.on('error', notify.onError(function(err){
+				return err.message;
+			}))
 			.pipe(gutil.env.production ? require('gulp-cssnano')() : gutil.noop())
 			.pipe(sourcemaps.write('.'))
 			.pipe(gulp.dest(target.dest))
