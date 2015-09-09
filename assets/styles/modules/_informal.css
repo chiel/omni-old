@@ -124,6 +124,48 @@
 			border-top-right-radius: 3px;
 			border-bottom-right-radius: 3px;
 		}
+
+		&-expand {
+			position: relative;
+			flex-grow: 1;
+
+			pre, textarea {
+				min-height: calc(24px * 4 + 20);
+				margin: 0;
+				padding: 9px 12px;
+				border: 1px solid #ccc;
+				font: inherit;
+			}
+
+			pre {
+				visibility: hidden;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
+
+			textarea {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				resize: none;
+
+				&:focus {
+					border-color: var(--blue);
+				}
+			}
+
+			&:first-child textarea {
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+			}
+
+			&:last-child textarea {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}
+		}
 	}
 
 	&-input-topbar {
