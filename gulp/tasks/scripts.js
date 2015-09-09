@@ -39,6 +39,7 @@ module.exports = function(gulp, config){
 				aliases: config.scripts.aliases
 			}), { global: true })
 			.transform(require('brfs'), { global: true })
+			.transform(require('deamdify'), { global: true })
 			.plugin(require('factor-bundle'), { outputs: createOutputStreams });
 
 		var bundle = function(){

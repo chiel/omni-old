@@ -5,6 +5,7 @@ informal.fields.api_multi_option = require('./fields/api_multi_option');
 informal.fields.builder = require('./fields/builder');
 informal.fields.markdown = require('./fields/markdown');
 informal.fields.slug = require('./fields/slug');
+informal.fields.wysiwyg = require('./fields/wysiwyg');
 
 var behaviour = require('behaviour');
 behaviour.register('data-form', require('./behaviours/form'));
