@@ -8,15 +8,19 @@ var templates = require('builder/templates');
  * BuilderField
  *
  * @param {Object} spec
+ * @param {Object} data
+ * @param {Object} subscriptionValues
  *
  * @return {BuilderField}
  */
-var BuilderField = function(spec){
+var BuilderField = function(spec, data, subscriptionValues){
 	if (!(this instanceof BuilderField)){
-		return new BuilderField(spec);
+		return new BuilderField(spec, data, subscriptionValues);
 	}
 
 	this.spec = spec;
+	this.data = data;
+	this.subscriptionValues = subscriptionValues;
 	this.build();
 };
 
@@ -38,6 +42,10 @@ BuilderField.prototype.build = function(){
 		templates: templates
 	});
 	wrap.appendChild(builder.wrap);
+
+	if (this.subscriptionValues.template){
+		builder.setTemplate(this.subscriptionValues.template);
+	}
 
 	this.builder = builder;
 	this.wrap = wrap;
