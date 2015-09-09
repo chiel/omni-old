@@ -5,17 +5,16 @@ var TextareaField = require('informal/fields/textarea');
 /**
  * MarkdownField
  *
- * @param {String} name
  * @param {Object} spec
  *
  * @return {MarkdownField}
  */
-var MarkdownField = function(name, spec){
+var MarkdownField = function(spec){
 	if (!(this instanceof MarkdownField)){
-		return new MarkdownField(name, spec);
+		return new MarkdownField(spec);
 	}
 
-	TextareaField.call(this, name, spec);
+	TextareaField.call(this, spec);
 };
 
 require('util').inherits(MarkdownField, TextareaField);

@@ -7,17 +7,15 @@ var templates = require('builder/templates');
 /**
  * BuilderField
  *
- * @param {String} name
  * @param {Object} spec
  *
  * @return {BuilderField}
  */
-var BuilderField = function(name, spec){
+var BuilderField = function(spec){
 	if (!(this instanceof BuilderField)){
-		return new BuilderField(name, spec);
+		return new BuilderField(spec);
 	}
 
-	this.name = name;
 	this.spec = spec;
 	this.build();
 };

@@ -7,20 +7,19 @@ var map = require('mout/array/map');
 /**
  * ApiMultiOption
  *
- * @param {String} name
  * @param {Object} spec
- * @param {String} spec.name - Name of the field if you want to change it
+ * @param {String} spec.name - Name of the field
  * @param {String} spec.label - The label for the field
  * @param {Array} spec.options - Options for the multi option field
  *
  * @return {ApiMultiOption}
  */
-var ApiMultiOption = function(name, spec){
+var ApiMultiOption = function(spec){
 	if (!(this instanceof ApiMultiOption)){
 		return new ApiMultiOption(spec);
 	}
 
-	MultiOptionField.call(this, name, spec);
+	MultiOptionField.call(this, spec);
 
 	var self = this;
 	fetch(self.spec.endpoint, {
