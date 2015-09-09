@@ -44,6 +44,10 @@
 				float: left;
 				margin: 0;
 			}
+
+			&:first-child {
+				margin-top: 0;
+			}
 		}
 	}
 
