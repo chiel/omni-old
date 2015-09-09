@@ -5,10 +5,10 @@ var disclose = require('../disclose');
 
 module.exports = function(el){
 	var specEl = el.querySelector('[data-informal-spec]');
+	var dataEl = el.querySelector('[data-informal-data]');
 	if (!specEl) return;
 
 	var spec;
-
 	try{
 		spec = JSON.parse(specEl.textContent);
 	} catch (e){
@@ -16,7 +16,14 @@ module.exports = function(el){
 		return;
 	}
 
-	var form = informal(spec);
+	var data;
+	if (dataEl){
+		try{
+			data = JSON.parse(dataEl.textContent);
+		} catch (e){}
+	}
+
+	var form = informal(spec, data);
 	specEl.parentNode.insertBefore(form.wrap, specEl);
 
 	var btn = el.querySelector('[type=submit]');
