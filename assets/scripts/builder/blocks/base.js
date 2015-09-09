@@ -18,10 +18,8 @@ var BaseBlock = function(wrap){
  * BaseBlock metadata
  */
 BaseBlock.prototype.meta = BaseBlock.meta = {
-	type: 'content',
-	name: 'Content',
-	description: 'Standard content',
-	constrain: /.*\.main/
+	type: 'base',
+	name: 'Base'
 };
 
 /**
