@@ -1,0 +1,9 @@
+.block {
+	clear: fix;
+	padding: 12px 18px 18px;
+
+	&-btn {
+		float: right;
+		margin-top: 24px;
+	}
+}

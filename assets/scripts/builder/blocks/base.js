@@ -28,8 +28,23 @@ BaseBlock.prototype.meta = BaseBlock.meta = {
 BaseBlock.prototype._build = function(){
 	if (!this.formSpec) return;
 
+	var wrap = document.createElement('div');
+	wrap.classList.add('block');
+
+	var heading = document.createElement('h2');
+	heading.textContent = this.meta.name;
+	wrap.appendChild(heading);
+
 	var form = informal(this.formSpec);
-	this.wrap.appendChild(form.wrap);
+	wrap.appendChild(form.wrap);
+
+	var btn = document.createElement('button');
+	btn.classList.add('btn', 'btn-primary', 'block-btn');
+	btn.type = 'button';
+	btn.textContent = 'Okay';
+	wrap.appendChild(btn);
+
+	this.wrap.appendChild(wrap);
 };
 
 module.exports = BaseBlock;
