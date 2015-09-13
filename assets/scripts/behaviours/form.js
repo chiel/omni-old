@@ -44,7 +44,6 @@ module.exports = function(el){
 		})
 		.then(function(res){
 			res.json().then(function(json){
-				console.log(json);
 				if (res.status < 200 || res.status > 299){
 					disclose.error(json.error.message, { sticky: true });
 				} else{
