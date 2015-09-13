@@ -22,49 +22,6 @@
 		}
 	],
 
-	"forms": {
-		"create": {
-			"tabs": [
-				{
-					"objects": [
-						"email",
-						"password",
-						"roles",
-						"superadmin"
-					]
-				}
-			],
-
-			"fields": {
-				"email": {
-					"type": "email",
-					"label": "E-mail",
-					"required": true,
-					"unique": true
-				},
-				"password": {
-					"type": "password",
-					"label": "Password",
-					"required": true
-				},
-				"roles": {
-					"type": "api_multi_option",
-					"style": "checkbox",
-					"label": "Roles",
-					"endpoint": "/roles/",
-					"valueField": "_id",
-					"labelField": "name"
-				},
-				"superadmin": {
-					"type": "boolean",
-					"label": "Super admin",
-					"default": false,
-					"hidden": true
-				}
-			}
-		}
-	},
-
 	"listSpec": {
 		"fields": [
 			{

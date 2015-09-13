@@ -1,12 +1,17 @@
 {
+	"url": "http://localhost:5000" ,
 	"listen": 5000,
 	"api": {
+		"url": "http://localhost:5001",
 		"listen": 5001,
 		"key": "client",
 		"secret": "",
 		"token": {
 			"secret": ""
 		}
+	},
+	"mail": {
+		"from": "Omni <admin@example.com>"
 	},
 	"mailgun": {
 		"api_key": "",
