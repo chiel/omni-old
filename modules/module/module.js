@@ -17,7 +17,7 @@ var Module = function(modulePath){
 
 	this.loadManifest();
 	this.loadSchema();
-	this.loadModel();
+	this.createModel();
 	this.loadAdaptors();
 	this.loadApiRouter();
 	this.loadRouter();
@@ -51,10 +51,14 @@ Module.prototype.loadSchema = function(){
 	this.schema = generateSchema(this);
 };
 
-Module.prototype.loadModel = function(){
-	if (this.schema){
-		this.Model = mongoose.model(this.manifest.collection, this.schema, this.manifest.collection);
-	}
+Module.prototype.createModel = function(){
+	if (!this.schema) return;
+
+	this.Model = mongoose.model(
+		this.manifest.collection,
+		this.schema,
+		this.manifest.collection
+	);
 };
 
 Module.prototype.loadAdaptors = function(){
