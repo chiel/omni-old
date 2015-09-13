@@ -50,7 +50,7 @@
     "listen.js": "^1.0.0",
     "merge-stream": "^1.0.0",
     "mkdirp": "^0.5.0",
-    "mongoose": "~3.8.20",
+    "mongoose": "^4.1.6",
     "mout": "^0.11.0",
     "nodemon": "^1.2.1",
     "normalize.css": "^3.0.2",

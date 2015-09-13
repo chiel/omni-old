@@ -1,8 +1,9 @@
 'use strict';
 
 var forOwn = require('mout/object/forOwn');
-var mongoose = require('mongoose');
 var isArray = require('mout/lang/isArray');
+var mongoose = require('mongoose');
+var set = require('mout/object/set');
 
 var types = {
 	text: String,
@@ -28,25 +29,12 @@ var generateSchema = function(mod){
 	if (!mod.manifest || !mod.manifest.forms) return;
 
 	var fields = mod.manifest.forms.create.fields;
-	var schema = {}, o, p, def;
+	var schema = {};
+	var def;
 
 	forOwn(fields, function(field, name){
-		name = field.name || name;
-		name = name.replace('][', '.').replace('[', '.').replace(/\]$/, '');
-		name = name.split('.');
-
+		name = (field.name || name).replace(/\[/g, '.').replace(/\]/g, '');
 		field.type = field.type || 'text';
-
-		o = schema;
-		while (name.length){
-			p = name.shift();
-			if (!name.length) break;
-
-			if (!o[p]){
-				o[p] = {};
-			}
-			o = o[p];
-		}
 
 		if (isArray(types[field.type])){
 			def = { type: types[field.type][0] };
@@ -58,27 +46,18 @@ var generateSchema = function(mod){
 			def.required = true;
 		}
 
-		if (field.default !== undefined){
-			def.default = field.default;
-		}
-
 		if (field.unique){
 			def.index = { unique: true };
-		}
-
-		if (field.type == 'db_multi_option'){
-			def.ref = field.module;
 		}
 
 		if (isArray(types[field.type])){
 			def = [ def ];
 		}
 
-		o[p] = def;
+		set(schema, name, def);
 	});
 
 	schema = new mongoose.Schema(schema);
-
 	schema.options.toJSON = { transform: function(doc, ret, options){
 		delete ret.__v;
 	}};
