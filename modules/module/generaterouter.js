@@ -2,7 +2,6 @@
 
 var express = require('express');
 var fs = require('fs');
-var expandFields = require('../../lib/expandfields');
 
 /**
  * Generate a router with standard CRUD functionality
@@ -39,12 +38,9 @@ module.exports = function(mod){
 			return res.send('You are not authorised to view this page');
 		}
 
-		expandFields(mod.manifest.form.fields, function(err, fields){
-			mod.manifest.form.fields = fields;
-			res.render(formView, {
-				action: '/' + mod.manifest.slug + '/new/',
-				manifest: mod.manifest
-			});
+		res.render(formView, {
+			action: '/' + mod.manifest.slug + '/new/',
+			manifest: mod.manifest
 		});
 	});
 
@@ -84,13 +80,10 @@ module.exports = function(mod){
 				return res.redirect('/' + mod.manifest.slug + '/new/');
 			}
 
-			expandFields(mod.manifest.form.fields, function(err, fields){
-				mod.manifest.form.fields = fields;
-				res.render(formView, {
-					action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
-					manifest: mod.manifest,
-					formData: docs[0]
-				});
+			res.render(formView, {
+				action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
+				manifest: mod.manifest,
+				formData: docs[0]
 			});
 		});
 	});
