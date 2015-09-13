@@ -97,24 +97,19 @@ var generateRouter = function(mod){
 	 * Existing item form view
 	 */
 	router.get('/edit/:id/', auth('update', mod.dirname), function(req, res){
-		mod.Model.find({_id: req.params.id}, function(err, docs){
-			if (err){
-				console.error(err);
-				return res.redirect('/' + mod.manifest.slug + '/');
+		mod.methods.findOne({ _id: req.params.id }).then(
+			function(item){
+				res.render(formView, {
+					action: '/' + mod.manifest.slug + '/edit/' + item._id + '/',
+					manifest: mod.manifest,
+					formType: mod.manifest.forms.update ? 'update' : 'create',
+					formData: item
+				});
+			},
+			function(err){
+				res.send('An error occurred: ' + err.message);
 			}
-
-			if (!docs.length){
-				console.error('No document found with id %s', req.params.id);
-				return res.redirect('/' + mod.manifest.slug + '/new/');
-			}
-
-			res.render(formView, {
-				action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
-				manifest: mod.manifest,
-				formType: mod.manifest.forms.update ? 'update' : 'create',
-				formData: docs[0]
-			});
-		});
+		);
 	});
 
 	/**

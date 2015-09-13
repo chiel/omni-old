@@ -56,6 +56,26 @@ var processHooks = function(hooks, args, cb){
  */
 module.exports = function(mod){
 	/**
+	 * Find a single item matching given query
+	 *
+	 * @param {Object} query
+	 *
+	 * @return {Promise}
+	 */
+	var findOne = function(query){
+		return new Promise(function(resolve, reject){
+			mod.Model.findOne(query, function(err, item){
+				if (err){
+					console.error('UNHANDLED', err);
+					return reject(new UnknownError());
+				}
+
+				resolve(item);
+			});
+		});
+	};
+
+	/**
 	 * Create a new entity of given model
 	 *
 	 * @param {Object} data
@@ -99,6 +119,7 @@ module.exports = function(mod){
 	};
 
 	return {
-		create: create
+		create: create,
+		findOne: findOne
 	};
 };
