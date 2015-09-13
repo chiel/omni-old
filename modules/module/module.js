@@ -4,8 +4,8 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var adaptors = require('../../core/adaptors');
 var auth = require('../../core/middleware/auth');
-var generateSchema = require('./generateschema');
-var generateRouter = require('./generaterouter');
+var generateSchema = require('./generators/schema');
+var generateRouter = require('./generators/router');
 
 var Module = function(modulePath){
 	if (!(this instanceof Module)){
