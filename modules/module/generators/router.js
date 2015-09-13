@@ -116,18 +116,14 @@ var generateRouter = function(mod){
 	 * Existing item updating
 	 */
 	router.post('/edit/:id/', auth('update', mod.dirname), function(req, res){
-		mod.Model.update({_id: req.params.id}, req.body, function(err){
-			if (err){
-				return res.json({
-					error: {
-						message: err.message
-					}
-				});
+		mod.methods.update(req.params.id, req.body).then(
+			function(item){
+				res.json(item);
+			},
+			function(err){
+				res.status(err.status).json({ error: err });
 			}
-
-			res.location('/' + mod.manifest.slug + '/edit/' + req.params.id + '/')
-				.json(req.body);
-		});
+		);
 	});
 
 	/**

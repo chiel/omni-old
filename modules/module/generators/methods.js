@@ -118,8 +118,47 @@ module.exports = function(mod){
 		});
 	};
 
+	/**
+	 * Update an existing item
+	 *
+	 * @param {String} id
+	 * @param {Object} data
+	 *
+	 * @return {Promise}
+	 */
+	var update = function(id, data){
+		return new Promise(function(resolve, reject){
+			try{
+				mod.validators.create(data);
+			} catch (err){
+				reject(err);
+			}
+
+			var save = function(){
+				mod.Model.update({ _id: id }, data, { overwrite: true }, function(err, raw){
+					if (err){
+						console.error('UNHANDLED', err);
+						return reject(new UnknownError());
+					}
+
+					resolve({ ok: true });
+				});
+			};
+
+			if (update.hooks && update.hooks.pre){
+				processHooks(update.hooks.pre, data, function(err){
+					if (err) return reject(err);
+					save();
+				});
+			} else{
+				save();
+			}
+		});
+	};
+
 	return {
 		create: create,
-		findOne: findOne
+		findOne: findOne,
+		update: update
 	};
 };
