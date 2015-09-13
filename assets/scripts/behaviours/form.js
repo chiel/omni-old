@@ -45,7 +45,7 @@ module.exports = function(el){
 		.then(function(res){
 			res.json().then(function(json){
 				if (res.status < 200 || res.status > 299){
-					disclose.error(json.error.message, { sticky: true });
+					disclose.error(json.error.message || json.error.type, { sticky: true });
 				} else{
 					window.location = '/dashboard/';
 				}
