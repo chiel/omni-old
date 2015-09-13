@@ -2,11 +2,42 @@
 
 var express = require('express');
 var fs = require('fs');
+var AuthorizationError = require('../../lib/error/authorization');
+
+/**
+ * Generate a middleware function that will check user's permissions
+ *
+ * @param {String} action
+ * @param {String} mod
+ *
+ * @return {Function}
+ */
+var auth = function(action, mod){
+	/**
+	 * Check if the logged in user is allowed to perform this action
+	 *
+	 * @param {Request} req
+	 * @param {Response} res
+	 * @param {Function} next
+	 */
+	return function(req, res, next){
+		if (req.user.can(action, mod)){
+			return next();
+		}
+
+		if (req.headers.accept === 'application/json'){
+			var err = new AuthorizationError('You are not authorised to do that');
+			res.status(err.status).json({ error: err });
+		} else{
+			res.send('You are not authorised to view this page');
+		}
+	};
+};
 
 /**
  * Generate a router with standard CRUD functionality
  */
-module.exports = function(mod){
+var generateRouter = function(mod){
 	var router = express.Router();
 	var listView = mod.path + '/views/list.html';
 	var formView = mod.path + '/views/form.html';
@@ -15,12 +46,7 @@ module.exports = function(mod){
 	if (!fs.existsSync(listView)) listView = 'layouts/list';
 	if (!fs.existsSync(formView)) formView = 'layouts/form';
 
-	router.get('/', function(req, res){
-		if (!req.user.can('view', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
-
+	router.get('/', auth('view', mod.dirname), function(req, res){
 		mod.Model.find(function(err, items){
 			if (req.headers.accept === 'application/json'){
 				res.json(items);
@@ -33,22 +59,14 @@ module.exports = function(mod){
 		});
 	});
 
-	router.get('/new/', function(req, res){
-		if (!req.user.can('create', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
+	router.get('/new/', auth('create', mod.dirname), function(req, res){
 		res.render(formView, {
 			action: '/' + mod.manifest.slug + '/new/',
 			manifest: mod.manifest
 		});
 	});
 
-	router.post('/new/', function(req, res){
-		if (!req.user.can('create', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
+	router.post('/new/', auth('create', mod.dirname), function(req, res){
 		new mod.Model(req.body).save(function(err, doc){
 			if (err){
 				return res.json({
@@ -64,11 +82,7 @@ module.exports = function(mod){
 		});
 	});
 
-	router.get('/edit/:id/', function(req, res){
-		if (!req.user.can('update', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
+	router.get('/edit/:id/', auth('update', mod.dirname), function(req, res){
 		mod.Model.find({_id: req.params.id}, function(err, docs){
 			if (err){
 				console.error(err);
@@ -88,11 +102,7 @@ module.exports = function(mod){
 		});
 	});
 
-	router.post('/edit/:id/', function(req, res){
-		if (!req.user.can('update', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
+	router.post('/edit/:id/', auth('update', mod.dirname), function(req, res){
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
 			if (err){
 				return res.json({
@@ -107,11 +117,7 @@ module.exports = function(mod){
 		});
 	});
 
-	router.get('/delete/:id/', function(req, res){
-		if (!req.user.can('delete', mod.dirName)){
-			return res.send('You are not authorised to view this page');
-		}
-
+	router.get('/delete/:id/', auth('delete', mod.dirname), function(req, res){
 		mod.Model.remove({_id: req.params.id}, function(err){
 			if (err){
 				console.error(err);
@@ -122,3 +128,12 @@ module.exports = function(mod){
 
 	return router;
 };
+
+/**
+ * Available router middleware
+ */
+generateRouter.middleware = {
+	auth: auth
+};
+
+module.exports = generateRouter;
