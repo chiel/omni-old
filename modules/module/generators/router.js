@@ -63,7 +63,8 @@ var generateRouter = function(mod){
 	router.get('/new/', auth('create', mod.dirname), function(req, res){
 		res.render(formView, {
 			action: '/' + mod.manifest.slug + '/new/',
-			manifest: mod.manifest
+			manifest: mod.manifest,
+			formType: 'create'
 		});
 	});
 
@@ -98,6 +99,7 @@ var generateRouter = function(mod){
 			res.render(formView, {
 				action: '/' + mod.manifest.slug + '/edit/' + req.params.id + '/',
 				manifest: mod.manifest,
+				formType: mod.manifest.forms.update ? 'update' : 'create',
 				formData: docs[0]
 			});
 		});

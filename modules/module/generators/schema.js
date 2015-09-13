@@ -25,9 +25,9 @@ var types = {
 };
 
 var generateSchema = function(mod){
-	if (!mod.manifest || !mod.manifest.form) return;
+	if (!mod.manifest || !mod.manifest.forms) return;
 
-	var fields = mod.manifest.form.fields;
+	var fields = mod.manifest.forms.create.fields;
 	var schema = {}, o, p, def;
 
 	forOwn(fields, function(field, name){

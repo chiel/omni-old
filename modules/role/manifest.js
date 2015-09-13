@@ -31,8 +31,8 @@ module.exports = function(manifest){
 			});
 		});
 
-		manifest.form.fields[moduleName] = field;
-		manifest.form.tabs[0].objects.push(moduleName);
+		manifest.forms.create.fields[moduleName] = field;
+		manifest.forms.create.tabs[0].objects.push(moduleName);
 	});
 
 	return manifest;

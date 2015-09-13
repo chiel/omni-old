@@ -11,8 +11,12 @@
 
 	<form method="post" action="{{ action }}" class="form-wrap" data-form data-scols='{"fromTop":48}'>
 		<div class="form-main" data-scols-col>
-			<script type="application/json" data-informal-spec>{{ manifest.form|json|safe }}</script>
-			<script type="application/json" data-informal-data>{{ formData|json|safe }}</script>
+			<script type="application/json" data-informal-spec>
+				{{ manifest.forms[formType]|json|safe }}
+			</script>
+			<script type="application/json" data-informal-data>
+				{{ formData|json|safe }}
+			</script>
 		</div>
 		<div class="form-options" data-scols-col>
 			<footer class="form-footer">

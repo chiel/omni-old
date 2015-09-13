@@ -23,21 +23,23 @@
 		}
 	],
 
-	"form": {
-		"tabs": [
-			{
-				"objects": [
-					"name"
-				]
-			}
-		],
+	"forms": {
+		"create": {
+			"tabs": [
+				{
+					"objects": [
+						"name"
+					]
+				}
+			],
 
-		"fields": {
-			"name": {
-				"label": "Name",
-				"placeholder": "e.g. Editors",
-				"required": true,
-				"autofocus": true
+			"fields": {
+				"name": {
+					"label": "Name",
+					"placeholder": "e.g. Editors",
+					"required": true,
+					"autofocus": true
+				}
 			}
 		}
 	},

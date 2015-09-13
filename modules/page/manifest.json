@@ -22,33 +22,35 @@
 		}
 	],
 
-	"form": {
-		"tabs": [
-			{
-				"objects": [
-					[ "title", "slug" ],
-					"template",
-					"zones"
-				]
-			}
-		],
-		"fields": {
-			"title": {
-				"label": "Title"
-			},
-			"slug": {
-				"type": "slug",
-				"label": "Slug",
-				"subscribe": "title"
-			},
-			"template": {
-				"type": "single_option",
-				"label": "Page template"
-			},
-			"zones": {
-				"type": "builder",
-				"label": "Content",
-				"subscribe": "template"
+	"forms": {
+		"create": {
+			"tabs": [
+				{
+					"objects": [
+						[ "title", "slug" ],
+						"template",
+						"zones"
+					]
+				}
+			],
+			"fields": {
+				"title": {
+					"label": "Title"
+				},
+				"slug": {
+					"type": "slug",
+					"label": "Slug",
+					"subscribe": "title"
+				},
+				"template": {
+					"type": "single_option",
+					"label": "Page template"
+				},
+				"zones": {
+					"type": "builder",
+					"label": "Content",
+					"subscribe": "template"
+				}
 			}
 		}
 	},

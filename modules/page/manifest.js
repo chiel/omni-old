@@ -18,11 +18,11 @@ module.exports = function(manifest){
 			label: '...'
 		});
 	} else{
-		var tabObjects = manifest.form.tabs[0].objects;
+		var tabObjects = manifest.forms.create.tabs[0].objects;
 		tabObjects.splice(tabObjects.indexOf('template'), 1);
-		manifest.form.fields.template.value = options[0].value;
+		manifest.forms.create.fields.template.value = options[0].value;
 	}
 
-	manifest.form.fields.template.options = options;
+	manifest.forms.create.fields.template.options = options;
 	return manifest;
 };
