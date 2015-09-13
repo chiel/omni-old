@@ -47,7 +47,11 @@ module.exports = function(el){
 				if (res.status < 200 || res.status > 299){
 					disclose.error(json.error.message || json.error.type, { sticky: true });
 				} else{
-					window.location = '/dashboard/';
+					if (res.headers.get('location')){
+						window.location = res.headers.get('location');
+					} else{
+						disclose.success('Save was successful.');
+					}
 				}
 
 				btn.disabled = false;
