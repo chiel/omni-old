@@ -22,7 +22,9 @@ module.exports = function(mod){
 		authWithPassword(req.body).then(
 			function(user){
 				req.session.userData = user;
-				res.json({ user: user });
+				res
+					.location('/dashboard/')
+					.json({ user: user });
 			},
 			function(err){
 				res.status(err.status || 500).json({ error: err });
