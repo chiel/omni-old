@@ -29,11 +29,9 @@ Module.prototype.loadManifest = function(){
 		manifest = require(this.path + '/manifest.json');
 	}
 
-	manifest.slug = manifest.slug !== undefined ? manifest.slug : this.dirname;
-
-	if (!manifest.collection){
-		manifest.collection = this.dirname.match(/(?:omni\.cm-)?(.*)/)[1];
-	}
+	var dirname = this.dirname.match(/(?:omni\.cm-)?(.*)/)[1];
+	manifest.slug = manifest.slug !== undefined ? manifest.slug : dirname;
+	manifest.collection = manifest.collection || dirname;
 
 	if (fs.existsSync(this.path + '/manifest.js')){
 		manifest = require(this.path + '/manifest')(manifest);
