@@ -36,7 +36,9 @@
 	}
 
 	&.is-pending {
+		padding-right: 48px;
 		background-image: url(/img/omni/pending.svg);
+		transition: padding .4s var(--easing);
 	}
 
 	&-small {
