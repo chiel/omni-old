@@ -50,8 +50,14 @@ WysiwygEditor.prototype.build = function(){
 	inputWrap.appendChild(editor);
 
 	this.inputWrap = inputWrap;
-	this.editor = editor;
+	this.scribe = scribe;
 	this.wrap = wrap;
 };
 
+/**
+ *
+ */
+WysiwygEditor.prototype.getValue = function(){
+	return this.scribe.getHTML();
+};
 module.exports = WysiwygEditor;
