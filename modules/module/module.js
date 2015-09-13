@@ -4,6 +4,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var adaptors = require('../../core/adaptors');
 var auth = require('../../core/middleware/auth');
+var generateMethods = require('./generators/methods');
 var generateSchema = require('./generators/schema');
 var generateRouter = require('./generators/router');
 var generateValidators = require('./generators/validators');
@@ -20,6 +21,7 @@ var Module = function(modulePath){
 	this.loadValidators();
 	this.loadSchema();
 	this.createModel();
+	this.loadMethods();
 	this.loadAdaptors();
 	this.loadApiRouter();
 	this.loadRouter();
@@ -105,6 +107,18 @@ Module.prototype.loadAdaptors = function(){
 			adaptors[match[1]] = require(dir + '/' + match[1]);
 		}
 	}
+};
+
+/**
+ * Load or generate methods for this module
+ */
+Module.prototype.loadMethods = function(){
+	if (fs.existsSync(this.path + '/methods.js')){
+		this.methods = require(this.path + '/methods')(this, generateMethods);
+		return;
+	}
+
+	this.methods = generateMethods(this);
 };
 
 /**

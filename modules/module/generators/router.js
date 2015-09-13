@@ -78,19 +78,19 @@ var generateRouter = function(mod){
 	 * New item creation
 	 */
 	router.post('/new/', auth('create', mod.dirname), function(req, res){
-		new mod.Model(req.body).save(function(err, doc){
-			if (err){
-				return res.json({
-					error: {
-						message: err.message
-					}
-				});
+		mod.methods.create(req.body).then(
+			function(item){
+				res
+					.location('/' + mod.manifest.slug + '/edit/' + item._id + '/')
+					.status(201)
+					.json(item);
+			},
+			function(err){
+				res
+					.status(err.status || 500)
+					.json({ error: err });
 			}
-
-			res.status(201)
-				.location('/' + mod.manifest.slug + '/edit/' + doc._id + '/')
-				.json(req.body);
-		});
+		);
 	});
 
 	/**
