@@ -8,6 +8,10 @@
 			"secret": ""
 		}
 	},
+	"mailgun": {
+		"api_key": "",
+		"api_domain": "mg.example.com"
+	},
 	"mongo": "mongodb://127.0.0.1:27017/omni",
 	"session": {
 		"name": "omni.sid",

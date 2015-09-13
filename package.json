@@ -63,6 +63,7 @@
     "postcss-nested": "^0.3.2",
     "promise": "^6.0.1",
     "relic": "^0.2.0",
+    "request": "^2.61.0",
     "scribe-editor": "^2.0.0",
     "serve-static": "^1.7.1",
     "swig": "^1.4.2",
