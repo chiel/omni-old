@@ -291,7 +291,11 @@ Builder.prototype.showBlock = function(id){
 	if (!blockDef) return;
 
 	this.darkbox.open('block', {
-		block: blockDef.Block
+		block: blockDef.Block,
+		data: blockDef.data,
+		callback: function(data){
+			blockDef.data = data;
+		}
 	});
 };
 
