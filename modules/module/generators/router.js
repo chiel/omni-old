@@ -47,6 +47,9 @@ var generateRouter = function(mod){
 	if (!fs.existsSync(listView)) listView = 'layouts/list';
 	if (!fs.existsSync(formView)) formView = 'layouts/form';
 
+	/**
+	 * Item list view
+	 */
 	router.get('/', auth('view', mod.dirname), function(req, res){
 		mod.Model.find(function(err, items){
 			if (req.headers.accept === 'application/json'){
@@ -60,6 +63,9 @@ var generateRouter = function(mod){
 		});
 	});
 
+	/**
+	 * New item form view
+	 */
 	router.get('/new/', auth('create', mod.dirname), function(req, res){
 		res.render(formView, {
 			action: '/' + mod.manifest.slug + '/new/',
@@ -68,6 +74,9 @@ var generateRouter = function(mod){
 		});
 	});
 
+	/**
+	 * New item creation
+	 */
 	router.post('/new/', auth('create', mod.dirname), function(req, res){
 		new mod.Model(req.body).save(function(err, doc){
 			if (err){
@@ -84,6 +93,9 @@ var generateRouter = function(mod){
 		});
 	});
 
+	/**
+	 * Existing item form view
+	 */
 	router.get('/edit/:id/', auth('update', mod.dirname), function(req, res){
 		mod.Model.find({_id: req.params.id}, function(err, docs){
 			if (err){
@@ -105,6 +117,9 @@ var generateRouter = function(mod){
 		});
 	});
 
+	/**
+	 * Existing item updating
+	 */
 	router.post('/edit/:id/', auth('update', mod.dirname), function(req, res){
 		mod.Model.update({_id: req.params.id}, req.body, function(err){
 			if (err){
@@ -120,6 +135,9 @@ var generateRouter = function(mod){
 		});
 	});
 
+	/**
+	 * Delete item
+	 */
 	router.get('/delete/:id/', auth('delete', mod.dirname), function(req, res){
 		mod.Model.remove({_id: req.params.id}, function(err){
 			if (err){
