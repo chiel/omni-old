@@ -6,6 +6,7 @@ var adaptors = require('../../core/adaptors');
 var auth = require('../../core/middleware/auth');
 var generateSchema = require('./generators/schema');
 var generateRouter = require('./generators/router');
+var generateValidators = require('./generators/validators');
 
 var Module = function(modulePath){
 	if (!(this instanceof Module)){
@@ -16,6 +17,7 @@ var Module = function(modulePath){
 	this.dirname = this.path.split('/').pop();
 
 	this.loadManifest();
+	this.loadValidators();
 	this.loadSchema();
 	this.createModel();
 	this.loadAdaptors();
@@ -49,6 +51,18 @@ Module.prototype.loadManifest = function(){
 	}
 
 	this.manifest = manifest;
+};
+
+/**
+ * Load or generate this module's input validators
+ */
+Module.prototype.loadValidators = function(){
+	if (fs.existsSync(this.path + '/validators.js')){
+		this.validators = require(this.path + '/validators')(this, generateValidators);
+		return;
+	}
+
+	this.validators = generateValidators(this);
 };
 
 /**

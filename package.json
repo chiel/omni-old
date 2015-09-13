@@ -45,7 +45,7 @@
     "gulp-util": "^3.0.6",
     "informal": "^0.3.0",
     "inherits": "^2.0.1",
-    "is-my-json-valid": "^2.12.1",
+    "is-my-json-valid": "^2.12.2",
     "jsonwebtoken": "^5.0.0",
     "listen.js": "^1.0.0",
     "merge-stream": "^1.0.0",
