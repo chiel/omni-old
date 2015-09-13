@@ -25,6 +25,10 @@
 		text-align: right;
 	}
 
+	&-empty {
+		text-align: center;
+	}
+
 	tbody {
 		tr:nth-child(odd) td {
 			background: #fafafa;
