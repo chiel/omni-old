@@ -99,7 +99,6 @@ Module.prototype.loadAdaptors = function(){
 Module.prototype.loadApiRouter = function(){
 	if (fs.existsSync(this.path + '/api_router.js')){
 		this.apiRouter = require(this.path + '/api_router')(this, auth);
-		return;
 	}
 };
 
