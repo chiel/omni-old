@@ -176,10 +176,30 @@ module.exports = function(mod){
 		});
 	};
 
+	/**
+	 * Remove existing item(s)
+	 *
+	 * @param {Object} query
+	 */
+	var remove = function(query){
+		return new Promise(function(resolve, reject){
+			mod.Model.remove(query, function(err){
+				if (err){
+					console.error('UNHANDLED', err);
+					return reject(new UnknownError());
+				}
+
+				resolve();
+			});
+
+		});
+	};
+
 	return {
 		create: create,
 		find: find,
 		findOne: findOne,
-		update: update
+		update: update,
+		remove: remove
 	};
 };
