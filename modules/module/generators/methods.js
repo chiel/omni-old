@@ -56,6 +56,26 @@ var processHooks = function(hooks, args, cb){
  */
 module.exports = function(mod){
 	/**
+	 * Find all items matching query
+	 *
+	 * @param {Object} query
+	 *
+	 * @return {Promise}
+	 */
+	var find = function(query){
+		return new Promise(function(resolve, reject){
+			mod.Model.find(query, function(err, items){
+				if (err){
+					console.error('UNHANDLED', err);
+					return reject(new UnknownError());
+				}
+
+				resolve(items);
+			});
+		});
+	};
+
+	/**
 	 * Find a single item matching given query
 	 *
 	 * @param {Object} query
@@ -158,6 +178,7 @@ module.exports = function(mod){
 
 	return {
 		create: create,
+		find: find,
 		findOne: findOne,
 		update: update
 	};
