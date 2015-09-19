@@ -323,4 +323,28 @@ Builder.prototype.setTemplate = function(templateName){
 	}
 };
 
+/**
+ * Get current value of all zones and their blocks
+ *
+ * @return {Object}
+ */
+Builder.prototype.getValue = function(){
+	var self = this;
+	var values = {};
+	var i, block, data;
+
+	forOwn(this.zones, function(zone, zoneName){
+		values[zoneName] = [];
+		for (var i = 0; i < zone.children.length; i++){
+			block = self.blocks[zone.children[i].dataset.id];
+			data = block.data;
+			if (!data) data = {};
+			data.type = block.Block.meta.type;
+			values[zoneName].push(data);
+		}
+	});
+
+	return values;
+};
+
 module.exports = Builder;

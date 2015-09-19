@@ -58,4 +58,13 @@ BuilderField.prototype.notify = function(name, value){
 	this.builder.setTemplate(value);
 };
 
+/**
+ * Get current value of the builder
+ *
+ * @return {Object}
+ */
+BuilderField.prototype.getValue = function(){
+	return this.builder.getValue();
+};
+
 module.exports = BuilderField;
