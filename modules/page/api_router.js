@@ -4,8 +4,9 @@ var adaptors = require('../../core/adaptors');
 var forOwn = require('mout/object/forOwn');
 var mongoose = require('mongoose');
 var Promise = require('promise');
-var NotFoundError = require('../../lib/error/notfound');
-var UnknownError = require('../../lib/error/unknown');
+
+var NotFoundError = require('../../lib/errors/notfound');
+var UnknownError = require('../../lib/errors/unknown');
 
 module.exports = function(mod, auth){
 	var router = require('express').Router();

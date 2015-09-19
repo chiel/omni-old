@@ -4,8 +4,8 @@ var isArray = require('mout/lang/isArray');
 var isFunction = require('mout/lang/isFunction');
 var Promise = require('promise');
 
-var DuplicateError = require('../../../lib/error/duplicate');
-var UnknownError = require('../../../lib/error/unknown');
+var DuplicateError = require('../../../lib/errors/duplicate');
+var UnknownError = require('../../../lib/errors/unknown');
 
 /**
  * Execute given hooks with given arguments

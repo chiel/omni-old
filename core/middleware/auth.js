@@ -1,6 +1,6 @@
 'use strict';
 
-var AuthorizationError = require('../../lib/error/authorization');
+var AuthorizationError = require('../../lib/errors/authorization');
 var config = require('../config');
 var jwt = require('jsonwebtoken');
 

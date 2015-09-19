@@ -3,7 +3,7 @@
 var express = require('express');
 var fs = require('fs');
 
-var AuthorizationError = require('../../../lib/error/authorization');
+var AuthorizationError = require('../../../lib/errors/authorization');
 
 /**
  * Generate a middleware function that will check user's permissions

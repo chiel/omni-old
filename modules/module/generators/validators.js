@@ -4,7 +4,7 @@ var forOwn = require('mout/object/forOwn');
 var merge = require('mout/object/merge');
 var validator = require('is-my-json-valid');
 
-var ValidationError = require('../../../lib/error/validation');
+var ValidationError = require('../../../lib/errors/validation');
 
 var types = {
 	text: { type: 'string' },
