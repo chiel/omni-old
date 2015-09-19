@@ -22,6 +22,7 @@ var types = {
 	markdown: String,
 	finder: String,
 	slug: String,
+	wysiwyg: String,
 	builder: mongoose.Schema.Types.Mixed
 };
 
