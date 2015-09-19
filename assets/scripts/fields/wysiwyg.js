@@ -9,15 +9,11 @@ var Scribe = require('scribe-editor');
  * @param {String} spec.name - Name of the field
  * @param {String} spec.label - The label for the field
  * @param {Boolean} spec.expand - Whether you want the field to expand when a user types in it
- *
- * @return {WysiwygEditor}
+ * @param {String} value
  */
-var WysiwygEditor = function(spec){
-	if (!(this instanceof WysiwygEditor)){
-		return new WysiwygEditor(spec);
-	}
-
+var WysiwygEditor = function(spec, value){
 	this.spec = spec;
+	this.value = value;
 	this.build();
 };
 
@@ -46,6 +42,9 @@ WysiwygEditor.prototype.build = function(){
 	}
 
 	var scribe = new Scribe(editor);
+	if (this.value){
+		scribe.setHTML(this.value);
+	}
 
 	inputWrap.appendChild(editor);
 
