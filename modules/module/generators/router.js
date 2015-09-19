@@ -139,12 +139,14 @@ var generateRouter = function(mod){
 	 * Delete item
 	 */
 	router.get('/delete/:id/', auth('delete', mod.dirname), function(req, res){
-		mod.Model.remove({_id: req.params.id}, function(err){
-			if (err){
-				console.error(err);
+		mod.methods.remove({ _id: req.params.id }).then(
+			function(){
+				res.redirect('/' + mod.manifest.slug + '/');
+			},
+			function(err){
+				res.status(err.status || 500).json({ error: err });
 			}
-			res.redirect('/' + mod.manifest.slug + '/');
-		});
+		);
 	});
 
 	return router;
