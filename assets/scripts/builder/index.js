@@ -206,7 +206,7 @@ Builder.prototype.dragEnd = function(){
 	if (!blockEl && (!hoverEl || !droppable)) return;
 
 	if (!blockEl){
-		var id = this.addBlock(this.dragType, this.hoverZone);
+		var id = this.addBlock(this.hoverZone, this.dragType);
 		blockEl = this.blocks[id].blockEl;
 	} else{
 		blockEl.style.display = '';
@@ -257,10 +257,10 @@ Builder.prototype.zoneLeave = function(zoneName){
 /**
  * Add a block of type to a zone
  *
- * @param {String} type
  * @param {String} zoneName
+ * @param {String} type
  */
-Builder.prototype.addBlock = function(type, zoneName){
+Builder.prototype.addBlock = function(zoneName, type){
 	if (!this.blockTypes[type] || !this.zones[zoneName]) return;
 
 	var Block = this.blockTypes[type];
