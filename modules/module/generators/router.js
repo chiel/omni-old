@@ -13,7 +13,7 @@ var AuthorizationError = require('../../../lib/errors/authorization');
  *
  * @return {Function}
  */
-var auth = function(action, mod){
+var permission = function(action, mod){
 	/**
 	 * Check if the logged in user is allowed to perform this action
 	 *
@@ -50,7 +50,7 @@ var generateRouter = function(mod){
 	/**
 	 * Item list view
 	 */
-	router.get('/', auth('view', mod.dirname), function(req, res){
+	router.get('/', permission('view', mod.dirname), function(req, res){
 		mod.methods.find().then(
 			function(items){
 				if (req.headers.accept === 'application/json'){
@@ -75,7 +75,7 @@ var generateRouter = function(mod){
 	/**
 	 * New item form view
 	 */
-	router.get('/new/', auth('create', mod.dirname), function(req, res){
+	router.get('/new/', permission('create', mod.dirname), function(req, res){
 		res.render(formView, {
 			action: '/' + mod.manifest.slug + '/new/',
 			manifest: mod.manifest,
@@ -86,7 +86,7 @@ var generateRouter = function(mod){
 	/**
 	 * New item creation
 	 */
-	router.post('/new/', auth('create', mod.dirname), function(req, res){
+	router.post('/new/', permission('create', mod.dirname), function(req, res){
 		mod.methods.create(req.body).then(
 			function(item){
 				res
@@ -105,7 +105,7 @@ var generateRouter = function(mod){
 	/**
 	 * Existing item form view
 	 */
-	router.get('/edit/:id/', auth('update', mod.dirname), function(req, res){
+	router.get('/edit/:id/', permission('update', mod.dirname), function(req, res){
 		mod.methods.findOne({ _id: req.params.id }).then(
 			function(item){
 				res.render(formView, {
@@ -124,7 +124,7 @@ var generateRouter = function(mod){
 	/**
 	 * Existing item updating
 	 */
-	router.post('/edit/:id/', auth('update', mod.dirname), function(req, res){
+	router.post('/edit/:id/', permission('update', mod.dirname), function(req, res){
 		mod.methods.update(req.params.id, req.body).then(
 			function(item){
 				res.json(item);
@@ -138,7 +138,7 @@ var generateRouter = function(mod){
 	/**
 	 * Delete item
 	 */
-	router.get('/delete/:id/', auth('delete', mod.dirname), function(req, res){
+	router.get('/delete/:id/', permission('delete', mod.dirname), function(req, res){
 		mod.methods.remove({ _id: req.params.id }).then(
 			function(){
 				res.redirect('/' + mod.manifest.slug + '/');
@@ -156,7 +156,7 @@ var generateRouter = function(mod){
  * Available router middleware
  */
 generateRouter.middleware = {
-	auth: auth
+	permission: permission
 };
 
 module.exports = generateRouter;
