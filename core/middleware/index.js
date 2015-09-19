@@ -8,6 +8,7 @@ var RedisStore = require('connect-redis')(session);
 debug('registering app middleware');
 require('../app')
 .use(require('serve-static')(__dirname + '/../../public'))
+.use('/uploads', require('serve-static')(config.upload.path))
 .use(require('connect-slashes')())
 .use(require('connect-busboy')())
 .use(require('body-parser').urlencoded({extended: true}))

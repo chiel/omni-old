@@ -97,6 +97,10 @@
 			}
 		}
 
+		.btn {
+			border-width: 1px;
+		}
+
 		&-prefix {
 			border-radius: 0;
 		}

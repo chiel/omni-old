@@ -1,6 +1,7 @@
 @import 'normalize.css/normalize';
 @import 'darkbox/darkbox';
 @import 'disclose.js/disclose';
+@import 'finder.js/index.scss';
 
 @import 'base/_variables';
 @import 'base/_base';

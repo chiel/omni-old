@@ -3,6 +3,7 @@
 var informal = require('informal/all');
 informal.fields.api_multi_option = require('./fields/api_multi_option');
 informal.fields.builder = require('./fields/builder');
+informal.fields.finder = require('./fields/finder');
 informal.fields.markdown = require('./fields/markdown');
 informal.fields.slug = require('./fields/slug');
 informal.fields.wysiwyg = require('./fields/wysiwyg');
@@ -14,3 +15,4 @@ behaviour.execute();
 
 var Darkbox = require('darkbox');
 Darkbox.types.block = require('./darkbox-types/block');
+Darkbox.types.finder = require('./darkbox-types/finder');
