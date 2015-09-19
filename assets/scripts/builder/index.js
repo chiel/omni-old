@@ -259,8 +259,9 @@ Builder.prototype.zoneLeave = function(zoneName){
  *
  * @param {String} zoneName
  * @param {String} type
+ * @param {Object} data
  */
-Builder.prototype.addBlock = function(zoneName, type){
+Builder.prototype.addBlock = function(zoneName, type, data){
 	if (!this.blockTypes[type] || !this.zones[zoneName]) return;
 
 	var Block = this.blockTypes[type];
@@ -274,7 +275,8 @@ Builder.prototype.addBlock = function(zoneName, type){
 	blockEl.draggable = true;
 	this.blocks[id] = {
 		Block: Block,
-		blockEl: blockEl
+		blockEl: blockEl,
+		data: data
 	};
 
 	this.zones[zoneName].appendChild(blockEl);

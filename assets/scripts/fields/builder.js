@@ -2,24 +2,19 @@
 
 var Builder = require('builder');
 var blocks = require('builder/blocks');
+var forOwn = require('mout/object/forOwn');
 var templates = require('builder/templates');
 
 /**
  * BuilderField
  *
  * @param {Object} spec
- * @param {Object} data
+ * @param {Object} value
  * @param {Object} subscriptionValues
- *
- * @return {BuilderField}
  */
-var BuilderField = function(spec, data, subscriptionValues){
-	if (!(this instanceof BuilderField)){
-		return new BuilderField(spec, data, subscriptionValues);
-	}
-
+var BuilderField = function(spec, value, subscriptionValues){
 	this.spec = spec;
-	this.data = data;
+	this.value = value;
 	this.subscriptionValues = subscriptionValues;
 	this.build();
 };
@@ -45,6 +40,15 @@ BuilderField.prototype.build = function(){
 
 	if (this.subscriptionValues.template){
 		builder.setTemplate(this.subscriptionValues.template);
+
+		if (this.value){
+			var i;
+			forOwn(this.value, function(blocks, zoneName){
+				for (i = 0; i < blocks.length; i++){
+					builder.addBlock(zoneName, blocks[i].type, blocks[i]);
+				}
+			});
+		}
 	}
 
 	this.builder = builder;
