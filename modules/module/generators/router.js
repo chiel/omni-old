@@ -51,16 +51,25 @@ var generateRouter = function(mod){
 	 * Item list view
 	 */
 	router.get('/', auth('view', mod.dirname), function(req, res){
-		mod.Model.find(function(err, items){
-			if (req.headers.accept === 'application/json'){
-				res.json(items);
-			} else{
-				res.render(listView, {
-					manifest: mod.manifest,
-					items: items
-				});
+		mod.methods.find().then(
+			function(items){
+				if (req.headers.accept === 'application/json'){
+					res.json(items);
+				} else{
+					res.render(listView, {
+						manifest: mod.manifest,
+						items: items
+					});
+				}
+			},
+			function(err){
+				if (req.headers.accept === 'application/json'){
+					res.status(err.status || 500).json({ error: err });
+				} else{
+					res.send('something went wrong');
+				}
 			}
-		});
+		);
 	});
 
 	/**
