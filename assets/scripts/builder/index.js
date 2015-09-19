@@ -140,7 +140,13 @@ Builder.prototype._setEvents = function(){
 	});
 
 	self.template.addEventListener('click', function(e){
-		self.showBlock(e.target.dataset.id);
+		var block = getClosest(e.target, 'article');
+		if (e.target.classList.contains('act-remove')){
+			self.removeBlock(block.dataset.id);
+			return;
+		}
+
+		self.showBlock(block.dataset.id);
 	});
 
 	self.bound = {
@@ -269,7 +275,8 @@ Builder.prototype.addBlock = function(zoneName, type, data){
 
 	var id = this.blockId++;
 	var blockEl = document.createElement('article');
-	blockEl.innerHTML = '<h4>' + Block.meta.name + '</h4><p></p>';
+	blockEl.innerHTML = '<h4>' + Block.meta.name + '</h4><p></p>' +
+		'<button type="button" class="act-remove">Remove</button>';
 	blockEl.dataset.type = Block.meta.type;
 	blockEl.dataset.id = id;
 	blockEl.draggable = true;
@@ -286,7 +293,22 @@ Builder.prototype.addBlock = function(zoneName, type, data){
 };
 
 /**
+ * Remove block of given index
  *
+ * @param {Number} id
+ */
+Builder.prototype.removeBlock = function(id){
+	index = parseInt(id, 10);
+	if (!this.blocks[id]) return;
+
+	var el = this.blocks[id].blockEl;
+	el.parentNode.removeChild(el);
+};
+
+/**
+ * Show given block in a modal overlay
+ *
+ * @param {Number} id
  */
 Builder.prototype.showBlock = function(id){
 	id = parseInt(id);

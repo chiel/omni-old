@@ -77,6 +77,16 @@
 				}
 			}
 
+			.act-remove {
+				float: right;
+				width: 24px;
+				height: 24px;
+				margin: 12px 0 0;
+				border: 0;
+				background: url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
+				text-indent: -999em;
+			}
+
 			> :last-child {
 				margin-bottom: 0;
 			}
