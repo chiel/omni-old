@@ -28,6 +28,6 @@ module.exports = [
 		});
 	},
 	function(err, req, res, next){
-		res.json({ error: err });
+		res.status(err.status || 500).json({ error: err });
 	}
 ];
