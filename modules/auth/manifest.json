@@ -1,5 +1,6 @@
 {
 	"slug": "",
+	"apiSlug": "auth",
 
 	"loginForm": {
 		"tabs": [
