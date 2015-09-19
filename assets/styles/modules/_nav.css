@@ -69,12 +69,12 @@
 					left: 100%;
 					right: auto;
 					bottom: 0;
-					width: 5px;
+					width: 3px;
 					height: auto;
 				}
 
 				&:hover:after {
-					transform: translateX(-5px);
+					transform: translateX(-3px);
 				}
 			}
 		}
