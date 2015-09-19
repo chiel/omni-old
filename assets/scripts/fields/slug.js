@@ -7,15 +7,10 @@ var slugify = require('mout/string/slugify');
  * SlugField
  *
  * @param {Object} spec
- *
- * @return {SlugField}
+ * @param {String} value
  */
-var SlugField = function(spec){
-	if (!(this instanceof SlugField)){
-		return new SlugField(spec);
-	}
-
-	TextField.call(this, spec);
+var SlugField = function(spec, value){
+	TextField.call(this, spec, value);
 	this.subValues = {};
 };
 
