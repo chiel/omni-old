@@ -269,7 +269,7 @@ Builder.prototype.addBlock = function(zoneName, type, data){
 
 	var id = this.blockId++;
 	var blockEl = document.createElement('article');
-	blockEl.textContent = Block.meta.name;
+	blockEl.innerHTML = '<h4>' + Block.meta.name + '</h4><p></p>';
 	blockEl.dataset.type = Block.meta.type;
 	blockEl.dataset.id = id;
 	blockEl.draggable = true;
@@ -279,6 +279,7 @@ Builder.prototype.addBlock = function(zoneName, type, data){
 		data: data
 	};
 
+	this.updateBlockFragment(id);
 	this.zones[zoneName].appendChild(blockEl);
 
 	return id;
@@ -292,13 +293,29 @@ Builder.prototype.showBlock = function(id){
 	var blockDef = this.blocks[id];
 	if (!blockDef) return;
 
+	var self = this;
 	this.darkbox.open('block', {
 		block: blockDef.Block,
 		data: blockDef.data,
 		callback: function(data){
 			blockDef.data = data;
+			self.updateBlockFragment(id);
 		}
 	});
+};
+
+/**
+ * Update given block's fragment display
+ *
+ * @param {Number} id
+ */
+Builder.prototype.updateBlockFragment = function(id){
+	id = parseInt(id);
+	var blockDef = this.blocks[id];
+	if (!blockDef || !blockDef.Block.getFragment) return;
+
+	var p = blockDef.blockEl.querySelector('p');
+	p.textContent = blockDef.Block.getFragment(blockDef.data);
 };
 
 /**

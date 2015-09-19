@@ -63,7 +63,21 @@
 				background: rgba(#fff, 1);
 			}
 
-			:last-child {
+			h4 {
+				display: inline;
+			}
+
+			p {
+				display: inline;
+				color: #aaa;
+
+				&:not(:empty):before {
+					content: '\2014';
+					margin: 0 6px;
+				}
+			}
+
+			> :last-child {
 				margin-bottom: 0;
 			}
 		}
