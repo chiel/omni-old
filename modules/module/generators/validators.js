@@ -18,7 +18,7 @@ var types = {
 	single_option: { type: 'string' },
 	multi_option: { type: 'array', items: { type: 'string' }},
 	api_multi_option: { type: 'array', items: { type: 'string' }},
-	list: { type: 'array', items: { type: 'object' }},
+	list: { type: 'array' },
 	markdown: { type: 'string' },
 	finder: { type: 'string' },
 	slug: { type: 'string' },

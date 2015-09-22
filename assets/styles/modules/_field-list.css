@@ -1,0 +1,43 @@
+.informal-field-list {
+	&-items {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		> li {
+			position: relative;
+			margin-bottom: 6px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			> .informal {
+				margin-left: 16px;
+				margin-right: 34px;
+			}
+
+			.act-remove {
+				overflow: hidden;
+				position: absolute;
+				top: 10px;
+				right: 0;
+				width: 24px;
+				height: 24px;
+				border: 0;
+				background: url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
+				text-indent: -999em;
+			}
+		}
+	}
+
+	&-drag-handle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 16px;
+		cursor: grab;
+		background: url(/img/omni/grip.svg) no-repeat left center;
+	}
+}

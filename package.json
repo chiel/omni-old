@@ -66,6 +66,7 @@
     "request": "^2.61.0",
     "scribe-editor": "^2.0.0",
     "serve-static": "^1.7.1",
+    "sortable.js": "^0.2.0",
     "swig": "^1.4.2",
     "then-all": "^2.0.0",
     "vinyl-source-stream": "^1.0.0",
