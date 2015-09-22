@@ -9,7 +9,8 @@ var sourcemaps = require('gulp-sourcemaps');
 
 module.exports = function(gulp, config){
 	gulp.task('styles', function(){
-		var streams = [], i, stream, target;
+		var streams = [];
+		var i, stream, target;
 
 		for (i = 0; i < config.styles.targets.length; i++){
 			target = config.styles.targets[i];
@@ -23,7 +24,7 @@ module.exports = function(gulp, config){
 				require('postcss-hexrgba'),
 				require('postcss-clearfix'),
 				require('postcss-color-function'),
-				require('autoprefixer-core')({ browsers: [ 'last 2 versions' ]})
+				require('autoprefixer')({ browsers: [ 'last 2 versions' ]})
 			]))
 			.on('error', notify.onError(function(err){
 				return err.message;
