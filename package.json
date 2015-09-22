@@ -58,6 +58,7 @@
     "postcss-clearfix": "^0.2.0",
     "postcss-color-function": "^2.0.0",
     "postcss-custom-properties": "^5.0.0",
+    "postcss-extend": "^1.0.0",
     "postcss-hexrgba": "^0.2.0",
     "postcss-import": "^7.0.0",
     "postcss-nested": "^1.0.0",

@@ -1,0 +1,25 @@
+.finder__btn {
+	@extend .btn;
+	@extend .btn-small;
+	@extend .btn-primary;
+}
+
+.finder__panel {
+	border-color: #ddd;
+}
+
+.finder__main {
+	bottom: 41px;
+}
+
+.finder__footer {
+	height: 41px;
+	padding: 0 6px;
+	border-color: #ddd;
+	background: transparent;
+}
+
+.finder__dir li.is-selected {
+	background: rgba(var(--blue), .3);
+}
+

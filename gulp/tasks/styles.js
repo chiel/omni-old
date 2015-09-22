@@ -19,6 +19,7 @@ module.exports = function(gulp, config){
 			.pipe(postcss([
 				require('postcss-import')({ glob: true }),
 				require('postcss-nested'),
+				require('postcss-extend'),
 				require('postcss-custom-properties'),
 				require('postcss-calc')(),
 				require('postcss-hexrgba'),
