@@ -1,12 +1,8 @@
-.darkbox-type-finder .darkbox-content {
-	height: 100%;
-
-	.finder-wrap {
-		position: absolute;
-		top: -6px;
-		left: -6px;
-		right: -6px;
-		bottom: -6px;
-		height: auto;
+.darkbox-type-finder {
+	.darkbox-wrap:before {
+		content: none;
+	}
+	.darkbox-content {
+		height: 100%;
 	}
 }
