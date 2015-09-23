@@ -13,10 +13,12 @@ module.exports = function(manifest){
 	});
 
 	if (options.length > 1){
-		options.unshift({
-			value: '',
-			label: '...'
-		});
+		if (manifest.forms.create.fields.template.style !== 'radio'){
+			options.unshift({
+				value: '',
+				label: '...'
+			});
+		}
 	} else{
 		var tabObjects = manifest.forms.create.tabs[0].objects;
 		tabObjects.splice(tabObjects.indexOf('template'), 1);
