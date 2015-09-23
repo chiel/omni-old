@@ -41,6 +41,7 @@ ListField.prototype.build = function(){
 
 	var addBtn = document.createElement('button');
 	addBtn.type = 'button';
+	addBtn.tabIndex = -1;
 	addBtn.textContent = 'add item';
 	label.appendChild(addBtn);
 	this.addBtn = addBtn;
