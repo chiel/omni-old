@@ -6,9 +6,8 @@ var fs = require('fs');
 module.exports = function(manifest){
 	var dir = __dirname + '/..';
 	var modules = fs.readdirSync(dir);
-	var moduleManifest;
-	var moduleName;
-	var field;
+	var fieldGroup = [];
+	var moduleManifest, moduleName, field;
 
 	cache.get('modules').forEach(function(modulePath){
 		if (!fs.existsSync(modulePath + '/manifest.json')) return;
@@ -32,8 +31,17 @@ module.exports = function(manifest){
 		});
 
 		manifest.forms.create.fields[moduleName] = field;
-		manifest.forms.create.tabs[0].objects.push(moduleName);
+
+		fieldGroup.push(moduleName);
+		if (fieldGroup.length > 1){
+			manifest.forms.create.tabs[0].objects.push(fieldGroup);
+			fieldGroup = [];
+		}
 	});
+
+	if (fieldGroup.length < 2){
+		manifest.forms.create.tabs[0].objects.push(fieldGroup);
+	}
 
 	return manifest;
 };
