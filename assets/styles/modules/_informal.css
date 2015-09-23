@@ -63,12 +63,15 @@
 			border-radius: 0;
 		}
 
-		input[type=checkbox] {
+		input[type=checkbox], input[type=radio] {
 			flex-grow: unset;
 			width: 16px;
 			margin: 4px 12px 4px 0;
 			border-width: 1px;
 			border-radius: 2px;
+		}
+		input[type=radio] {
+			border-radius: 50%;
 		}
 
 		&-options {
