@@ -35,7 +35,8 @@
 			],
 			"fields": {
 				"title": {
-					"label": "Title"
+					"label": "Title",
+					"autofocus": true
 				},
 				"slug": {
 					"type": "slug",

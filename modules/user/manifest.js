@@ -18,7 +18,8 @@ module.exports = function(manifest){
 				type: 'email',
 				label: 'E-mail',
 				required: true,
-				unique: true
+				unique: true,
+				autofocus: true
 			},
 			roles: {
 				type: 'api_multi_option',
