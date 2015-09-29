@@ -5,7 +5,7 @@ var get = require('mout/object/get');
 var map = require('mout/array/map');
 
 /**
- * ApiMultiOption
+ * ApiMultiOptionField
  *
  * @param {Object} spec
  * @param {String} spec.name - Name of the field
@@ -13,7 +13,7 @@ var map = require('mout/array/map');
  * @param {Array} spec.options - Options for the multi option field
  * @param {Array} values
  */
-var ApiMultiOption = function(spec, values){
+var ApiMultiOptionField = function(spec, values){
 	MultiOptionField.call(this, spec, values);
 
 	var self = this;
@@ -36,6 +36,6 @@ var ApiMultiOption = function(spec, values){
 	});
 };
 
-require('util').inherits(ApiMultiOption, MultiOptionField);
+require('util').inherits(ApiMultiOptionField, MultiOptionField);
 
-module.exports = ApiMultiOption;
+module.exports = ApiMultiOptionField;
