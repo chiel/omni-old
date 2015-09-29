@@ -97,6 +97,19 @@ module.exports = function(mod, generate){
 		req.pipe(req.busboy);
 	});
 
+	router.get('/focus/', function(req, res){
+		mod.methods.findOne({ path: req.query.path }).then(
+			function(item){
+				res.json(item);
+			},
+			function(err){
+				res
+					.status(err.status || 500)
+					.json({ error: err });
+			}
+		);
+	});
+
 	router.post('/focus/', function(req, res){
 		mod.methods.updateFocus(req.body).then(
 			function(){

@@ -6,6 +6,29 @@ var Focal = require('focal.js');
 var Promise = require('promise');
 
 /**
+ *
+ */
+var getFocus = function(path){
+	return new Promise(function(resolve, reject){
+		fetch('/media/focus/?path=' + encodeURIComponent(path), {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include'
+		}).then(
+			function(res){
+				res.json().then(
+					function(json){
+						resolve(json ? json.focus : null);
+					}
+				);
+			}
+		);
+	});
+};
+
+/**
  * Update focus for given path
  *
  * @param {String} path
@@ -45,9 +68,13 @@ var imageType = function(panel, data, options){
 	finderImage(panel, data, options, function(){
 		var img = panel.querySelector('img');
 
-		var focal = new Focal(img);
-		focal.on('change', function(x, y){
-			updateFocus(data.relative_path, x, y);
+		var focal;
+		getFocus(data.relative_path).then(function(focus){
+			focal = new Focal(img, { focus: focus || {}});
+
+			focal.on('change', function(x, y){
+				updateFocus(data.relative_path, x, y);
+			});
 		});
 	});
 };
