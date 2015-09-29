@@ -71,7 +71,7 @@ var readpath = function(path){
 };
 
 module.exports = function(mod, generate){
-	var router = generate(mod);
+	var router = require('express').Router();
 
 	router.get('/', function(req, res){
 		var path = rtrim(req.query.path || '', '/');
@@ -95,6 +95,19 @@ module.exports = function(mod, generate){
 		});
 
 		req.pipe(req.busboy);
+	});
+
+	router.post('/focus/', function(req, res){
+		mod.methods.updateFocus(req.body).then(
+			function(){
+				res.json({ status: 'ok' });
+			},
+			function(err){
+				res
+					.status(err.status || 500)
+					.json({ error: err });
+			}
+		);
 	});
 
 	return router;
