@@ -1,7 +1,11 @@
-.disclose-notification {
-	width: 420px;
+.disclose {
+	z-index: 101;
 
-	.disclose-btn-close {
-		background: url(/img/omni/cross-red.svg) no-repeat center / 50%;
+	&__notification {
+		width: 420px;
+
+		.disclose__act-close {
+			background: url(/img/omni/cross-red.svg) no-repeat center / 50%;
+		}
 	}
 }
