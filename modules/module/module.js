@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var get = require('mout/object/get');
 var mongoose = require('mongoose');
 var adaptors = require('../../core/adaptors');
 var auth = require('../../core/middleware/auth');
@@ -64,6 +65,8 @@ Module.prototype.loadValidators = function(){
 		return;
 	}
 
+	if (!this.manifest.forms) return;
+
 	this.validators = generateValidators(this);
 };
 
@@ -75,6 +78,8 @@ Module.prototype.loadSchema = function(){
 		this.schema = require(this.path + '/schema')(this, generateSchema);
 		return;
 	}
+
+	if (!get(this.manifest, 'forms.create')) return;
 
 	this.schema = generateSchema(this);
 };
@@ -118,6 +123,8 @@ Module.prototype.loadMethods = function(){
 		return;
 	}
 
+	if (!this.Model) return;
+
 	this.methods = generateMethods(this);
 };
 
@@ -138,6 +145,8 @@ Module.prototype.loadRouter = function(){
 		this.router = require(this.path + '/router')(this, generateRouter);
 		return;
 	}
+
+	if (!this.methods) return;
 
 	this.router = generateRouter(this);
 };
