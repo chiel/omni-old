@@ -45,7 +45,7 @@ BuilderField.prototype.build = function(){
 			var i;
 			forOwn(this.value, function(blocks, zoneName){
 				for (i = 0; i < blocks.length; i++){
-					builder.addBlock(zoneName, blocks[i].type, blocks[i]);
+					builder.addBlock(zoneName, blocks[i].type, blocks[i].data);
 				}
 			});
 		}

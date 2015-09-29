@@ -23,7 +23,7 @@ module.exports = function(mod, auth){
 						block = blocks[i];
 						if (adaptors[block.type]){
 							promiseIndices.push({ zone: zoneName, block: i });
-							promises.push(adaptors[block.type](block.properties, mongoose));
+							promises.push(adaptors[block.type](block.data, mongoose));
 						}
 					}
 				});
@@ -36,7 +36,7 @@ module.exports = function(mod, auth){
 					var index;
 					for (i = 0; i < resolved.length; i++){
 						index = promiseIndices[i];
-						item.zones[index.zone][index.block].properties = resolved[i];
+						item.zones[index.zone][index.block].data = resolved[i];
 					}
 
 					res.json(item);
