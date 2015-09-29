@@ -104,7 +104,7 @@ Module.prototype.loadAdaptors = function(){
 	for (var i = 0; i < files.length; i++){
 		match = files[i].match(/^(.*)\.js$/);
 		if (match){
-			adaptors[match[1]] = require(dir + '/' + match[1]);
+			adaptors[match[1]] = require(dir + '/' + match[1])(this);
 		}
 	}
 };
