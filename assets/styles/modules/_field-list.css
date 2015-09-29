@@ -15,6 +15,14 @@
 			> .informal {
 				margin-left: 16px;
 				margin-right: 34px;
+
+				& .informal-field {
+					margin-top: 6px;
+
+					&:first-child {
+						margin-top: 0;
+					}
+				}
 			}
 
 			.act-remove {
@@ -35,8 +43,8 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		bottom: 0;
 		width: 16px;
+		height: 44px;
 		cursor: grab;
 		background: url(/img/omni/grip.svg) no-repeat left center;
 	}

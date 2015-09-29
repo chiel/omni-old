@@ -5,6 +5,7 @@ informal.fields.api_multi_option = require('./fields/api_multi_option');
 informal.fields.api_single_option = require('./fields/api_single_option');
 informal.fields.builder = require('./fields/builder');
 informal.fields.finder = require('./fields/finder');
+informal.fields.form_list = require('./fields/form_list');
 informal.fields.list = require('./fields/list');
 informal.fields.markdown = require('./fields/markdown');
 informal.fields.slug = require('./fields/slug');
