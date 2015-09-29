@@ -23,3 +23,10 @@
 	background: rgba(var(--blue), .3);
 }
 
+.finder__image .focal {
+	@extend .finder__image img;
+
+	&.is-loaded {
+		@extend .finder__image img.is-loaded;
+	}
+}

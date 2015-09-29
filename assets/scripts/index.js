@@ -19,3 +19,6 @@ behaviour.execute();
 var Darkbox = require('darkbox');
 Darkbox.types.block = require('./darkbox-types/block');
 Darkbox.types.finder = require('./darkbox-types/finder');
+
+var Finder = require('finder.js');
+Finder.types.image = require('./finder-types/image');

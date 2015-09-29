@@ -2,6 +2,7 @@
 @import 'darkbox/darkbox';
 @import 'disclose.js/disclose';
 @import 'finder.js/finder';
+@import 'focal.js/focal';
 
 @import 'base/_variables';
 @import 'base/_base';
