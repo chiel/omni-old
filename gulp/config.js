@@ -21,6 +21,7 @@ var config = {
 		ignore: [
 			'.git/',
 			'assets/',
+			'blocks/',
 			'gulp/',
 			'gulpfile.js',
 			'modules/**/assets/',
