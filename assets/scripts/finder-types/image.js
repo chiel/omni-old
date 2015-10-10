@@ -10,7 +10,11 @@ var Promise = require('promise');
 var crops = [ null ].concat(get(config, 'images.crops') || []);
 
 /**
+ * Retrieve focal point for given path
  *
+ * @param {String} path
+ *
+ * @return {Promise}
  */
 var getFocus = function(path){
 	return new Promise(function(resolve, reject){
@@ -33,7 +37,7 @@ var getFocus = function(path){
 };
 
 /**
- * Update focus for given path
+ * Update focal point for given path
  *
  * @param {String} path
  * @param {Number} x
