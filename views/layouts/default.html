@@ -28,6 +28,7 @@
 		<section class="main-content">
 			{% block content %}{% endblock %}
 		</section>
+		<script type="application/json" data-config>{{ config|json|safe }}</script>
 		<script src="/js/common.js"></script>
 		{% block scripts %}{% endblock %}
 		<script src="/js/omni/index.js"></script>
