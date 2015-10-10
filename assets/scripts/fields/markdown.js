@@ -28,7 +28,7 @@ MarkdownField.prototype.build = function(){
 	TextareaField.prototype.build.call(this);
 
 	var topbar = document.createElement('div');
-	topbar.classList.add('informal-input-topbar', 'btn-group');
+	topbar.classList.add('informal__input-topbar', 'btn-group');
 
 	var actions = [ 'bold', 'italic', 'url' ];
 	var btn;

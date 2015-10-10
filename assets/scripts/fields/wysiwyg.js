@@ -24,21 +24,22 @@ WysiwygEditor.prototype.build = function(){
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
-	wrap.classList.add('informal-field');
+	wrap.classList.add('informal__field');
 
 	var label = document.createElement('label');
+	label.classList.add('informal__label');
 	label.textContent = this.spec.label;
 	wrap.appendChild(label);
 
 	var inputWrap = document.createElement('div');
-	inputWrap.classList.add('informal-input');
+	inputWrap.classList.add('informal__input');
 	wrap.appendChild(inputWrap);
 
 	var editor = document.createElement('div');
-	editor.classList.add('informal-input-wysiwyg');
+	editor.classList.add('informal__input-wysiwyg');
 
 	if (this.spec.expand){
-		editor.classList.add('informal-input-wysiwyg-expand');
+		editor.classList.add('informal__input-wysiwyg_expandable');
 	}
 
 	var scribe = new Scribe(editor);

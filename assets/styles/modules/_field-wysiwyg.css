@@ -1,0 +1,27 @@
+.informal__input-wysiwyg {
+	overflow: auto;
+	flex-grow: 1;
+	height: calc(24px * 4 + 20);
+	padding: 9px 12px;
+	border: 1px solid #ccc;
+	transition: border-color .4s var(--easing), box-shadow .4s var(--easing);
+
+	p {
+		margin: 24px 0 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	&:focus {
+		outline: 0;
+		border-color: var(--blue);
+		box-shadow: 0 0 5px rgba(var(--blue), .6);
+	}
+
+	&_expandable {
+		min-height: calc(24px * 4 + 20);
+		height: auto;
+	}
+}

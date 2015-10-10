@@ -25,7 +25,7 @@ FinderField.prototype.build = function(){
 	var btn = document.createElement('button');
 	btn.type = 'button';
 	btn.textContent = 'Browse';
-	btn.classList.add('btn', 'btn-primary', 'informal-input-suffix');
+	btn.classList.add('btn', 'btn-primary', 'informal__input-suffix');
 	this.inputWrap.appendChild(btn);
 
 	this.darkbox = new Darkbox();
@@ -45,7 +45,7 @@ FinderField.prototype.open = function(){
 	var self = this;
 	this.darkbox.open('finder', {
 		finder: this.finder,
-		path: this.value,
+		path: this.getValue(),
 		callback: function(path){
 			self.input.value = path;
 		}

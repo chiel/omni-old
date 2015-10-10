@@ -33,9 +33,10 @@ ListField.prototype.build = function(){
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
-	wrap.classList.add('informal-field', 'informal-field-list');
+	wrap.classList.add('informal__field', 'informal__field-list');
 
 	var label = document.createElement('label');
+	label.classList.add('informal__label');
 	label.textContent = this.spec.label;
 	wrap.appendChild(label);
 
@@ -47,7 +48,7 @@ ListField.prototype.build = function(){
 	this.addBtn = addBtn;
 
 	var items = document.createElement('ul');
-	items.classList.add('informal-field-list-items');
+	items.classList.add('informal__field-list-items');
 	wrap.appendChild(items);
 	this.items = items;
 
@@ -66,7 +67,7 @@ ListField.prototype.build = function(){
  */
 ListField.prototype.setEvents = function(){
 	this.sortable = new Sortable(this.items, {
-		handle: '.informal-field-list-drag-handle'
+		handle: '.informal__field-list-handle'
 	});
 
 	var self = this;
@@ -93,7 +94,7 @@ ListField.prototype.addItem = function(data){
 
 	var li = document.createElement('li');
 	var dragHandle = document.createElement('span');
-	dragHandle.classList.add('informal-field-list-drag-handle');
+	dragHandle.classList.add('informal__field-list-handle');
 
 	var removeBtn = document.createElement('button');
 	removeBtn.type = 'button';

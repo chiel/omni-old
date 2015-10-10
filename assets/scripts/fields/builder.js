@@ -26,9 +26,10 @@ BuilderField.prototype.build = function(){
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
-	wrap.classList.add('informal-field');
+	wrap.classList.add('informal__field');
 
 	var label = document.createElement('label');
+	label.classList.add('informal__label');
 	label.textContent = this.spec.label;
 	wrap.appendChild(label);
 

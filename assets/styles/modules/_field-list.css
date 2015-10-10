@@ -1,4 +1,4 @@
-.informal-field-list {
+.informal__field-list {
 	&-items {
 		margin: 0;
 		padding: 0;
@@ -11,35 +11,27 @@
 			&:last-child {
 				margin-bottom: 0;
 			}
-
-			> .informal {
-				margin-left: 16px;
-				margin-right: 34px;
-
-				& .informal-field {
-					margin-top: 6px;
-
-					&:first-child {
-						margin-top: 0;
-					}
-				}
-			}
-
-			.act-remove {
-				overflow: hidden;
-				position: absolute;
-				top: 10px;
-				right: 0;
-				width: 24px;
-				height: 24px;
-				border: 0;
-				background: url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
-				text-indent: -999em;
-			}
 		}
 	}
 
-	&-drag-handle {
+	.informal {
+		margin-left: 16px;
+		margin-right: 34px;
+	}
+
+	.act-remove {
+		overflow: hidden;
+		position: absolute;
+		top: 10px;
+		right: 0;
+		width: 24px;
+		height: 24px;
+		border: 0;
+		background: url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
+		text-indent: -999em;
+	}
+
+	&-handle {
 		position: absolute;
 		top: 0;
 		left: 0;
