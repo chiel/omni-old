@@ -79,7 +79,12 @@ module.exports = function(mod, auth){
 		var mode = req.params[2] || 'cover';
 		var path = req.params[3];
 
-		var img = gm(uploads + path);
+		try{
+			var img = gm(uploads + path);
+		} catch (err) {
+			console.error(err);
+			return;
+		}
 
 		var crop = function(x, y){
 			if (x && y && width && height){
