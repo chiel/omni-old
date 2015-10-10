@@ -72,6 +72,7 @@ FormListField.prototype.setEvents = function(){
 	this.items.addEventListener('click', function(e){
 		if (e.target.classList.contains('act-remove')){
 			e.preventDefault();
+			e.stopPropagation();
 			self.items.removeChild(e.target.parentNode);
 		}
 	});
@@ -90,6 +91,7 @@ FormListField.prototype.addItem = function(data){
 
 	var removeBtn = document.createElement('button');
 	removeBtn.type = 'button';
+	removeBtn.tabIndex = -1;
 	removeBtn.classList.add('act-remove');
 	removeBtn.innerText = 'Remove';
 
