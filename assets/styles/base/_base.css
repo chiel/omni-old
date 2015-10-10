@@ -87,7 +87,7 @@ select {
 
 	&:not([multiple]) {
 		-webkit-appearance: none;
-		background: url(/img/omni/caret.svg) no-repeat calc(100% - 12px) 20px / 12px auto;
+		background: #fff url(/img/omni/caret.svg) no-repeat calc(100% - 12px) 20px / 12px auto;
 	}
 }
 
