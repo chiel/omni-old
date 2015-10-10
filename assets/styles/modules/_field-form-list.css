@@ -23,7 +23,7 @@
 
 	.informal {
 		margin-left: 30px;
-		margin-right: 34px;
+		margin-right: 24px;
 	}
 
 	.act-remove {
@@ -35,7 +35,7 @@
 		height: 24px;
 		border: 0;
 		border-radius: 0 3px 0 3px;
-		background: #eee url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
+		background: url(/img/omni/cross-red.svg) no-repeat center / 12px auto;
 		text-indent: -999em;
 	}
 
