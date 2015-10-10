@@ -5,10 +5,9 @@
 	<circle cx="2" cy="14" r="1" fill="#bbb"/>
 	<circle cx="2" cy="18" r="1" fill="#bbb"/>
 	<circle cx="2" cy="22" r="1" fill="#bbb"/>
-	<circle cx="6" cy="2"  r="1" fill="#bbb"/>
-	<circle cx="6" cy="6"  r="1" fill="#bbb"/>
-	<circle cx="6" cy="10" r="1" fill="#bbb"/>
-	<circle cx="6" cy="14" r="1" fill="#bbb"/>
-	<circle cx="6" cy="18" r="1" fill="#bbb"/>
-	<circle cx="6" cy="22" r="1" fill="#bbb"/>
+	<circle cx="6" cy="4"  r="1" fill="#bbb"/>
+	<circle cx="6" cy="8"  r="1" fill="#bbb"/>
+	<circle cx="6" cy="12" r="1" fill="#bbb"/>
+	<circle cx="6" cy="16" r="1" fill="#bbb"/>
+	<circle cx="6" cy="20" r="1" fill="#bbb"/>
 </svg>
