@@ -14,6 +14,7 @@ informal.fields.wysiwyg = require('./fields/wysiwyg');
 var behaviour = require('behaviour');
 behaviour.register('data-form', require('./behaviours/form'));
 behaviour.register('data-overview', require('./behaviours/overview'));
+behaviour.register('data-scols', require('./behaviours/scols'));
 behaviour.execute();
 
 var Darkbox = require('darkbox');
