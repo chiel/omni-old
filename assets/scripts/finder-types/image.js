@@ -1,9 +1,13 @@
 'use strict';
 
+var config = require('../config');
 var disclose = require('../disclose');
 var finderImage = require('finder.js/types/image');
 var Focal = require('focal.js');
+var get = require('mout/object/get');
 var Promise = require('promise');
+
+var crops = [ null ].concat(get(config, 'images.crops') || []);
 
 /**
  *
@@ -68,13 +72,37 @@ var imageType = function(panel, data, options){
 	finderImage(panel, data, options, function(){
 		var img = panel.querySelector('img');
 
+		var fieldset = document.createElement('fieldset');
+		fieldset.classList.add('focal__crops');
+
+		var p, input;
+		for (var i = 0; i < crops.length; i++){
+			p = crops[i];
+			input = document.createElement('input');
+			input.type = 'radio';
+			input.name = 'focal-preview';
+			input.checked = i === 0;
+			input.dataset.index = i;
+			fieldset.appendChild(input);
+		}
+
 		var focal;
 		getFocus(data.relative_path).then(function(focus){
 			focal = new Focal(img, { focus: focus || {}});
-
+			focal.wrap.appendChild(fieldset);
+			focal.wrap.getBoundingClientRect();
+			focal.wrap.classList.add('is-loaded');
 			focal.on('change', function(x, y){
 				updateFocus(data.relative_path, x, y);
 			});
+		});
+
+		fieldset.addEventListener('change', function(e){
+			var index = fieldset.querySelector('input:checked').dataset.index;
+			var p = crops[index];
+			if (!p) return focal.setPreview(null);
+
+			focal.setPreview(p.width, p.height);
 		});
 	});
 };

@@ -1,0 +1,24 @@
+.focal__crops {
+	position: absolute;
+	left: 6px;
+	bottom: 6px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+	input {
+		display: block;
+		float: left;
+		margin: 0 0 0 3px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
+
+.focal--dragging {
+	.focal__crops {
+		display: none;
+	}
+}
