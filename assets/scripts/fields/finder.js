@@ -10,7 +10,7 @@ var TextField = require('informal/fields/text');
  * @param {Object} spec
  * @param {String} value
  */
-var FinderField = function(spec, value){
+var FinderField = function(spec, value) {
 	TextField.call(this, spec, value);
 };
 
@@ -19,7 +19,7 @@ require('util').inherits(FinderField, TextField);
 /**
  *
  */
-FinderField.prototype.build = function(){
+FinderField.prototype.build = function() {
 	TextField.prototype.build.call(this);
 
 	var btn = document.createElement('button');
@@ -32,7 +32,7 @@ FinderField.prototype.build = function(){
 	this.finder = new Finder(this.spec.options);
 
 	var self = this;
-	btn.addEventListener('click', function(e){
+	btn.addEventListener('click', function(e) {
 		e.preventDefault();
 		self.open();
 	});
@@ -41,12 +41,12 @@ FinderField.prototype.build = function(){
 /**
  *
  */
-FinderField.prototype.open = function(){
+FinderField.prototype.open = function() {
 	var self = this;
 	this.darkbox.open('finder', {
 		finder: this.finder,
 		path: this.getValue(),
-		callback: function(path){
+		callback: function(path) {
 			self.input.value = path;
 		}
 	});

@@ -9,8 +9,8 @@ var indexOf = require('mout/array/indexOf');
 /**
  * Create new page builder
  */
-var Builder = function(options){
-	if (!(this instanceof Builder)){
+var Builder = function(options) {
+	if (!(this instanceof Builder)) {
 		return new Builder(options);
 	}
 
@@ -32,7 +32,7 @@ require('util').inherits(Builder, require('events').EventEmitter);
 /**
  * Build up required elements
  */
-Builder.prototype._build = function(){
+Builder.prototype._build = function() {
 	if (this.wrap) return;
 
 	this.darkbox = new Darkbox();
@@ -57,7 +57,7 @@ Builder.prototype._build = function(){
 	var Block;
 	var block;
 	var blockTypes = {};
-	for (var i = 0; i < this.options.blocks.length; i++){
+	for (var i = 0; i < this.options.blocks.length; i++) {
 		Block = this.options.blocks[i];
 		block = document.createElement('article');
 		block.dataset.type = Block.meta.type;
@@ -69,7 +69,7 @@ Builder.prototype._build = function(){
 
 	var template;
 	var templates = {};
-	for (i = 0; i < this.options.templates.length; i++){
+	for (i = 0; i < this.options.templates.length; i++) {
 		template = this.options.templates[i];
 		templates[template.type] = template;
 	}
@@ -82,40 +82,40 @@ Builder.prototype._build = function(){
 /**
  * Set required events
  */
-Builder.prototype._setEvents = function(){
+Builder.prototype._setEvents = function() {
 	var self = this;
 
 	// drag new block from list
-	self.blocksWrap.addEventListener('dragstart', function(e){
+	self.blocksWrap.addEventListener('dragstart', function(e) {
 		e.dataTransfer.dropEffect = 'copy';
 		self.emit('dragstart', e.target.dataset.type);
 	});
 
 	// drag existing block in template
-	self.template.addEventListener('dragstart', function(e){
+	self.template.addEventListener('dragstart', function(e) {
 		e.dataTransfer.dropEffect = 'move';
 		self.emit('dragstart', e.target.dataset.type, e.target);
 	});
 
 	// entering / leaving zones
-	document.body.addEventListener('dragover', function(e){
+	document.body.addEventListener('dragover', function(e) {
 		var zoneEl = getClosest(e.target, '[data-zone]');
 
-		if (self.hoverZone){
+		if (self.hoverZone) {
 			var hoverEl = self.zones[self.hoverZone];
-			if (zoneEl !== hoverEl){
+			if (zoneEl !== hoverEl) {
 				self.emit('zone:leave', self.hoverZone);
 			}
 		}
 
-		if (zoneEl){
+		if (zoneEl) {
 			if (zoneEl.dataset.droppable) e.preventDefault();
 			self.emit('zone:enter', zoneEl.dataset.zone);
 		}
 	});
 
 	// ordering of blocks
-	self.template.addEventListener('dragenter', function(e){
+	self.template.addEventListener('dragenter', function(e) {
 		var zoneEl = getClosest(e.target, '[data-zone]');
 		if (!zoneEl) return;
 
@@ -135,13 +135,13 @@ Builder.prototype._setEvents = function(){
 	});
 
 	// wrap up
-	document.body.addEventListener('dragend', function(e){
+	document.body.addEventListener('dragend', function(e) {
 		self.emit('dragend');
 	});
 
-	self.template.addEventListener('click', function(e){
+	self.template.addEventListener('click', function(e) {
 		var block = getClosest(e.target, 'article');
-		if (e.target.classList.contains('act-remove')){
+		if (e.target.classList.contains('act-remove')) {
 			self.removeBlock(block.dataset.id);
 			return;
 		}
@@ -165,12 +165,12 @@ Builder.prototype._setEvents = function(){
 /**
  * Start dragging a block
  */
-Builder.prototype.dragStart = function(type, block){
+Builder.prototype.dragStart = function(type, block) {
 	this.dragType = type;
 	this.dragBlock = block;
 
-	if (block){
-		setTimeout(bind(function(){
+	if (block) {
+		setTimeout(bind(function() {
 			block.parentNode.insertBefore(this.placeholder, block);
 			block.style.display = 'none';
 		}, this), 1);
@@ -180,8 +180,8 @@ Builder.prototype.dragStart = function(type, block){
 	this.placeholder.textContent = Block.meta.name;
 
 	var tplName = this.templateName;
-	forOwn(this.zones, function(zone, zoneName){
-		if (!Block.meta.constrain || Block.meta.constrain.test(tplName + '.' + zoneName)){
+	forOwn(this.zones, function(zone, zoneName) {
+		if (!Block.meta.constrain || Block.meta.constrain.test(tplName + '.' + zoneName)) {
 			zone.classList.add('is-block-droppable');
 			zone.dataset.droppable = true;
 			return;
@@ -194,15 +194,15 @@ Builder.prototype.dragStart = function(type, block){
 /**
  * Stop dragging a block
  */
-Builder.prototype.dragEnd = function(){
+Builder.prototype.dragEnd = function() {
 	if (!this.dragType) return false;
 
 	var hoverEl = this.zones[this.hoverZone];
-	if (hoverEl){
+	if (hoverEl) {
 		var droppable = hoverEl.dataset.droppable;
 	}
 
-	forOwn(this.zones, function(zoneEl){
+	forOwn(this.zones, function(zoneEl) {
 		zoneEl.classList.remove('is-block-droppable');
 		zoneEl.classList.remove('is-not-block-droppable');
 		delete zoneEl.dataset.droppable;
@@ -211,10 +211,10 @@ Builder.prototype.dragEnd = function(){
 	var blockEl = this.dragBlock;
 	if (!blockEl && (!hoverEl || !droppable)) return;
 
-	if (!blockEl){
+	if (!blockEl) {
 		var id = this.addBlock(this.hoverZone, this.dragType);
 		blockEl = this.blocks[id].blockEl;
-	} else{
+	} else {
 		blockEl.style.display = '';
 	}
 
@@ -230,13 +230,13 @@ Builder.prototype.dragEnd = function(){
  *
  * @param {String} zoneName
  */
-Builder.prototype.zoneEnter = function(zoneName){
+Builder.prototype.zoneEnter = function(zoneName) {
 	if (zoneName === this.hoverZone) return;
 
 	var zoneEl = this.zones[zoneName];
 
-	if (zoneEl.dataset.droppable){
-		if (indexOf(zoneEl.children, this.placeholder) === -1){
+	if (zoneEl.dataset.droppable) {
+		if (indexOf(zoneEl.children, this.placeholder) === -1) {
 			zoneEl.appendChild(this.placeholder);
 		}
 	}
@@ -249,11 +249,11 @@ Builder.prototype.zoneEnter = function(zoneName){
  *
  * @param {String} zoneName
  */
-Builder.prototype.zoneLeave = function(zoneName){
+Builder.prototype.zoneLeave = function(zoneName) {
 	if (!this.hoverZone) return;
 
 	var zoneEl = this.zones[zoneName];
-	if (!this.dragBlock && indexOf(zoneEl.children, this.placeholder) > -1){
+	if (!this.dragBlock && indexOf(zoneEl.children, this.placeholder) > -1) {
 		zoneEl.removeChild(this.placeholder);
 	}
 
@@ -267,7 +267,7 @@ Builder.prototype.zoneLeave = function(zoneName){
  * @param {String} type
  * @param {Object} data
  */
-Builder.prototype.addBlock = function(zoneName, type, data){
+Builder.prototype.addBlock = function(zoneName, type, data) {
 	if (!this.blockTypes[type] || !this.zones[zoneName]) return;
 
 	var Block = this.blockTypes[type];
@@ -297,7 +297,7 @@ Builder.prototype.addBlock = function(zoneName, type, data){
  *
  * @param {Number} id
  */
-Builder.prototype.removeBlock = function(id){
+Builder.prototype.removeBlock = function(id) {
 	index = parseInt(id, 10);
 	if (!this.blocks[id]) return;
 
@@ -310,7 +310,7 @@ Builder.prototype.removeBlock = function(id){
  *
  * @param {Number} id
  */
-Builder.prototype.showBlock = function(id){
+Builder.prototype.showBlock = function(id) {
 	id = parseInt(id);
 	var blockDef = this.blocks[id];
 	if (!blockDef) return;
@@ -319,7 +319,7 @@ Builder.prototype.showBlock = function(id){
 	this.darkbox.open('block', {
 		block: blockDef.Block,
 		data: blockDef.data,
-		callback: function(data){
+		callback: function(data) {
 			blockDef.data = data;
 			self.updateBlockFragment(id);
 		}
@@ -331,7 +331,7 @@ Builder.prototype.showBlock = function(id){
  *
  * @param {Number} id
  */
-Builder.prototype.updateBlockFragment = function(id){
+Builder.prototype.updateBlockFragment = function(id) {
 	id = parseInt(id);
 	var blockDef = this.blocks[id];
 	if (!blockDef || !blockDef.Block.getFragment) return;
@@ -345,9 +345,9 @@ Builder.prototype.updateBlockFragment = function(id){
  *
  * @param {String} templateName
  */
-Builder.prototype.setTemplate = function(templateName){
+Builder.prototype.setTemplate = function(templateName) {
 	var template = this.templates[templateName];
-	if (!template){
+	if (!template) {
 		this.template.innerHTML = '';
 		this.zones = {};
 		this.wrap.classList.add('has-no-layout');
@@ -359,7 +359,7 @@ Builder.prototype.setTemplate = function(templateName){
 	this.templateName = templateName;
 	this.zones = {};
 	var zones = this.template.querySelectorAll('[data-zone]');
-	for (var i = 0; i < zones.length; i++){
+	for (var i = 0; i < zones.length; i++) {
 		this.zones[zones[i].dataset.zone] = zones[i];
 	}
 };
@@ -369,14 +369,14 @@ Builder.prototype.setTemplate = function(templateName){
  *
  * @return {Object}
  */
-Builder.prototype.getValue = function(){
+Builder.prototype.getValue = function() {
 	var self = this;
 	var values = {};
 	var i, block, data;
 
-	forOwn(this.zones, function(zone, zoneName){
+	forOwn(this.zones, function(zone, zoneName) {
 		values[zoneName] = [];
-		for (var i = 0; i < zone.children.length; i++){
+		for (var i = 0; i < zone.children.length; i++) {
 			block = self.blocks[zone.children[i].dataset.id];
 			data = {
 				type: block.Block.meta.type,

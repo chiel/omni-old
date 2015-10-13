@@ -12,7 +12,7 @@ var templates = require('builder/templates');
  * @param {Object} value
  * @param {Object} subscriptionValues
  */
-var BuilderField = function(spec, value, subscriptionValues){
+var BuilderField = function(spec, value, subscriptionValues) {
 	this.spec = spec;
 	this.value = value;
 	this.subscriptionValues = subscriptionValues;
@@ -22,7 +22,7 @@ var BuilderField = function(spec, value, subscriptionValues){
 /**
  * Build the field
  */
-BuilderField.prototype.build = function(){
+BuilderField.prototype.build = function() {
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
@@ -39,13 +39,13 @@ BuilderField.prototype.build = function(){
 	});
 	wrap.appendChild(builder.wrap);
 
-	if (this.subscriptionValues.template){
+	if (this.subscriptionValues.template) {
 		builder.setTemplate(this.subscriptionValues.template);
 
-		if (this.value){
+		if (this.value) {
 			var i;
-			forOwn(this.value, function(blocks, zoneName){
-				for (i = 0; i < blocks.length; i++){
+			forOwn(this.value, function(blocks, zoneName) {
+				for (i = 0; i < blocks.length; i++) {
 					builder.addBlock(zoneName, blocks[i].type, blocks[i].data);
 				}
 			});
@@ -59,7 +59,7 @@ BuilderField.prototype.build = function(){
 /**
  *
  */
-BuilderField.prototype.notify = function(name, value){
+BuilderField.prototype.notify = function(name, value) {
 	this.builder.setTemplate(value);
 };
 
@@ -68,7 +68,7 @@ BuilderField.prototype.notify = function(name, value){
  *
  * @return {Object}
  */
-BuilderField.prototype.getValue = function(){
+BuilderField.prototype.getValue = function() {
 	return this.builder.getValue();
 };
 

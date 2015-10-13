@@ -11,7 +11,7 @@ var Scribe = require('scribe-editor');
  * @param {Boolean} spec.expand - Whether you want the field to expand when a user types in it
  * @param {String} value
  */
-var WysiwygEditor = function(spec, value){
+var WysiwygEditor = function(spec, value) {
 	this.spec = spec;
 	this.value = value;
 	this.build();
@@ -20,7 +20,7 @@ var WysiwygEditor = function(spec, value){
 /**
  * Build the field
  */
-WysiwygEditor.prototype.build = function(){
+WysiwygEditor.prototype.build = function() {
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
@@ -38,12 +38,12 @@ WysiwygEditor.prototype.build = function(){
 	var editor = document.createElement('div');
 	editor.classList.add('informal__input-wysiwyg');
 
-	if (this.spec.expand){
+	if (this.spec.expand) {
 		editor.classList.add('informal__input-wysiwyg_expandable');
 	}
 
 	var scribe = new Scribe(editor);
-	if (this.value){
+	if (this.value) {
 		scribe.setHTML(this.value);
 	}
 
@@ -57,7 +57,7 @@ WysiwygEditor.prototype.build = function(){
 /**
  *
  */
-WysiwygEditor.prototype.getValue = function(){
+WysiwygEditor.prototype.getValue = function() {
 	return this.scribe.getHTML();
 };
 module.exports = WysiwygEditor;

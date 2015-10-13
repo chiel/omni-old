@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(mod){
+module.exports = function(mod) {
 	var router = require('express').Router();
 
-	router.get('/', function(req, res){
+	router.get('/', function(req, res) {
 		res.render('$dashboard/index', {
 			manifest: mod.manifest
 		});

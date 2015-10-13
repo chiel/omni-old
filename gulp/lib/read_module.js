@@ -9,7 +9,7 @@ var readScripts = require('./read_scripts');
 var readStyles = require('./read_styles');
 var readTemplates = require('./read_templates');
 
-module.exports = function(dir, target){
+module.exports = function(dir, target) {
 	dir = path.normalize(dir);
 
 	readBlocks(dir + '/blocks', target);
@@ -18,7 +18,7 @@ module.exports = function(dir, target){
 	readStyles(dir + '/assets/styles', target);
 	readTemplates(dir + '/templates', target);
 
-	if (fs.existsSync(dir + '/gulp.js')){
+	if (fs.existsSync(dir + '/gulp.js')) {
 		config.gulpfiles.push(dir + '/gulp.js');
 	}
 };

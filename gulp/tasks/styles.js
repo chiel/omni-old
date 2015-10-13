@@ -7,12 +7,12 @@ var notify = require('gulp-notify');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
 
-module.exports = function(gulp, config){
-	gulp.task('styles', function(){
+module.exports = function(gulp, config) {
+	gulp.task('styles', function() {
 		var streams = [];
 		var i, stream, target;
 
-		for (i = 0; i < config.styles.targets.length; i++){
+		for (i = 0; i < config.styles.targets.length; i++) {
 			target = config.styles.targets[i];
 			stream = gulp.src(target.src)
 			.pipe(sourcemaps.init())
@@ -27,7 +27,7 @@ module.exports = function(gulp, config){
 				require('postcss-color-function'),
 				require('autoprefixer')({ browsers: [ 'last 2 versions' ]})
 			]))
-			.on('error', notify.onError(function(err){
+			.on('error', notify.onError(function(err) {
 				return err.message;
 			}))
 			.pipe(gutil.env.production ? require('gulp-cssnano')() : gutil.noop())

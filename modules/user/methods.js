@@ -9,14 +9,14 @@ var Promise = require('promise');
 /**
  *
  */
-module.exports = function(mod, generateMethods){
+module.exports = function(mod, generateMethods) {
 	var methods = generateMethods(mod);
 
 	methods.create.hooks = {
-		pre: function(data, next){
+		pre: function(data, next) {
 			var password = bases.base62.generateToken(8);
-			bcrypt.hash(password, 10, function(err, hash){
-				if (err){
+			bcrypt.hash(password, 10, function(err, hash) {
+				if (err) {
 					console.error(err);
 					return next(new Error(err.message));
 				}
@@ -31,11 +31,11 @@ module.exports = function(mod, generateMethods){
 				};
 
 				mail.send(mailData).then(
-					function(body){
+					function(body) {
 						data.password = hash;
 						next();
 					},
-					function(err){
+					function(err) {
 						next(err);
 					}
 				);

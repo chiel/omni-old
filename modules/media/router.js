@@ -7,9 +7,9 @@ var rtrim = require('mout/string/rtrim');
 var config = require('../../core/config');
 var uploads = require('path').normalize(config.upload.path);
 
-var stat = function(file){
-	return new Promise(function(resolve, reject){
-		fs.stat(file, function(err, stats){
+var stat = function(file) {
+	return new Promise(function(resolve, reject) {
+		fs.stat(file, function(err, stats) {
 			if (err) return reject(err);
 
 			var fullPath = file + (stats.isDirectory() ? '/' : '');
@@ -26,83 +26,83 @@ var stat = function(file){
 	});
 };
 
-var statFiles = function(files){
-	return new Promise(function(resolve, reject){
+var statFiles = function(files) {
+	return new Promise(function(resolve, reject) {
 		Promise.all(map(files, stat)).then(resolve, reject);
 	});
 };
 
-var readdir = function(dir){
-	return new Promise(function(resolve, reject){
-		fs.readdir(dir, function(err, files){
+var readdir = function(dir) {
+	return new Promise(function(resolve, reject) {
+		fs.readdir(dir, function(err, files) {
 			if (err) return reject(err);
 
-			resolve(map(files, function(file){
+			resolve(map(files, function(file) {
 				return dir + file;
 			}));
 		});
 	});
 };
 
-var readfile = function(path){
-	return new Promise(function(resolve, reject){
+var readfile = function(path) {
+	return new Promise(function(resolve, reject) {
 		stat(path).then(resolve, reject);
 	});
 };
 
-var readpath = function(path){
-	return new Promise(function(resolve, reject){
-		fs.stat(path, function(err, stats){
-			if (err){
+var readpath = function(path) {
+	return new Promise(function(resolve, reject) {
+		fs.stat(path, function(err, stats) {
+			if (err) {
 				return console.error(err);
 			}
-			if (stats.isDirectory()){
-				readdir(path + '/').then(statFiles).then(function(files){
+			if (stats.isDirectory()) {
+				readdir(path + '/').then(statFiles).then(function(files) {
 					resolve({
 						type: 'directory',
 						files: files
 					});
 				}, reject);
-			} else{
+			} else {
 				readfile(path).then(resolve, reject);
 			}
 		});
 	});
 };
 
-module.exports = function(mod, generate){
+module.exports = function(mod, generate) {
 	var router = require('express').Router();
 
-	router.get('/', function(req, res){
+	router.get('/', function(req, res) {
 		var path = rtrim(req.query.path || '', '/');
 
-		readpath(uploads + path).then(function(data){
+		readpath(uploads + path).then(function(data) {
 			res.json(data);
-		}, function(err){
+		}, function(err) {
 			console.error(err);
 		});
 	});
 
-	router.post('/upload/', function(req, res){
-		req.busboy.on('file', function(fieldname, file, filename){
+	router.post('/upload/', function(req, res) {
+		req.busboy.on('file', function(fieldname, file, filename) {
 			var dest = uploads + rtrim(req.query.path || '', '/') + '/' + filename;
 			var stream = fs.createWriteStream(dest);
 			file.pipe(stream);
 		});
 
-		req.busboy.on('finish', function(){
+		req.busboy.on('finish', function() {
 			res.json({ status: 'ok' });
 		});
 
 		req.pipe(req.busboy);
 	});
 
-	router.get('/focus/', function(req, res){
+	router.get('/focus/', function(req, res) {
 		mod.methods.findOne({ path: req.query.path }).then(
-			function(item){
+			function(item) {
 				res.json(item);
 			},
-			function(err){
+			function(err) {
 				res
 					.status(err.status || 500)
 					.json({ error: err });
@@ -110,12 +110,12 @@ module.exports = function(mod, generate){
 		);
 	});
 
-	router.post('/focus/', function(req, res){
+	router.post('/focus/', function(req, res) {
 		mod.methods.updateFocus(req.body).then(
-			function(){
+			function() {
 				res.json({ status: 'ok' });
 			},
-			function(err){
+			function(err) {
 				res
 					.status(err.status || 500)
 					.json({ error: err });

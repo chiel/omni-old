@@ -10,8 +10,8 @@ var generateSchema = require('./generators/schema');
 var generateRouter = require('./generators/router');
 var generateValidators = require('./generators/validators');
 
-var Module = function(modulePath){
-	if (!(this instanceof Module)){
+var Module = function(modulePath) {
+	if (!(this instanceof Module)) {
 		return new Module();
 	}
 
@@ -39,9 +39,9 @@ var Module = function(modulePath){
  * should export a function which accepts the manifest as a first argument and
  * return the (potentially modified) manifest.
  */
-Module.prototype.loadManifest = function(){
+Module.prototype.loadManifest = function() {
 	var manifest = {};
-	if (fs.existsSync(this.path + '/manifest.json')){
+	if (fs.existsSync(this.path + '/manifest.json')) {
 		manifest = require(this.path + '/manifest.json');
 	}
 
@@ -49,7 +49,7 @@ Module.prototype.loadManifest = function(){
 	manifest.slug = manifest.slug !== undefined ? manifest.slug : dirname;
 	manifest.collection = manifest.collection || dirname;
 
-	if (fs.existsSync(this.path + '/manifest.js')){
+	if (fs.existsSync(this.path + '/manifest.js')) {
 		manifest = require(this.path + '/manifest')(manifest);
 	}
 
@@ -59,8 +59,8 @@ Module.prototype.loadManifest = function(){
 /**
  * Load or generate this module's input validators
  */
-Module.prototype.loadValidators = function(){
-	if (fs.existsSync(this.path + '/validators.js')){
+Module.prototype.loadValidators = function() {
+	if (fs.existsSync(this.path + '/validators.js')) {
 		this.validators = require(this.path + '/validators')(this, generateValidators);
 		return;
 	}
@@ -73,8 +73,8 @@ Module.prototype.loadValidators = function(){
 /**
  * Load or generate this module's mongoose schema
  */
-Module.prototype.loadSchema = function(){
-	if (fs.existsSync(this.path + '/schema.js')){
+Module.prototype.loadSchema = function() {
+	if (fs.existsSync(this.path + '/schema.js')) {
 		this.schema = require(this.path + '/schema')(this, generateSchema);
 		return;
 	}
@@ -87,7 +87,7 @@ Module.prototype.loadSchema = function(){
 /**
  * Create a mongoose model for the module's schema, if available
  */
-Module.prototype.createModel = function(){
+Module.prototype.createModel = function() {
 	if (!this.schema) return;
 
 	this.Model = mongoose.model(
@@ -100,15 +100,15 @@ Module.prototype.createModel = function(){
 /**
  * Load any available api adaptors for this module
  */
-Module.prototype.loadAdaptors = function(){
+Module.prototype.loadAdaptors = function() {
 	var dir = this.path + '/adaptors';
 	if (!fs.existsSync(dir)) return;
 
 	var match;
 	var files = fs.readdirSync(dir);
-	for (var i = 0; i < files.length; i++){
+	for (var i = 0; i < files.length; i++) {
 		match = files[i].match(/^(.*)\.js$/);
-		if (match){
+		if (match) {
 			adaptors[match[1]] = require(dir + '/' + match[1])(this);
 		}
 	}
@@ -117,8 +117,8 @@ Module.prototype.loadAdaptors = function(){
 /**
  * Load or generate methods for this module
  */
-Module.prototype.loadMethods = function(){
-	if (fs.existsSync(this.path + '/methods.js')){
+Module.prototype.loadMethods = function() {
+	if (fs.existsSync(this.path + '/methods.js')) {
 		this.methods = require(this.path + '/methods')(this, generateMethods);
 		return;
 	}
@@ -131,8 +131,8 @@ Module.prototype.loadMethods = function(){
 /**
  * Attempt to load this module's api router
  */
-Module.prototype.loadApiRouter = function(){
-	if (fs.existsSync(this.path + '/api_router.js')){
+Module.prototype.loadApiRouter = function() {
+	if (fs.existsSync(this.path + '/api_router.js')) {
 		this.apiRouter = require(this.path + '/api_router')(this, auth);
 	}
 };
@@ -140,8 +140,8 @@ Module.prototype.loadApiRouter = function(){
 /**
  * Load or generate router for this module
  */
-Module.prototype.loadRouter = function(){
-	if (fs.existsSync(this.path + '/router.js')){
+Module.prototype.loadRouter = function() {
+	if (fs.existsSync(this.path + '/router.js')) {
 		this.router = require(this.path + '/router')(this, generateRouter);
 		return;
 	}

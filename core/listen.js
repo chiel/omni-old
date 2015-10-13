@@ -7,9 +7,9 @@ var config = require('./config');
 var listen = require('listen.js');
 var loadModule = require('../lib/loadmodule');
 
-module.exports = function(){
+module.exports = function() {
 	var modules = cache.get('modules');
-	for (var i = 0; i < modules.length; i++){
+	for (var i = 0; i < modules.length; i++) {
 		loadModule(modules[i]);
 	}
 	listen(app, config.listen);

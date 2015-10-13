@@ -6,7 +6,7 @@ var cache = require('./core/cache');
 var loadConfig = require('./lib/loadconfig');
 var registerModule = require('./lib/register_module');
 
-module.exports = function(config){
+module.exports = function(config) {
 	debug('initialising core');
 
 	loadConfig(require(__dirname + '/config.json'));
@@ -14,16 +14,16 @@ module.exports = function(config){
 	require('./core/setup');
 	require('./core/middleware');
 
-	fs.readdirSync(__dirname + '/modules').forEach(function(moduleName){
+	fs.readdirSync(__dirname + '/modules').forEach(function(moduleName) {
 		registerModule(__dirname + '/modules/' + moduleName);
 	});
 
 	return {
 		registerModule: registerModule,
-		listen: function(){
+		listen: function() {
 			require('./core/listen')();
 		},
-		setNavigation: function(nav){
+		setNavigation: function(nav) {
 			cache.set('navigation', nav);
 		}
 	};

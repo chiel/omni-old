@@ -16,8 +16,8 @@ var crops = [ null ].concat(get(config, 'images.crops') || []);
  *
  * @return {Promise}
  */
-var getFocus = function(path){
-	return new Promise(function(resolve, reject){
+var getFocus = function(path) {
+	return new Promise(function(resolve, reject) {
 		fetch('/media/focus/?path=' + encodeURIComponent(path), {
 			headers: {
 				'Accept': 'application/json',
@@ -25,9 +25,9 @@ var getFocus = function(path){
 			},
 			credentials: 'include'
 		}).then(
-			function(res){
+			function(res) {
 				res.json().then(
-					function(json){
+					function(json) {
 						resolve(json ? json.focus : null);
 					}
 				);
@@ -43,7 +43,7 @@ var getFocus = function(path){
  * @param {Number} x
  * @param {Number} y
  */
-var updateFocus = function(path, x, y){
+var updateFocus = function(path, x, y) {
 	fetch('/media/focus/', {
 		method: 'post',
 		headers: {
@@ -53,12 +53,12 @@ var updateFocus = function(path, x, y){
 		credentials: 'include',
 		body: JSON.stringify({ path: path, focus: { x: x, y: y }})
 	}).then(
-		function(res){
+		function(res) {
 			res.json().then(
-				function(json){
-					if (res.status < 200 || res.status > 299){
+				function(json) {
+					if (res.status < 200 || res.status > 299) {
 						disclose.error(json.error.message || json.error.type, { sticky: true });
-					} else{
+					} else {
 						disclose.success('Focus has been saved.');
 					}
 				}
@@ -72,15 +72,15 @@ var updateFocus = function(path, x, y){
  * @param {Object} data
  * @param {Object} options
  */
-var imageType = function(panel, data, options){
-	finderImage(panel, data, options, function(){
+var imageType = function(panel, data, options) {
+	finderImage(panel, data, options, function() {
 		var img = panel.querySelector('img');
 
 		var fieldset = document.createElement('fieldset');
 		fieldset.classList.add('focal__crops');
 
 		var p, input;
-		for (var i = 0; i < crops.length; i++){
+		for (var i = 0; i < crops.length; i++) {
 			p = crops[i];
 			input = document.createElement('input');
 			input.type = 'radio';
@@ -91,17 +91,17 @@ var imageType = function(panel, data, options){
 		}
 
 		var focal;
-		getFocus(data.relative_path).then(function(focus){
+		getFocus(data.relative_path).then(function(focus) {
 			focal = new Focal(img, { focus: focus || {}});
 			focal.wrap.appendChild(fieldset);
 			focal.wrap.getBoundingClientRect();
 			focal.wrap.classList.add('is-loaded');
-			focal.on('change', function(x, y){
+			focal.on('change', function(x, y) {
 				updateFocus(data.relative_path, x, y);
 			});
 		});
 
-		fieldset.addEventListener('change', function(e){
+		fieldset.addEventListener('change', function(e) {
 			var index = fieldset.querySelector('input:checked').dataset.index;
 			var p = crops[index];
 			if (!p) return focal.setPreview(null);

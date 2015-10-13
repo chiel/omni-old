@@ -4,7 +4,7 @@ var cache = require('../cache');
 var config = require('../config');
 var pkg = require('../../package.json');
 
-module.exports = function(req, res, next){
+module.exports = function(req, res, next) {
 	res.locals.config = {
 		images: config.images
 	};

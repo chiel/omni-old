@@ -11,20 +11,20 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var watchify = require('watchify');
 
-module.exports = function(gulp, config){
-	gulp.task('scripts', [ 'blocks', 'templates' ], function(){
-		var entries = config.scripts.targets.map(function(target){
+module.exports = function(gulp, config) {
+	gulp.task('scripts', [ 'blocks', 'templates' ], function() {
+		var entries = config.scripts.targets.map(function(target) {
 			return target.input;
 		});
 
-		var createOutputStreams = function(){
-			return config.scripts.targets.map(function(target){
+		var createOutputStreams = function() {
+			return config.scripts.targets.map(function(target) {
 				return handleBundle(target.output);
 			});
 		};
 
-		var handleBundle = function(name){
-			return concat(function(body){
+		var handleBundle = function(name) {
+			return concat(function(body) {
 				return file(path.basename(name), body, { src: true })
 					.pipe(sourcemaps.init({ loadMaps: true }))
 					.pipe(gutil.env.production ? uglify() : gutil.noop())
@@ -42,15 +42,15 @@ module.exports = function(gulp, config){
 			.transform(require('deamdify'), { global: true })
 			.plugin(require('factor-bundle'), { outputs: createOutputStreams });
 
-		var bundle = function(){
+		var bundle = function() {
 			return bundler.bundle()
-				.on('error', notify.onError(function(err){
+				.on('error', notify.onError(function(err) {
 					return err.message;
 				}))
 				.pipe(handleBundle(config.scripts.common));
 		};
 
-		if (!gutil.env.production){
+		if (!gutil.env.production) {
 			bundler = watchify(bundler);
 			bundler.on('update', bundle);
 		}

@@ -9,8 +9,8 @@ var TextareaField = require('informal/fields/textarea');
  *
  * @return {MarkdownField}
  */
-var MarkdownField = function(spec){
-	if (!(this instanceof MarkdownField)){
+var MarkdownField = function(spec) {
+	if (!(this instanceof MarkdownField)) {
 		return new MarkdownField(spec);
 	}
 
@@ -22,7 +22,7 @@ require('util').inherits(MarkdownField, TextareaField);
 /**
  * Build the field
  */
-MarkdownField.prototype.build = function(){
+MarkdownField.prototype.build = function() {
 	if (this.wrap) return;
 
 	TextareaField.prototype.build.call(this);
@@ -33,7 +33,7 @@ MarkdownField.prototype.build = function(){
 	var actions = [ 'bold', 'italic', 'url' ];
 	var btn;
 
-	for (var i = 0; i < actions.length; i++){
+	for (var i = 0; i < actions.length; i++) {
 		btn = document.createElement('button');
 		btn.classList.add('btn', 'btn-primary', 'btn-small');
 		btn.type = 'button';
@@ -44,7 +44,7 @@ MarkdownField.prototype.build = function(){
 	}
 
 	var self = this;
-	topbar.addEventListener('click', function(e){
+	topbar.addEventListener('click', function(e) {
 		var action = e.target.dataset.action;
 		if (!action) return;
 
@@ -71,7 +71,7 @@ MarkdownField.prototype.build = function(){
  * @param {String} before - Characters to prepend to selection
  * @param {String} after - Characters to append to selection
  */
-MarkdownField.prototype.wrapSelection = function(before, after){
+MarkdownField.prototype.wrapSelection = function(before, after) {
 	var start = this.input.selectionStart;
 	var end = this.input.selectionEnd;
 	var value = this.input.value;

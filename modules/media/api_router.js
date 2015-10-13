@@ -16,22 +16,22 @@ var uploads = require('path').normalize(config.upload.path);
  *
  * @return {Object}
  */
-var calculateBounds = function(width, height, maxWidth, maxHeight, x, y){
+var calculateBounds = function(width, height, maxWidth, maxHeight, x, y) {
 	var newWidth = width;
 	var newHeight = height;
 	var ratio;
 
-	if (newWidth < maxWidth && newHeight < maxHeight){
+	if (newWidth < maxWidth && newHeight < maxHeight) {
 		ratio = maxWidth / newWidth;
 		newWidth *= ratio;
 		newHeight *= ratio;
 	}
-	if (newWidth > maxWidth){
+	if (newWidth > maxWidth) {
 		ratio = maxWidth / newWidth;
 		newWidth *= ratio;
 		newHeight *= ratio;
 	}
-	if (newHeight > maxHeight){
+	if (newHeight > maxHeight) {
 		ratio = maxHeight / newHeight;
 		newWidth *= ratio;
 		newHeight *= ratio;
@@ -44,17 +44,17 @@ var calculateBounds = function(width, height, maxWidth, maxHeight, x, y){
 
 	var x = point.x - (newWidth / 2);
 	var y = point.y - (newHeight / 2);
-	if (x < 0){
+	if (x < 0) {
 		x = 0;
 	}
-	if ((x + newWidth) > maxWidth){
+	if ((x + newWidth) > maxWidth) {
 		x = maxWidth - newWidth;
 	}
 
-	if (y < 0){
+	if (y < 0) {
 		y = 0;
 	}
-	if ((y + newHeight) > maxHeight){
+	if ((y + newHeight) > maxHeight) {
 		y = maxHeight - newHeight;
 	}
 
@@ -70,26 +70,26 @@ var calculateBounds = function(width, height, maxWidth, maxHeight, x, y){
  * @param {Module} mod
  * @param {Function[]} auth - Authentication middleware
  */
-module.exports = function(mod, auth){
+module.exports = function(mod, auth) {
 	var router = require('express').Router();
 
-	router.get(/^\/images(?:\/([0-9]+)x([0-9]+))?(?:\/(contain|cover))?(.*)$/, auth, function(req, res, next){
+	router.get(/^\/images(?:\/([0-9]+)x([0-9]+))?(?:\/(contain|cover))?(.*)$/, auth, function(req, res, next) {
 		var width = req.params[0];
 		var height = req.params[1];
 		var mode = req.params[2] || 'cover';
 		var path = req.params[3];
 
-		try{
+		try {
 			var img = gm(uploads + path);
 		} catch (err) {
 			console.error(err);
 			return;
 		}
 
-		var crop = function(x, y){
-			if (x && y && width && height){
-				return img.size(function(err, size){
-					if (err){
+		var crop = function(x, y) {
+			if (x && y && width && height) {
+				return img.size(function(err, size) {
+					if (err) {
 						console.error(err);
 						return;
 					}
@@ -110,16 +110,16 @@ module.exports = function(mod, auth){
 			img.stream().pipe(res);
 		};
 
-		if (!width || !height){
+		if (!width || !height) {
 			return crop();
 		}
 
 		mod.methods.findOne({ path: path }).then(
-			function(item){
+			function(item) {
 				crop(item.focus.x, item.focus.y);
 			},
-			function(err){
-				if (err.name !== 'NotFoundError'){
+			function(err) {
+				if (err.name !== 'NotFoundError') {
 					console.error(err);
 				}
 

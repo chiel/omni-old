@@ -13,7 +13,7 @@ var map = require('mout/array/map');
  * @param {Array} spec.options - Options for the multi option field
  * @param {Array} values
  */
-var ApiMultiOptionField = function(spec, values){
+var ApiMultiOptionField = function(spec, values) {
 	MultiOptionField.call(this, spec, values);
 
 	var self = this;
@@ -23,11 +23,11 @@ var ApiMultiOptionField = function(spec, values){
 		},
 		credentials: 'include'
 	})
-	.then(function(res){
+	.then(function(res) {
 		return res.json();
 	})
-	.then(function(data){
-		self.buildOptions(map(data, function(item){
+	.then(function(data) {
+		self.buildOptions(map(data, function(item) {
 			return {
 				value: get(item, self.spec.valueField),
 				label: get(item, self.spec.labelField)

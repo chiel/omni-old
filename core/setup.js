@@ -17,7 +17,7 @@ var swigDefaults = {
 	loader: require('./swig/loader')
 };
 
-if (app.settings.env == 'development'){
+if (app.settings.env == 'development') {
 	debug('disabling swig cache');
 	swigDefaults.cache = false;
 }

@@ -27,32 +27,32 @@ var types = {
 	builder: mongoose.Schema.Types.Mixed
 };
 
-var generateSchema = function(mod){
+var generateSchema = function(mod) {
 	if (!mod.manifest || !mod.manifest.forms) return;
 
 	var fields = mod.manifest.forms.create.fields;
 	var schema = {};
 	var def;
 
-	forOwn(fields, function(field, name){
+	forOwn(fields, function(field, name) {
 		name = (field.name || name).replace(/\[/g, '.').replace(/\]/g, '');
 		field.type = field.type || 'text';
 
-		if (isArray(types[field.type])){
+		if (isArray(types[field.type])) {
 			def = { type: types[field.type][0] };
-		} else{
+		} else {
 			def = { type: types[field.type] };
 		}
 
-		if (field.required){
+		if (field.required) {
 			def.required = true;
 		}
 
-		if (field.unique){
+		if (field.unique) {
 			def.index = { unique: true };
 		}
 
-		if (isArray(types[field.type])){
+		if (isArray(types[field.type])) {
 			def = [ def ];
 		}
 
@@ -60,7 +60,7 @@ var generateSchema = function(mod){
 	});
 
 	schema = new mongoose.Schema(schema);
-	schema.options.toJSON = { transform: function(doc, ret, options){
+	schema.options.toJSON = { transform: function(doc, ret, options) {
 		delete ret.__v;
 	}};
 

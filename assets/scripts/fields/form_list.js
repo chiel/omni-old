@@ -10,7 +10,7 @@ var Sortable = require('sortable.js');
  * @param {Object} spec
  * @param {Array} value
  */
-var FormListField = function(spec, value){
+var FormListField = function(spec, value) {
 	this.spec = spec;
 	this.value = value;
 	this.forms = {};
@@ -22,7 +22,7 @@ var FormListField = function(spec, value){
 /**
  * Build specific elements
  */
-FormListField.prototype.build = function(){
+FormListField.prototype.build = function() {
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
@@ -45,8 +45,8 @@ FormListField.prototype.build = function(){
 	wrap.appendChild(items);
 	this.items = items;
 
-	if (this.value){
-		for (var i = 0; i < this.value.length; i++){
+	if (this.value) {
+		for (var i = 0; i < this.value.length; i++) {
 			this.addItem(this.value[i]);
 		}
 	}
@@ -58,19 +58,19 @@ FormListField.prototype.build = function(){
 /**
  * Set events
  */
-FormListField.prototype.setEvents = function(){
+FormListField.prototype.setEvents = function() {
 	this.sortable = new Sortable(this.items, {
 		handle: '.informal__field-form-list-handle'
 	});
 
 	var self = this;
-	this.addBtn.addEventListener('click', function(e){
+	this.addBtn.addEventListener('click', function(e) {
 		e.preventDefault();
 		self.addItem();
 	});
 
-	this.items.addEventListener('click', function(e){
-		if (e.target.classList.contains('act-remove')){
+	this.items.addEventListener('click', function(e) {
+		if (e.target.classList.contains('act-remove')) {
 			e.preventDefault();
 			e.stopPropagation();
 			self.items.removeChild(e.target.parentNode);
@@ -82,7 +82,7 @@ FormListField.prototype.setEvents = function(){
  * Add a value to the list
  * @param {Object} data
  */
-FormListField.prototype.addItem = function(data){
+FormListField.prototype.addItem = function(data) {
 	var index = this.itemIndex++;
 
 	var li = document.createElement('li');
@@ -109,10 +109,10 @@ FormListField.prototype.addItem = function(data){
 /**
  * Get all values
  */
-FormListField.prototype.getValue = function(){
+FormListField.prototype.getValue = function() {
 	var self = this;
 
-	return map(this.items.children, function(el){
+	return map(this.items.children, function(el) {
 		return self.forms[el.dataset.index].getValues();
 	});
 };

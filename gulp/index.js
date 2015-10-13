@@ -11,21 +11,21 @@ config.nodemon.watch.push(root);
 
 readModule(root, 'omni');
 
-fs.readdirSync(root + '/modules').forEach(function(moduleName){
+fs.readdirSync(root + '/modules').forEach(function(moduleName) {
 	readModule(root + '/modules/' + moduleName, moduleName);
 });
 
-module.exports = function(gulp){
-	fs.readdirSync(__dirname + '/tasks').forEach(function(fileName){
+module.exports = function(gulp) {
+	fs.readdirSync(__dirname + '/tasks').forEach(function(fileName) {
 		require(__dirname + '/tasks/' + fileName)(gulp, config);
 	});
 
-	config.gulpfiles.forEach(function(file){
+	config.gulpfiles.forEach(function(file) {
 		require(file)(gulp, config);
 	});
 
 	var tasks = [ 'scripts', 'styles', 'symlink' ];
-	if (!gutil.env.production){
+	if (!gutil.env.production) {
 		tasks.push('nodemon', 'watch');
 		livereload.listen();
 	}

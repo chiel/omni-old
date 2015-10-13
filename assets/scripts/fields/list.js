@@ -10,7 +10,7 @@ var Sortable = require('sortable.js');
  * @param {Object} spec
  * @param {Array} value
  */
-var ListField = function(spec, value){
+var ListField = function(spec, value) {
 	this.spec = spec;
 	this.value = value;
 	this.forms = {};
@@ -29,7 +29,7 @@ var ListField = function(spec, value){
 /**
  * Build specific elements
  */
-ListField.prototype.build = function(){
+ListField.prototype.build = function() {
 	if (this.wrap) return;
 
 	var wrap = document.createElement('div');
@@ -52,8 +52,8 @@ ListField.prototype.build = function(){
 	wrap.appendChild(items);
 	this.items = items;
 
-	if (this.value){
-		for (var i = 0; i < this.value.length; i++){
+	if (this.value) {
+		for (var i = 0; i < this.value.length; i++) {
 			this.addItem(this.value[i]);
 		}
 	}
@@ -65,19 +65,19 @@ ListField.prototype.build = function(){
 /**
  * Set events
  */
-ListField.prototype.setEvents = function(){
+ListField.prototype.setEvents = function() {
 	this.sortable = new Sortable(this.items, {
 		handle: '.informal__field-list-handle'
 	});
 
 	var self = this;
-	this.addBtn.addEventListener('click', function(e){
+	this.addBtn.addEventListener('click', function(e) {
 		e.preventDefault();
 		self.addItem();
 	});
 
-	this.items.addEventListener('click', function(e){
-		if (e.target.classList.contains('act-remove')){
+	this.items.addEventListener('click', function(e) {
+		if (e.target.classList.contains('act-remove')) {
 			e.preventDefault();
 			self.items.removeChild(e.target.parentNode);
 		}
@@ -88,7 +88,7 @@ ListField.prototype.setEvents = function(){
  * Add a value to the list
  * @param {Object} data
  */
-ListField.prototype.addItem = function(data){
+ListField.prototype.addItem = function(data) {
 	if (data) data = { field: data };
 	var index = this.itemIndex++;
 
@@ -115,10 +115,10 @@ ListField.prototype.addItem = function(data){
 /**
  * Get all values
  */
-ListField.prototype.getValue = function(){
+ListField.prototype.getValue = function() {
 	var self = this;
 
-	return map(this.items.children, function(el){
+	return map(this.items.children, function(el) {
 		return self.forms[el.dataset.index].getValues().field;
 	});
 };

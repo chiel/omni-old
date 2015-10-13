@@ -2,8 +2,8 @@
 
 var SessionUser = require('../../modules/user/sessionuser');
 
-module.exports = function(req, res, next){
-	if (req.session && req.session.userData){
+module.exports = function(req, res, next) {
+	if (req.session && req.session.userData) {
 		req.user = new SessionUser(req.session.userData);
 		return next();
 	}

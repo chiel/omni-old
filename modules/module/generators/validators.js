@@ -33,7 +33,7 @@ var types = {
  *
  * @return {Object}
  */
-var generateJSONSchema = function(fields){
+var generateJSONSchema = function(fields) {
 	var objectBase = {
 		type: 'object',
 		additionalProperties: false,
@@ -43,17 +43,17 @@ var generateJSONSchema = function(fields){
 	var schema = merge({}, objectBase);
 
 	var o, p, def;
-	forOwn(fields, function(field, name){
+	forOwn(fields, function(field, name) {
 		name = (field.name || name).replace(/\[/g, '.').replace(/\]/g, '').split('.');
 		field.type = field.type || 'text';
 
 		o = schema.properties;
 
-		while (name.length){
+		while (name.length) {
 			p = name.shift();
 			if (!name.length) break;
 
-			if (!o[p]){
+			if (!o[p]) {
 				o[p] = merge({}, objectBase);
 			}
 			o = o[p].properties;
@@ -61,7 +61,7 @@ var generateJSONSchema = function(fields){
 
 		def = merge({}, types[field.type]);
 
-		if (field.required){
+		if (field.required) {
 			def.required = true;
 		}
 
@@ -76,10 +76,10 @@ var generateJSONSchema = function(fields){
  *
  * @param {Object} schema
  */
-var generateValidator = function(schema){
+var generateValidator = function(schema) {
 	var validate = validator(schema);
 
-	return function(data){
+	return function(data) {
 		if (validate(data)) return;
 		throw new ValidationError(schema, validate.errors);
 	};
@@ -92,11 +92,11 @@ var generateValidator = function(schema){
  *
  * @return {Object}
  */
-var generateValidators = function(mod){
+var generateValidators = function(mod) {
 	if (!mod.manifest.forms) return {};
 
 	var validators = {};
-	forOwn(mod.manifest.forms, function(form, formType){
+	forOwn(mod.manifest.forms, function(form, formType) {
 		validators[formType] = generateValidator(generateJSONSchema(form.fields));
 	});
 

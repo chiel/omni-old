@@ -10,13 +10,13 @@ require('mongoose').connect(argv.mongo);
 var Module = require('./modules/module/module');
 var user = new Module(__dirname + '/modules/user');
 
-user.Model.findOne({ email: argv.email }, function(err, doc){
-	if (err){
+user.Model.findOne({ email: argv.email }, function(err, doc) {
+	if (err) {
 		console.error(err);
 		process.exit(1);
 	}
 
-	if (doc){
+	if (doc) {
 		console.log('User already exists');
 		process.exit(0);
 	}
@@ -25,8 +25,8 @@ user.Model.findOne({ email: argv.email }, function(err, doc){
 		email: argv.email,
 		password: argv.password,
 		superadmin: true
-	}).save(function(err){
-		if (err){
+	}).save(function(err) {
+		if (err) {
 			console.error(err);
 			process.exit(1);
 		}

@@ -20,39 +20,39 @@ var validator = require('../../../lib/validator')(require('../schemas/password.j
  *
  * @return {Promise}
  */
-module.exports = function(data){
-	return new Promise(function(resolve, reject){
-		try{
+module.exports = function(data) {
+	return new Promise(function(resolve, reject) {
+		try {
 			validator.validate(data);
 		} catch (err){
 			return reject(err);
 		}
 
-		modules.user.Model.findOne({ email: data.email }).populate('roles').exec(function(err, user){
-			if (err){
+		modules.user.Model.findOne({ email: data.email }).populate('roles').exec(function(err, user) {
+			if (err) {
 				console.error('UNHANDLED', err);
 				return reject(new UnknownError());
 			}
 
-			if (!user){
+			if (!user) {
 				return reject(new NotFoundError('Could not find user `' + data.email + '`'));
 			}
 
-			bcrypt.compare(data.password, user.password, function(err, equal){
-				if (err){
+			bcrypt.compare(data.password, user.password, function(err, equal) {
+				if (err) {
 					console.error(err);
 					return reject(new BcryptError('Failed to do bcrypt compare'));
 				}
 
-				if (!equal){
+				if (!equal) {
 					return reject(new AuthorizationError('wrong_password', 'Wrong password'));
 				}
 
 				user = user.toObject();
 
 				var rights = {};
-				user.roles.forEach(function(role){
-					forOwn(role.modules, function(roleRights, moduleName){
+				user.roles.forEach(function(role) {
+					forOwn(role.modules, function(roleRights, moduleName) {
 						if (!rights[moduleName]) rights[moduleName] = {};
 						mixIn(rights[moduleName], roleRights);
 					});

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(mod){
+module.exports = function(mod) {
 	return {
 		path: String,
 		focus: {

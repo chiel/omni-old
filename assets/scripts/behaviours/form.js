@@ -3,13 +3,13 @@
 var informal = require('informal/all');
 var disclose = require('../disclose');
 
-module.exports = function(el){
+module.exports = function(el) {
 	var specEl = el.querySelector('[data-informal-spec]');
 	var dataEl = el.querySelector('[data-informal-data]');
 	if (!specEl) return;
 
 	var spec;
-	try{
+	try {
 		spec = JSON.parse(specEl.textContent);
 	} catch (e){
 		console.error('Failed to parse json for form');
@@ -17,8 +17,8 @@ module.exports = function(el){
 	}
 
 	var data;
-	if (dataEl){
-		try{
+	if (dataEl) {
+		try {
 			data = JSON.parse(dataEl.textContent);
 		} catch (e){}
 	}
@@ -27,7 +27,7 @@ module.exports = function(el){
 	specEl.parentNode.insertBefore(form.wrap, specEl);
 
 	var btn = el.querySelector('[type=submit]');
-	el.addEventListener('submit', function(e){
+	el.addEventListener('submit', function(e) {
 		e.preventDefault();
 
 		btn.disabled = true;
@@ -42,14 +42,14 @@ module.exports = function(el){
 			credentials: 'include',
 			body: JSON.stringify(form.getValues())
 		})
-		.then(function(res){
-			res.json().then(function(json){
-				if (res.status < 200 || res.status > 299){
+		.then(function(res) {
+			res.json().then(function(json) {
+				if (res.status < 200 || res.status > 299) {
 					disclose.error(json.error.message || json.error.type, { sticky: true });
-				} else{
-					if (res.headers.get('location')){
+				} else {
+					if (res.headers.get('location')) {
 						window.location = res.headers.get('location');
-					} else{
+					} else {
 						disclose.success('Save was successful.');
 					}
 				}

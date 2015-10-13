@@ -5,8 +5,8 @@ var informal = require('informal');
 /**
  * BaseBlock
  */
-var BaseBlock = function(data, wrap, callback){
-	if (!(this instanceof BaseBlock)){
+var BaseBlock = function(data, wrap, callback) {
+	if (!(this instanceof BaseBlock)) {
 		return new BaseBlock(wrap, callback);
 	}
 
@@ -27,7 +27,7 @@ BaseBlock.prototype.meta = BaseBlock.meta = {
 /**
  * Build block details
  */
-BaseBlock.prototype._build = function(){
+BaseBlock.prototype._build = function() {
 	if (!this.formSpec) return;
 
 	var wrap = document.createElement('form');
@@ -55,10 +55,10 @@ BaseBlock.prototype._build = function(){
 /**
  * Set block events
  */
-BaseBlock.prototype._setEvents = function(){
+BaseBlock.prototype._setEvents = function() {
 	var self = this;
 
-	self.wrap.addEventListener('submit', function(e){
+	self.wrap.addEventListener('submit', function(e) {
 		e.preventDefault();
 		self.callback(self.form.getValues());
 	});

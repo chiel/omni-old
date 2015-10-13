@@ -1,6 +1,6 @@
 'use strict';
 
-var AuthError = function(code, message){
+var AuthError = function(code, message) {
 	this.code = code;
 	this.message = message;
 };

@@ -1,18 +1,18 @@
 'use strict';
 
-var renderNav = function(nodes){
+var renderNav = function(nodes) {
 	var html = [], i, node;
 	html.push('<ul>');
 
-	for (i = 0; i < nodes.length; i++){
+	for (i = 0; i < nodes.length; i++) {
 		node = nodes[i];
 		html.push('<li>');
-		if (node.url){
+		if (node.url) {
 			html.push('<a href="', node.url, '">', node.label, '</a>');
 		} else {
 			html.push('<span>', node.label, '</span>');
 		}
-		if (node.children && node.children.length){
+		if (node.children && node.children.length) {
 			html.push(renderNav(node.children));
 		}
 		html.push('</li>');

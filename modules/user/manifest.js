@@ -9,7 +9,7 @@ var merge = require('mout/object/merge');
  *
  * @return {Object}
  */
-module.exports = function(manifest){
+module.exports = function(manifest) {
 	var baseForm = {
 		tabs: [{ objects: [ 'email', 'roles', 'superadmin' ]}],
 
