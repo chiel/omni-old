@@ -1,8 +1,8 @@
 'use strict';
 
-var app = require('./app');
-var swig = require('swig');
-var debug = require('debug')('omni:core:setup');
+const app   = require('./app');
+const swig  = require('swig');
+const debug = require('debug')('omni:core:setup');
 
 require('./db');
 
@@ -13,7 +13,7 @@ app
 .set('views', __dirname + '/../views')
 .enable('strict routing');
 
-var swigDefaults = {
+let swigDefaults = {
 	loader: require('./swig/loader')
 };
 

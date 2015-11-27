@@ -4,9 +4,11 @@ var symlink = require('gulp-symlink');
 
 module.exports = function(gulp, config) {
 	gulp.task('symlink', function() {
-		var i, target, srcs = [], dests = [];
+		var srcs = [];
+		var dests = [];
+		var target;
 
-		for (i = 0; i < config.symlink.targets.length; i++) {
+		for (var i = 0; i < config.symlink.targets.length; i++) {
 			target = config.symlink.targets[i];
 			srcs.push(target.src);
 			dests.push(target.dest);

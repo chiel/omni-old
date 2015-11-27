@@ -1,10 +1,11 @@
 'use strict';
 
 var renderNav = function(nodes) {
-	var html = [], i, node;
+	var html = [];
+	var node;
 	html.push('<ul>');
 
-	for (i = 0; i < nodes.length; i++) {
+	for (var i = 0; i < nodes.length; i++) {
 		node = nodes[i];
 		html.push('<li>');
 		if (node.url) {
